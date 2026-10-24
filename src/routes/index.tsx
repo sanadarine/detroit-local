@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, HandHeart, MapPin, MessagesSquare, Store } from "lucide-react";
+import { ArrowRight, BadgeCheck, HandHeart, Handshake, MapPin, MessagesSquare, Sprout, Store } from "lucide-react";
 import hero from "@/assets/hero.jpg";
-import { stories, vendors } from "@/lib/data";
+import { neighborhoods, seedThreads, stories, vendors } from "@/lib/data";
 import { VendorCard } from "@/components/VendorCard";
 import { SearchBar } from "@/components/SearchBar";
 import { NeighborhoodStrip } from "@/components/NeighborhoodStrip";
@@ -61,7 +61,52 @@ function Index() {
         </div>
       </section>
 
-      <section className="mx-auto mt-10 grid max-w-6xl gap-3 px-4 md:mt-16 md:grid-cols-3 md:gap-4 md:px-5">
+
+      <Reveal as="section" aria-labelledby="about" className="mx-auto mt-12 max-w-6xl px-4 md:mt-20 md:px-5">
+        <div className="grid gap-8 md:grid-cols-[1.05fr_1fr] md:gap-14">
+          <div>
+            <p className="text-sm font-medium uppercase tracking-widest text-brick">About Detroit Local</p>
+            <h2 id="about" className="mt-2 text-3xl font-semibold leading-tight tracking-tight md:text-5xl">The neighborhood, back on the front porch.</h2>
+            <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+              Detroit Local connects people with the neighbors who make their blocks work: the farmer growing greens on a once-vacant lot, the auntie baking pies from her kitchen, the fixer who has kept the street's basements dry for twenty years.
+            </p>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              Whether you just moved here, have lived here for fifty years or run a small business, it's one place to find trusted local help, ask the block a question and keep the city's stories going. Every local is vouched for by long-time residents, so newcomers can trust what they find and money stays in the neighborhood.
+            </p>
+            <dl className="mt-8 grid grid-cols-3 gap-3">
+              {[
+                { n: neighborhoods.length, l: "neighborhoods" },
+                { n: vendors.length, l: "vouched locals" },
+                { n: seedThreads.length, l: "forum threads" },
+              ].map((s) => (
+                <div key={s.l} className="rounded-2xl bg-secondary px-3 py-4 text-center">
+                  <dt className="sr-only">{s.l}</dt>
+                  <dd className="font-display text-3xl font-semibold text-primary md:text-4xl">{s.n}</dd>
+                  <dd className="mt-1 text-xs text-muted-foreground md:text-sm">{s.l}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <ul className="space-y-3 md:pt-10">
+            {[
+              { icon: Sprout, t: "Find people, not just businesses", d: "Browse farmers, home businesses, repair, childcare and wellness by neighborhood, or see who's a few minutes' walk, bike, bus ride or drive away." },
+              { icon: MessagesSquare, t: "Ask once, the whole block answers", d: "The forum keeps questions, recommendations and stories in one searchable place, with block clubs and events, so good answers don't get lost." },
+              { icon: Handshake, t: "Help local sellers grow together", d: "Sellers share skills, supplies and buying power, and get a plain-language guide to Detroit permits." },
+              { icon: BadgeCheck, t: "Built on trust", d: "Long-time residents vouch for locals and neighbors leave honest reviews, so trust passes down like a family recipe." },
+            ].map((p) => (
+              <li key={p.t} className="flex gap-4 rounded-2xl border border-border bg-card p-4 shadow-soft md:p-5">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-accent text-accent-foreground"><p.icon className="h-5 w-5" /></span>
+                <div>
+                  <h3 className="font-semibold">{p.t}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{p.d}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
+
+      <section className="mx-auto mt-12 grid max-w-6xl gap-3 px-4 md:mt-20 md:grid-cols-3 md:gap-4 md:px-5">
         {doors.map((d, i) => (
           <Reveal key={d.title} delay={i * 80}>
             <Link to={d.to} {...("search" in d ? { search: d.search } : {})} className="group flex h-full items-start gap-4 rounded-2xl border border-border bg-card p-4 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift md:block md:p-6">
