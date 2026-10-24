@@ -41,7 +41,7 @@ export function CityServices() {
               key={k.id}
               href={k.href}
               {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className={`group flex flex-col justify-between gap-3 rounded-2xl p-4 shadow-soft ring-1 ring-border transition hover:-translate-y-0.5 hover:shadow-lift active:scale-[0.98] ${k.tone}`}
+              className={`group flex flex-col justify-between gap-3 rounded-2xl p-4 shadow-soft ring-1 ring-border transition-shadow duration-300 ease-out hover:shadow-lift ${k.tone}`}
             >
               <k.icon className="h-6 w-6" />
               <span>

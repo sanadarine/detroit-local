@@ -29,3 +29,6 @@
 - [x] Brighter home page photo
 - [x] Remove neighborhoods section from home page
 - [x] For sellers: searchable directory with tagged listings + post form; move "Put your business on the map" to Find locals
+- [x] Real Google Maps photos for every Explore listing (cards, rows, seller pages, parks)
+- [x] Home About cards: icons left-aligned, 4 columns on desktop, at least 16px gaps
+- [x] Smoother hover effects site-wide, no zoom/scale on hover

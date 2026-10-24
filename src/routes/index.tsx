@@ -74,12 +74,12 @@ function Index() {
       <section className="mx-auto mt-12 grid max-w-6xl gap-3 px-4 md:mt-20 md:grid-cols-3 md:gap-4 md:px-5">
         {doors.map((d, i) => (
           <Reveal key={d.title} delay={i * 80}>
-            <Link to={d.to} {...("search" in d ? { search: d.search } : {})} className="group flex h-full items-start gap-4 rounded-2xl border border-border bg-card p-4 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift md:block md:p-6">
+            <Link to={d.to} {...("search" in d ? { search: d.search } : {})} className="group flex h-full items-start gap-4 rounded-2xl border border-border bg-card p-4 shadow-soft transition-[box-shadow,border-color] duration-300 ease-out hover:border-primary/25 hover:shadow-lift md:block md:p-6">
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"><d.icon className="h-5 w-5" /></span>
               <div className="min-w-0 md:mt-4">
                 <h2 className="text-xl font-semibold md:text-2xl">{d.title}</h2>
                 <p className="mt-1 text-sm text-muted-foreground md:mt-2 md:text-base">{d.body}</p>
-                <span className="mt-3 hidden items-center gap-1 text-sm font-medium text-primary md:inline-flex">Start here <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></span>
+                <span className="mt-3 hidden items-center gap-1 text-sm font-medium text-primary md:inline-flex">Start here <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5" /></span>
               </div>
             </Link>
           </Reveal>
@@ -95,15 +95,15 @@ function Index() {
               Detroit Local brings neighbors and the people who serve them into one place. Find the farmer, baker or fixer down the street, ask the block a question, look up a city service, or get your own business on the map, whether you just moved here or have been here fifty years. Detroit Local is where everything local grows.
             </p>
           </div>
-          <ul className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-4 lg:gap-x-8">
             {[
               { icon: Sprout, t: "Find people, not just businesses", d: "Browse local farms, food, home services, childcare and more by neighborhood, or by who's a few minutes away." },
               { icon: MessagesSquare, t: "Ask once, the whole block answers", d: "Questions, recommendations and stories live in one searchable forum, so good answers don't get lost." },
               { icon: Landmark, t: "City help in one place", d: "Trash day, 311 requests, block clubs and key numbers, without digging through city websites." },
               { icon: Handshake, t: "Sellers grow together", d: "Local businesses share skills, supplies and buying power, with a plain-language permit guide." },
             ].map((p) => (
-              <li key={p.t} className="text-center sm:text-left">
-                <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-card text-primary shadow-soft ring-1 ring-border sm:mx-0"><p.icon className="h-5 w-5" /></span>
+              <li key={p.t} className="min-w-0 text-left">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-card text-primary shadow-soft ring-1 ring-border"><p.icon className="h-5 w-5" /></span>
                 <h3 className="mt-4 text-lg font-semibold leading-snug">{p.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.d}</p>
               </li>
