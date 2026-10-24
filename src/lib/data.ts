@@ -67,6 +67,8 @@ export type Vendor = {
   owner: string;
   category: (typeof categories)[number];
   neighborhood: (typeof neighborhoods)[number];
+  /** Specific pocket inside the neighborhood; must match a name in subAreas[neighborhood]. */
+  subArea: string;
   minutesAway: number;
   travel: Record<TravelMode, number>;
   address: string;
@@ -88,6 +90,7 @@ export const vendors: Vendor[] = [
     owner: "Marcus Bell",
     category: "Food & farms",
     neighborhood: "North End",
+    subArea: "Oakland Ave",
     minutesAway: 4,
     travel: { walk: 12, bike: 5, bus: 8, drive: 4 },
     address: "Oakland Ave & Holbrook St, Detroit, MI 48211",
@@ -107,6 +110,7 @@ export const vendors: Vendor[] = [
     owner: "Denise Carter",
     category: "Home-based business",
     neighborhood: "Bagley",
+    subArea: "Avenue of Fashion",
     minutesAway: 3,
     travel: { walk: 9, bike: 4, bus: 7, drive: 3 },
     address: "Near Bagley & Livernois, Detroit, MI 48221",
@@ -127,6 +131,7 @@ export const vendors: Vendor[] = [
     owner: "Ray Ortiz",
     category: "Home repair",
     neighborhood: "Jefferson-Chalmers",
+    subArea: "Jefferson Ave Strip",
     minutesAway: 6,
     travel: { walk: 25, bike: 10, bus: 14, drive: 6 },
     address: "14000 E Jefferson Ave, Detroit, MI 48215",
@@ -146,6 +151,7 @@ export const vendors: Vendor[] = [
     owner: "Keisha Morgan",
     category: "Childcare",
     neighborhood: "Corktown",
+    subArea: "Historic Corktown",
     minutesAway: 5,
     travel: { walk: 15, bike: 6, bus: 5, drive: 5 },
     address: "Near Michigan Ave & Trumbull, Detroit, MI 48216",
@@ -166,6 +172,7 @@ export const vendors: Vendor[] = [
     owner: "Rosa Delgado",
     category: "Wellness",
     neighborhood: "Southwest",
+    subArea: "Mexicantown",
     minutesAway: 8,
     travel: { walk: 30, bike: 12, bus: 15, drive: 8 },
     address: "4200 W Vernor Hwy, Detroit, MI 48209",
@@ -185,6 +192,7 @@ export const vendors: Vendor[] = [
     owner: "Samuel Okafor",
     category: "Food & farms",
     neighborhood: "Eastern Market",
+    subArea: "The Sheds",
     minutesAway: 7,
     travel: { walk: 28, bike: 11, bus: 4, drive: 7 },
     address: "Eastern Market Shed 2, 2934 Russell St, Detroit, MI 48207",
