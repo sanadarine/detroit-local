@@ -27,3 +27,5 @@
 - [x] Nicer front-page (hero) photo
 - [x] Home: remove stats boxes; move About lower as a polished section
 - [x] Brighter home page photo
+- [x] Remove neighborhoods section from home page
+- [x] For sellers: searchable directory with tagged listings + post form; move "Put your business on the map" to Find locals
