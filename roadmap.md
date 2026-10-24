@@ -12,3 +12,4 @@
 - [ ] "Within X minutes of me": real location, map zooms to where you are
 - [ ] More demo threads in the forum
 - [ ] Simpler Apple-style "new post" form in the forum
+- [ ] Move Community into the forum as a special section; remove the Community tab
