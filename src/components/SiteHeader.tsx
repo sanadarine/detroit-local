@@ -69,7 +69,7 @@ export function SiteFooter() {
     <footer className="mt-16 border-t border-border bg-secondary pb-20 md:mt-24 md:pb-0">
       <div className="mx-auto max-w-6xl px-5 py-10 text-sm text-muted-foreground">
         <p className="flex items-center gap-2 font-display text-lg text-foreground"><img src={logoIcon} alt="" width={28} height={28} className="h-7 w-7" />Detroit Local</p>
-        <p className="mt-1">Know your neighbors. Buy from them. Look out for each other.</p>
+        <p className="mt-1">Know your neighbors. Support them. Look out for each other.</p>
         <p className="mt-4 text-xs">Prototype with sample listings, Detroit, MI.</p>
       </div>
     </footer>
