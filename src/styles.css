@@ -32,6 +32,7 @@
   --animate-float: float 6s ease-in-out infinite;
   --animate-flap: flap 0.9s ease-in-out infinite;
   --animate-rise: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-caret: caret 1s steps(1) infinite;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -169,6 +170,7 @@
 @keyframes drift { from { transform: translateX(-30%); } to { transform: translateX(130%); } }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 @keyframes flap { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.4); } }
+@keyframes caret { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 
 @utility shadow-soft { box-shadow: var(--shadow-soft); }

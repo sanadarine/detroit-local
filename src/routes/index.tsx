@@ -6,6 +6,7 @@ import { VendorCard } from "@/components/VendorCard";
 import { SearchBar } from "@/components/SearchBar";
 import { NeighborhoodStrip } from "@/components/NeighborhoodStrip";
 import { Reveal } from "@/components/Reveal";
+import { Typewriter } from "@/components/Typewriter";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,6 +28,15 @@ const doors = [
   { to: "/explore", search: { tab: "sell" as const }, icon: Store, title: "I run a business", body: "Reach neighbors, share skills and supplies, and get help with permits." },
 ] as const;
 
+const headlinePhrases = [
+  "Support them.",
+  "Ask them anything.",
+  "Share your stories.",
+  "Grow together.",
+  "Look out for each other.",
+  "Lift up your block.",
+];
+
 const popular = ["Daycare in Corktown", "Fresh produce", "Flood prep", "Business permits"];
 
 function Index() {
@@ -41,9 +51,9 @@ function Index() {
         <div className="relative mx-auto flex min-h-[560px] max-w-4xl flex-col items-center justify-center px-4 py-16 text-center text-primary-foreground md:min-h-[640px] md:px-5">
           <p className="animate-rise text-xs font-medium uppercase tracking-[0.25em] opacity-90">Detroit, Michigan</p>
           <h1 className="mt-3 animate-rise text-4xl font-semibold leading-[1.05] tracking-tight md:text-7xl" style={{ animationDelay: "80ms" }}>
-            Know your neighbors.
-            <br />
-            Buy from them.
+            <span className="sr-only">Know your neighbors. Support them.</span>
+            <span aria-hidden>Know your neighbors.</span>
+            <Typewriter phrases={headlinePhrases} className="block min-h-[2.1em] text-accent md:min-h-[1.05em]" />
           </h1>
           <p className="mt-4 max-w-xl animate-rise text-base opacity-90 md:text-lg" style={{ animationDelay: "160ms" }}>
             Ask once, and the whole block answers. Search first, your question may already have a thread.
