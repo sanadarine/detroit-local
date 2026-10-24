@@ -15,6 +15,8 @@ import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as StoriesRouteImport } from './routes/stories'
 import { Route as VendorHubRouteImport } from './routes/vendor-hub'
+import { Route as ClubsSlugRouteImport } from './routes/clubs.$slug'
+import { Route as EventsSlugRouteImport } from './routes/events.$slug'
 import { Route as StoriesSlugRouteImport } from './routes/stories_.$slug'
 import { Route as VendorsSlugRouteImport } from './routes/vendors.$slug'
 
@@ -48,6 +50,16 @@ const VendorHubRoute = VendorHubRouteImport.update({
   path: '/vendor-hub',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClubsSlugRoute = ClubsSlugRouteImport.update({
+  id: '/clubs/$slug',
+  path: '/clubs/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsSlugRoute = EventsSlugRouteImport.update({
+  id: '/events/$slug',
+  path: '/events/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StoriesSlugRoute = StoriesSlugRouteImport.update({
   id: '/stories_/$slug',
   path: '/stories/$slug',
@@ -66,6 +78,8 @@ export interface FileRoutesByFullPath {
   '/search': typeof SearchRoute
   '/stories': typeof StoriesRoute
   '/vendor-hub': typeof VendorHubRoute
+  '/clubs/$slug': typeof ClubsSlugRoute
+  '/events/$slug': typeof EventsSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
   '/vendors/$slug': typeof VendorsSlugRoute
 }
@@ -76,6 +90,8 @@ export interface FileRoutesByTo {
   '/search': typeof SearchRoute
   '/stories': typeof StoriesRoute
   '/vendor-hub': typeof VendorHubRoute
+  '/clubs/$slug': typeof ClubsSlugRoute
+  '/events/$slug': typeof EventsSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
   '/vendors/$slug': typeof VendorsSlugRoute
 }
@@ -87,6 +103,8 @@ export interface FileRoutesById {
   '/search': typeof SearchRoute
   '/stories': typeof StoriesRoute
   '/vendor-hub': typeof VendorHubRoute
+  '/clubs/$slug': typeof ClubsSlugRoute
+  '/events/$slug': typeof EventsSlugRoute
   '/stories_/$slug': typeof StoriesSlugRoute
   '/vendors/$slug': typeof VendorsSlugRoute
 }
@@ -99,6 +117,8 @@ export interface FileRouteTypes {
     | '/search'
     | '/stories'
     | '/vendor-hub'
+    | '/clubs/$slug'
+    | '/events/$slug'
     | '/stories/$slug'
     | '/vendors/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +129,8 @@ export interface FileRouteTypes {
     | '/search'
     | '/stories'
     | '/vendor-hub'
+    | '/clubs/$slug'
+    | '/events/$slug'
     | '/stories/$slug'
     | '/vendors/$slug'
   id:
@@ -119,6 +141,8 @@ export interface FileRouteTypes {
     | '/search'
     | '/stories'
     | '/vendor-hub'
+    | '/clubs/$slug'
+    | '/events/$slug'
     | '/stories_/$slug'
     | '/vendors/$slug'
   fileRoutesById: FileRoutesById
@@ -130,6 +154,8 @@ export interface RootRouteChildren {
   SearchRoute: typeof SearchRoute
   StoriesRoute: typeof StoriesRoute
   VendorHubRoute: typeof VendorHubRoute
+  ClubsSlugRoute: typeof ClubsSlugRoute
+  EventsSlugRoute: typeof EventsSlugRoute
   StoriesSlugRoute: typeof StoriesSlugRoute
   VendorsSlugRoute: typeof VendorsSlugRoute
 }
@@ -178,6 +204,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VendorHubRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/clubs/$slug': {
+      id: '/clubs/$slug'
+      path: '/clubs/$slug'
+      fullPath: '/clubs/$slug'
+      preLoaderRoute: typeof ClubsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/$slug': {
+      id: '/events/$slug'
+      path: '/events/$slug'
+      fullPath: '/events/$slug'
+      preLoaderRoute: typeof EventsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/stories_/$slug': {
       id: '/stories_/$slug'
       path: '/stories/$slug'
@@ -202,6 +242,8 @@ const rootRouteChildren: RootRouteChildren = {
   SearchRoute: SearchRoute,
   StoriesRoute: StoriesRoute,
   VendorHubRoute: VendorHubRoute,
+  ClubsSlugRoute: ClubsSlugRoute,
+  EventsSlugRoute: EventsSlugRoute,
   StoriesSlugRoute: StoriesSlugRoute,
   VendorsSlugRoute: VendorsSlugRoute,
 }

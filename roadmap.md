@@ -19,3 +19,5 @@
 - [x] Home: About section under the search (what Detroit Local is, who it helps, how it connects the community)
 - [x] Home headline: "Know your neighbors." + typewriter cycling phrases (no "Buy from them")
 - [x] New unique "DL" monogram logo (D + L), update header/footer/favicon
+- [ ] Clickable block clubs & events with detail pages (how to join / request a spot)
+- [ ] Detroit city services directory inside the forum (311, trash pickup, key numbers)

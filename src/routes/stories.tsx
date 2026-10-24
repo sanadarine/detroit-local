@@ -92,19 +92,21 @@ function Forum() {
             <ul className="mt-3 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
               {events.map((e) => {
                 const [mon, day] = e.date.split(" ");
+                const full = e.signup === "request" && e.spotsLeft === 0;
                 return (
-                  <li key={e.title} className="flex items-center gap-4 p-4">
-                    <span className="grid w-12 shrink-0 place-items-center rounded-xl bg-secondary py-1.5 text-center leading-none">
-                      <span className="text-[10px] font-semibold uppercase tracking-wider text-brick">{mon}</span>
-                      <span className="mt-0.5 font-display text-xl">{day}</span>
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <p className="font-medium">{e.title}</p>
-                      <p className="truncate text-sm text-muted-foreground">{e.place} · {e.neighborhood}</p>
-                    </div>
-                    <button type="button" onClick={() => compose({ title: `${e.title} (${e.date})`, category: "Events & meetups", neighborhood: e.neighborhood })} className="shrink-0 rounded-full bg-secondary px-3 py-1.5 text-xs font-medium text-primary transition hover:bg-accent">
-                      Discuss
-                    </button>
+                  <li key={e.slug}>
+                    <Link to="/events/$slug" params={{ slug: e.slug }} className="group flex items-center gap-4 p-4 transition-colors hover:bg-secondary">
+                      <span className="grid w-12 shrink-0 place-items-center rounded-xl bg-secondary py-1.5 text-center leading-none group-hover:bg-card">
+                        <span className="text-[10px] font-semibold uppercase tracking-wider text-brick">{mon}</span>
+                        <span className="mt-0.5 font-display text-xl">{day}</span>
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <p className="font-medium group-hover:text-primary">{e.title}</p>
+                        <p className="truncate text-sm text-muted-foreground">{e.place} · {e.neighborhood}</p>
+                        <p className="mt-1 text-xs font-medium text-brick">{e.signup === "drop-in" ? "Drop in, no sign-up" : full ? "Full · waitlist open" : `${e.spotsLeft} spots left`}</p>
+                      </div>
+                      <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+                    </Link>
                   </li>
                 );
               })}
@@ -114,14 +116,16 @@ function Forum() {
             <h2 className="flex items-center gap-2 text-xl font-semibold"><Users className="h-5 w-5 text-brick" />Block clubs</h2>
             <ul className="mt-3 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
               {blockClubs.map((b) => (
-                <li key={b.name} className="flex items-center gap-4 p-4">
-                  <div className="min-w-0 flex-1">
-                    <p className="font-medium">{b.name}</p>
-                    <p className="text-sm text-muted-foreground">Meets {b.meets} · {b.members} members</p>
-                  </div>
-                  <button type="button" onClick={() => compose({ title: `Question for ${b.name}`, category: "Questions", neighborhood: b.neighborhood })} className="shrink-0 rounded-full bg-secondary px-3 py-1.5 text-xs font-medium text-primary transition hover:bg-accent">
-                    Ask
-                  </button>
+                <li key={b.slug}>
+                  <Link to="/clubs/$slug" params={{ slug: b.slug }} className="group flex items-center gap-4 p-4 transition-colors hover:bg-secondary">
+                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent text-accent-foreground"><Users className="h-5 w-5" /></span>
+                    <div className="min-w-0 flex-1">
+                      <p className="font-medium group-hover:text-primary">{b.name}</p>
+                      <p className="text-sm text-muted-foreground">{b.neighborhood} · Meets {b.meets}</p>
+                      <p className="mt-1 text-xs font-medium text-brick">{b.members} members · Free to join</p>
+                    </div>
+                    <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+                  </Link>
                 </li>
               ))}
             </ul>
