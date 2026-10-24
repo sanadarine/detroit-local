@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { BadgeCheck, MapPin } from "lucide-react";
 import type { Vendor } from "@/lib/data";
 
 export function VendorCard({ v }: { v: Vendor }) {
@@ -9,14 +10,14 @@ export function VendorCard({ v }: { v: Vendor }) {
       className="group overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-lg"
     >
       <img src={v.image} alt={v.name} loading="lazy" width={1024} height={1024} className="aspect-[4/3] w-full object-cover" />
-      <div className="p-5">
+      <div className="p-4 md:p-5">
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span className="rounded-full bg-secondary px-2 py-0.5">{v.category}</span>
-          <span>{v.minutesAway} min · {v.neighborhood}</span>
+          <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" />{v.minutesAway} min · {v.neighborhood}</span>
         </div>
         <h3 className="mt-3 text-xl font-semibold group-hover:text-primary">{v.name}</h3>
         <p className="mt-1 text-sm text-muted-foreground">{v.tagline}</p>
-        <p className="mt-3 text-xs font-medium text-brick">Vouched by {v.vouchedBy.length} long-time neighbor{v.vouchedBy.length > 1 ? "s" : ""}</p>
+        <p className="mt-3 flex items-center gap-1 text-xs font-medium text-brick"><BadgeCheck className="h-4 w-4" />Vouched by {v.vouchedBy.length} long-time neighbor{v.vouchedBy.length > 1 ? "s" : ""}</p>
       </div>
     </Link>
   );
