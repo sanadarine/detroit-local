@@ -7,6 +7,9 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  // Pre-bundle icons so a first-time import doesn't re-optimize deps mid-session
+  // (that caused a duplicate-React "useContext of null" crash in the preview).
+  vite: { optimizeDeps: { include: ["lucide-react"] } },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
