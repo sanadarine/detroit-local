@@ -14,7 +14,7 @@ export function VendorCard({ v, mode, minutes }: { v: Vendor; mode?: TravelMode 
       <div className="p-4 md:p-5">
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span className="rounded-full bg-secondary px-2 py-0.5">{v.category}</span>
-          <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" />{mode ? `${v.travel[mode]} min ${mode === "bus" ? "by bus" : mode}` : `${v.minutesAway} min`} · {v.neighborhood}</span>
+          <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" />{mode ? `${mins} min ${mode === "bus" ? "by bus" : mode}` : `${mins} min`} · <span title={v.neighborhood}>{v.subArea}</span></span>
         </div>
         <h3 className="mt-3 text-xl font-semibold group-hover:text-primary">{v.name}</h3>
         <p className="mt-1 text-sm text-muted-foreground">{v.tagline}</p>
