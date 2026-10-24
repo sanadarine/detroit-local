@@ -22,3 +22,4 @@
 - [ ] Clickable block clubs & events with detail pages (how to join / request a spot)
 - [ ] Detroit city services directory inside the forum (311, trash pickup, key numbers)
 - [ ] Explore: add parks + more specific categories (Farms, Food businesses separate, etc.)
+- [ ] Real small-business examples for every neighborhood + sub-area (researched, sourced)
