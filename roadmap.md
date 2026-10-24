@@ -13,3 +13,4 @@
 - [x] More demo threads in the forum
 - [x] Simpler Apple-style "new post" form in the forum
 - [x] Move Community into the forum as a special section; remove the Community tab
+- [x] Reviews on seller pages (stars + written review)
