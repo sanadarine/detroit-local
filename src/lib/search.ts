@@ -1,6 +1,6 @@
-import { blockClubs, events, hubBoard, permitSteps, vendorReviews, vendors, type Thread } from "@/lib/data";
+import { blockClubs, cityServices, events, hubBoard, permitSteps, vendorReviews, vendors, type Thread } from "@/lib/data";
 
-export type SearchKind = "thread" | "vendor" | "community" | "hub";
+export type SearchKind = "thread" | "vendor" | "community" | "hub" | "service";
 
 export type SearchResult = {
   kind: SearchKind;
@@ -84,6 +84,14 @@ function docs(threads: Thread[]): Doc[] {
       snippet: `Event · ${e.date} · ${e.place}, ${e.neighborhood}`,
       text: `event ${e.date} ${e.place} ${e.neighborhood} ${e.host} ${e.about}`,
     })),
+    ...cityServices.map((c) => ({
+      kind: "service" as const,
+      id: `service:${c.id}`,
+      slug: c.id,
+      title: c.name,
+      snippet: `${c.category}${c.phone ? ` · ${c.phone}` : ""} · ${c.what}`,
+      text: `city service resource number phone 311 help ${c.category} ${c.name} ${c.what}`,
+    })),
     ...hubBoard.map((b) => ({
       kind: "hub" as const,
       id: `board:${b.text}`,
@@ -117,5 +125,6 @@ export const kindLabels: Record<SearchKind, string> = {
   thread: "Forum threads",
   vendor: "Vendors",
   community: "Block clubs & events",
+  service: "City services",
   hub: "For sellers & permits",
 };

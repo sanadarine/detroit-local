@@ -695,3 +695,50 @@ export const vendorReviews: Record<string, Review[]> = {
     { id: "s2", author: "Priya S.", note: "Bagley", rating: 5, date: "2026-10-10", text: "Held my bag while I shopped like he promised in the forum. The fall wildflower honey is amazing." },
   ],
 };
+
+export const serviceCategories = ["Emergency & safety", "Trash & recycling", "Streets & 311", "Water & power", "Health & help", "City hall & neighborhoods"] as const;
+export type ServiceCategory = (typeof serviceCategories)[number];
+
+export type CityService = {
+  id: string;
+  category: ServiceCategory;
+  name: string;
+  what: string;
+  phone?: string | undefined;
+  /** Extra phone instruction, e.g. "press 2" */
+  phoneNote?: string | undefined;
+  text?: { to: string; body: string } | undefined;
+  url?: string | undefined;
+  hours?: string | undefined;
+};
+
+/** Real Detroit resident services and numbers (from detroitmi.gov, DTE and Michigan 211, checked Oct 2026). */
+export const cityServices: CityService[] = [
+  { id: "911", category: "Emergency & safety", name: "Police, fire & EMS", what: "Crimes in progress, fires, medical emergencies, downed power lines, illegal dumping happening right now.", phone: "911", hours: "24/7" },
+  { id: "police-non-emergency", category: "Emergency & safety", name: "Detroit Police non-emergency", what: "Report something that already happened: break-ins, noise complaints, abandoned vehicles, open hydrants.", phone: "(313) 267-4600", hours: "24/7", url: "https://detroitmi.gov/departments/police-department/report-crime" },
+  { id: "gas-leak", category: "Emergency & safety", name: "DTE gas leak hotline", what: "Smell gas? Leave the area first, call 911, then call DTE.", phone: "(800) 947-5000", hours: "24/7", url: "https://dteenergy.com/us/en/quicklinks/contact-us.html" },
+
+  { id: "trash-schedule", category: "Trash & recycling", name: "Find your trash day", what: "Trash, recycling, bulk and yard waste are picked up weekly. Look up your schedule, or text your street address for reminders the night before.", text: { to: "(313) 800-7905", body: "Your street address" }, url: "https://detroitmi.gov/webapp/find-your-waste-pickup-schedule" },
+  { id: "priority-waste", category: "Trash & recycling", name: "Missed pickup: East & Southwest Detroit", what: "Priority Waste handles East Detroit and Southwest Detroit south of I-94.", phone: "(855) 927-8365", url: "https://www.prioritywaste.com/cities-we-serve/detroit/" },
+  { id: "waste-management", category: "Trash & recycling", name: "Missed pickup: West side", what: "Waste Management handles west-side pickup.", phone: "(844) 233-8764" },
+  { id: "dpw-paid-pickup", category: "Trash & recycling", name: "DPW paid bulk pickup", what: "Too much for the curb? The Department of Public Works picks up extra items for $40 per cubic yard.", phone: "(313) 876-0004", url: "https://detroitmi.gov/departments/department-public-works/refuse-collection" },
+  { id: "recycling-bin", category: "Trash & recycling", name: "Get a free recycling bin", what: "Curbside recycling is free for homes and buildings with 1–4 units, but you have to opt in.", url: "https://detroitmi.gov/departments/department-public-works/refuse-collection/detroit-recycles" },
+  { id: "illegal-dumping", category: "Trash & recycling", name: "Report illegal dumping", what: "Already dumped? Report it in Improve Detroit or call BSEED Environmental Enforcement. Happening now? Call 911.", phone: "(313) 876-0426", url: "https://detroitmi.gov/departments/general-services-department/keep-detroit-clean" },
+
+  { id: "improve-detroit", category: "Streets & 311", name: "Improve Detroit (Detroit's 311)", what: "Report potholes, running water, damaged street signs, dumping and more with a photo. You get updates as it's fixed.", url: "https://detroitmi.gov/ImproveDetroit" },
+  { id: "street-repairs", category: "Streets & 311", name: "Street & pothole repairs", what: "Request repairs on residential streets and city roads by phone.", phone: "(313) 224-0033", url: "https://detroitmi.gov/departments/department-public-works/street-maintenance/pothole-repair" },
+  { id: "streetlights", category: "Streets & 311", name: "Streetlight out", what: "Report public streetlight and outdoor lighting problems in DTE's Outage Center.", url: "https://outage.dteenergy.com/" },
+  { id: "code-enforcement", category: "Streets & 311", name: "Property maintenance & code issues", what: "Neglected or unsafe properties, handled by BSEED Property Maintenance.", phone: "(313) 628-2451", url: "https://detroitmi.gov/contact" },
+
+  { id: "dwsd", category: "Water & power", name: "Water main break or sewer backup", what: "Detroit Water and Sewerage Department, for water and sewer emergencies and billing.", phone: "(313) 267-8000", url: "https://detroitmi.gov/departments/water-and-sewerage-department/dwsd-customer-service/water-and-sewer-maintenanceemergencies" },
+  { id: "dte-outage", category: "Water & power", name: "Power outage or downed line", what: "Report an outage and get restoration updates. Stay 25 feet away from downed lines.", phone: "(800) 477-4747", phoneNote: "press 2", url: "https://outage.dteenergy.com/" },
+
+  { id: "211", category: "Health & help", name: "Michigan 211", what: "Free, confidential help finding food, housing, utility and bill assistance. 180+ languages.", phone: "211", text: { to: "898211", body: "Your ZIP code" }, hours: "24/7", url: "https://mi211.org/" },
+  { id: "health-dept", category: "Health & help", name: "Detroit Health Department", what: "Clinics, immunizations, lead prevention, food safety. Public health emergencies: (313) 933-3437.", phone: "(313) 876-4000", url: "https://detroitmi.gov/departments/detroit-health-department" },
+  { id: "animal-control", category: "Health & help", name: "Detroit Animal Care and Control", what: "Report stray animals, find a lost pet or adopt.", phone: "(313) 922-3647", hours: "Mon–Sat, 8am–6pm", url: "https://detroitmi.gov/departments/general-services-department/detroit-animal-care-and-control" },
+
+  { id: "neighborhoods", category: "City hall & neighborhoods", name: "Department of Neighborhoods", what: "Your district manager helps with city services and neighborhood concerns, and can help you start a block club.", url: "https://detroitmi.gov/departments/department-neighborhoods" },
+  { id: "city-clerk", category: "City hall & neighborhoods", name: "City Clerk, Citizen Information Center", what: "General questions about city government, records and elections.", phone: "(313) 224-3270", url: "https://detroitmi.gov/government/city-clerk/community-resources" },
+  { id: "motor-city-makeover", category: "City hall & neighborhoods", name: "Volunteer: Motor City Makeover", what: "The City's yearly neighborhood cleanup. Bags and gloves provided.", phone: "(313) 224-4415", url: "https://detroitmi.gov/departments/general-services-department/keep-detroit-clean" },
+  { id: "city-directory", category: "City hall & neighborhoods", name: "Full City of Detroit directory", what: "Every department's contacts in one place.", url: "https://detroitmi.gov/contact" },
+];
