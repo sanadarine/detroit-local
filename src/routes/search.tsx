@@ -12,9 +12,9 @@ export const Route = createFileRoute("/search")({
   validateSearch: (s: Record<string, unknown>): SearchParams => (typeof s["q"] === "string" && s["q"] ? { q: String(s["q"]).slice(0, 100) } : {}),
   head: () => ({
     meta: [
-      { title: "Search — Porchlight Detroit" },
-      { name: "description", content: "Search Porchlight Detroit forum threads, local vendors, block clubs, events and the vendor permit guide." },
-      { property: "og:title", content: "Search Porchlight Detroit" },
+      { title: "Search — Detroit Local" },
+      { name: "description", content: "Search Detroit Local forum threads, local vendors, block clubs, events and the vendor permit guide." },
+      { property: "og:title", content: "Search Detroit Local" },
       { property: "og:description", content: "Check if your neighbors already answered it before you ask." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

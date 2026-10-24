@@ -10,9 +10,9 @@ import { Reveal } from "@/components/Reveal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Porchlight Detroit — Know your neighbors" },
+      { title: "Detroit Local — Know your neighbors" },
       { name: "description", content: "Search local farmers, home businesses, trusted services and neighborhood threads across Detroit, vouched for by long-time residents." },
-      { property: "og:title", content: "Porchlight Detroit — Know your neighbors" },
+      { property: "og:title", content: "Detroit Local — Know your neighbors" },
       { property: "og:description", content: "Local farmers, home businesses, trusted services and neighborhood conversations across Detroit." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

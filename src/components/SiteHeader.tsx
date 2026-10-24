@@ -14,7 +14,7 @@ export function SiteHeader() {
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:px-5 md:py-4">
           <Link to="/" className="flex min-w-0 items-center gap-2">
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brick font-display text-lg text-brick-foreground">P</span>
-            <span className="truncate font-display text-lg font-semibold md:text-xl">Porchlight Detroit</span>
+            <span className="truncate font-display text-lg font-semibold md:text-xl">Detroit Local</span>
           </Link>
           <div className="flex items-center gap-1">
           <nav className="hidden gap-0.5 text-sm md:flex">
@@ -67,7 +67,7 @@ export function SiteFooter() {
   return (
     <footer className="mt-16 border-t border-border bg-secondary pb-20 md:mt-24 md:pb-0">
       <div className="mx-auto max-w-6xl px-5 py-10 text-sm text-muted-foreground">
-        <p className="font-display text-lg text-foreground">Porchlight Detroit</p>
+        <p className="font-display text-lg text-foreground">Detroit Local</p>
         <p className="mt-1">Know your neighbors. Buy from them. Look out for each other.</p>
         <p className="mt-4 text-xs">Prototype with sample listings, Detroit, MI.</p>
       </div>

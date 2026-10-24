@@ -17,9 +17,9 @@ export const Route = createFileRoute("/explore")({
   }),
   head: () => ({
     meta: [
-      { title: "Explore local sellers — Porchlight Detroit" },
+      { title: "Explore local sellers — Detroit Local" },
       { name: "description", content: "Find Detroit farmers, home businesses, repair, childcare and wellness by neighborhood and block — or put your own business on the map." },
-      { property: "og:title", content: "Explore local sellers — Porchlight Detroit" },
+      { property: "og:title", content: "Explore local sellers — Detroit Local" },
       { property: "og:description", content: "Trusted local services within minutes of home, plus help for Detroit sellers." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
