@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Clock, ExternalLink, Globe, Instagram, MapPin, Navigation, Phone, Quote, Star } from "lucide-react";
 import { vendors } from "@/lib/data";
 import { GoogleMap } from "@/components/GoogleMap";
-import { NeighborhoodArt } from "@/components/NeighborhoodArt";
+import { PlaceGallery } from "@/components/PlaceGallery";
 import { Stars, VendorReviews } from "@/components/VendorReviews";
 import { useReviews } from "@/lib/reviews";
 
@@ -57,9 +57,7 @@ function VendorPage() {
     <div className="mx-auto max-w-5xl px-4 pt-6 md:px-5 md:pt-10">
       <Link to="/explore" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" />Explore</Link>
 
-      <div className="relative mt-4 overflow-hidden rounded-3xl shadow-lift">
-        <NeighborhoodArt name={v.neighborhood} className="aspect-[5/2] w-full md:aspect-[3/1]" />
-      </div>
+      <PlaceGallery slug={v.slug} name={v.name} neighborhood={v.neighborhood} />
 
       <div className="mt-6 grid gap-8 md:grid-cols-[1fr_340px] md:gap-10">
         <div>
