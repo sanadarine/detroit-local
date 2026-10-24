@@ -81,7 +81,7 @@ function Forum() {
           <MessagesSquare className="h-4 w-4" />Discussions
         </button>
         <button type="button" role="tab" aria-selected={community} onClick={() => setSection("community")} className={segment(community)}>
-          <Users className="h-4 w-4" />Block clubs &amp; events
+          <Users className="h-4 w-4" /><span className="sm:hidden">Clubs &amp; events</span><span className="hidden sm:inline">Block clubs &amp; events</span>
         </button>
       </div>
 
