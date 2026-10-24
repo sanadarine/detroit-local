@@ -502,3 +502,34 @@ export const forumThreads: Thread[] = [
 
 /** All built-in threads (featured stories first). */
 export const seedThreads: Thread[] = [...stories, ...forumThreads];
+
+export type Review = { id: string; author: string; note?: string | undefined; rating: number; date: string; text: string };
+
+/** Demo reviews for each seller (made-up neighbors). */
+export const vendorReviews: Record<string, Review[]> = {
+  "north-end-greens": [
+    { id: "s1", author: "Jasmine T.", note: "North End", rating: 5, date: "2026-10-04", text: "The produce box is huge for the price and my daughter now begs to go pick tomatoes. Marcus remembers everyone's name." },
+    { id: "s2", author: "Kevin D.", note: "Milwaukee Junction", rating: 4, date: "2026-09-21", text: "Best collards I've had outside my grandma's kitchen. Wish the stand was open on Sundays too." },
+  ],
+  "auntie-dees-pies": [
+    { id: "s1", author: "Pastor Reed", note: "Bagley", rating: 5, date: "2026-10-11", text: "Tastes exactly like the pies from church homecoming in the 80s. Order early for the holidays, she sells out." },
+    { id: "s2", author: "Priya S.", note: "Bagley", rating: 5, date: "2026-10-02", text: "First sweet potato pie I've ever had and now I'm ruined for store-bought." },
+    { id: "s3", author: "Marcus L.", note: "Avenue of Fashion", rating: 4, date: "2026-09-15", text: "Delicious. Pickup was a little hard to find the first time, but Denise texted directions." },
+  ],
+  "jc-fix-it": [
+    { id: "s1", author: "Keisha Morgan", note: "Jefferson-Chalmers", rating: 5, date: "2026-10-19", text: "Came out the same day, fixed our backflow valve, and charged less than the quote. Honest guy." },
+    { id: "s2", author: "Harold W.", note: "Jefferson-Chalmers", rating: 5, date: "2026-09-08", text: "Ray's been fixing things on this block for twenty years. Haven't flooded since he redid my downspouts." },
+  ],
+  "little-sprouts": [
+    { id: "s1", author: "Sam P.", note: "North Corktown", rating: 5, date: "2026-10-07", text: "Our son comes home talking about the garden every day. Grace sends photos and little notes at pickup." },
+    { id: "s2", author: "Lena K.", note: "Historic Corktown", rating: 4, date: "2026-09-26", text: "Warm, safe and lots of outdoor time. Waitlist was a few months, so ask early." },
+  ],
+  "mexicantown-wellness": [
+    { id: "s1", author: "Alicia M.", note: "Southwest", rating: 5, date: "2026-10-13", text: "Rosa's bilingual classes are perfect for my mom and me to do together. The tea blends are wonderful." },
+    { id: "s2", author: "Dana R.", note: "Clark Park", rating: 4, date: "2026-09-30", text: "Calm, friendly and affordable. The Thursday evening class fills up fast." },
+  ],
+  "eastern-market-honey": [
+    { id: "s1", author: "Brian K.", note: "Eastern Market", rating: 4, date: "2026-10-05", text: "Great honey and Hank will talk bees with you for as long as you let him." },
+    { id: "s2", author: "Priya S.", note: "Bagley", rating: 5, date: "2026-10-10", text: "Held my bag while I shopped like he promised in the forum. The fall wildflower honey is amazing." },
+  ],
+};
