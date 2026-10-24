@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BadgeCheck, HandHeart, Handshake, MapPin, MessagesSquare, Sprout, Store } from "lucide-react";
-import hero from "@/assets/hero.jpg";
-import { neighborhoods, seedThreads, stories, vendors } from "@/lib/data";
+import { ArrowRight, HandHeart, Handshake, Landmark, MapPin, MessagesSquare, Sprout, Store } from "lucide-react";
+import hero from "@/assets/hero-v2.jpg";
+import { stories, vendors } from "@/lib/data";
 import { VendorCard } from "@/components/VendorCard";
 import { SearchBar } from "@/components/SearchBar";
 import { NeighborhoodStrip } from "@/components/NeighborhoodStrip";
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Detroit Local — Know your neighbors" },
-      { name: "description", content: "Search local farmers, home businesses, trusted services and neighborhood threads across Detroit, vouched for by long-time residents." },
+      { name: "description", content: "Search real local businesses, parks, city services and neighborhood threads across Detroit." },
       { property: "og:title", content: "Detroit Local — Know your neighbors" },
       { property: "og:description", content: "Local farmers, home businesses, trusted services and neighborhood conversations across Detroit." },
       { property: "og:type", content: "website" },
@@ -45,17 +45,17 @@ function Index() {
     <div>
       <section className="relative">
         <div className="absolute inset-0 overflow-hidden">
-          <img src={hero} alt="Neighbors on a Detroit street at sunset" width={1600} height={912} className="h-full w-full scale-105 object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/45 to-foreground/10" />
+          <img src={hero} alt="A grandmother hands a basket of fresh greens over her fence to a young family on a Detroit street at golden hour" width={1920} height={1088} fetchPriority="high" className="h-full w-full scale-105 object-cover object-[60%_center] brightness-110 saturate-[1.05]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent" />
         </div>
         <div className="relative mx-auto flex min-h-[560px] max-w-4xl flex-col items-center justify-center px-4 py-16 text-center text-primary-foreground md:min-h-[640px] md:px-5">
           <p className="animate-rise text-xs font-medium uppercase tracking-[0.25em] opacity-90">Detroit, Michigan</p>
-          <h1 className="mt-3 animate-rise text-4xl font-semibold leading-[1.05] tracking-tight md:text-7xl" style={{ animationDelay: "80ms" }}>
+          <h1 className="mt-3 animate-rise text-4xl font-semibold leading-[1.05] tracking-tight [text-shadow:0_2px_24px_rgb(0_0_0/0.45)] md:text-7xl" style={{ animationDelay: "80ms" }}>
             <span className="sr-only">Know your neighbors. Support them.</span>
             <span aria-hidden>Know your neighbors.</span>
             <Typewriter phrases={headlinePhrases} className="block min-h-[2.1em] text-accent md:min-h-[1.05em]" />
           </h1>
-          <p className="mt-4 max-w-xl animate-rise text-base opacity-90 md:text-lg" style={{ animationDelay: "160ms" }}>
+          <p className="mt-4 max-w-xl animate-rise text-base opacity-95 [text-shadow:0_1px_12px_rgb(0_0_0/0.5)] md:text-lg" style={{ animationDelay: "160ms" }}>
             Ask once, and the whole block answers. Search first, your question may already have a thread.
           </p>
           <div className="relative z-20 mt-8 w-full max-w-2xl animate-rise" style={{ animationDelay: "240ms" }}>
@@ -72,50 +72,6 @@ function Index() {
       </section>
 
 
-      <Reveal as="section" aria-labelledby="about" className="mx-auto mt-12 max-w-6xl px-4 md:mt-20 md:px-5">
-        <div className="grid gap-8 md:grid-cols-[1.05fr_1fr] md:gap-14">
-          <div>
-            <p className="text-sm font-medium uppercase tracking-widest text-brick">About Detroit Local</p>
-            <h2 id="about" className="mt-2 text-3xl font-semibold leading-tight tracking-tight md:text-5xl">The neighborhood, back on the front porch.</h2>
-            <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-              Detroit Local connects people with the neighbors who make their blocks work: the farmer growing greens on a once-vacant lot, the auntie baking pies from her kitchen, the fixer who has kept the street's basements dry for twenty years.
-            </p>
-            <p className="mt-4 leading-relaxed text-muted-foreground">
-              Whether you just moved here, have lived here for fifty years or run a small business, it's one place to find trusted local help, ask the block a question and keep the city's stories going. Every local is vouched for by long-time residents, so newcomers can trust what they find and money stays in the neighborhood.
-            </p>
-            <dl className="mt-8 grid grid-cols-3 gap-3">
-              {[
-                { n: neighborhoods.length, l: "neighborhoods" },
-                { n: vendors.length, l: "vouched locals" },
-                { n: seedThreads.length, l: "forum threads" },
-              ].map((s) => (
-                <div key={s.l} className="rounded-2xl bg-secondary px-3 py-4 text-center">
-                  <dt className="sr-only">{s.l}</dt>
-                  <dd className="font-display text-3xl font-semibold text-primary md:text-4xl">{s.n}</dd>
-                  <dd className="mt-1 text-xs text-muted-foreground md:text-sm">{s.l}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-          <ul className="space-y-3 md:pt-10">
-            {[
-              { icon: Sprout, t: "Find people, not just businesses", d: "Browse farmers, home businesses, repair, childcare and wellness by neighborhood, or see who's a few minutes' walk, bike, bus ride or drive away." },
-              { icon: MessagesSquare, t: "Ask once, the whole block answers", d: "The forum keeps questions, recommendations and stories in one searchable place, with block clubs and events, so good answers don't get lost." },
-              { icon: Handshake, t: "Help local sellers grow together", d: "Sellers share skills, supplies and buying power, and get a plain-language guide to Detroit permits." },
-              { icon: BadgeCheck, t: "Built on trust", d: "Long-time residents vouch for locals and neighbors leave honest reviews, so trust passes down like a family recipe." },
-            ].map((p) => (
-              <li key={p.t} className="flex gap-4 rounded-2xl border border-border bg-card p-4 shadow-soft md:p-5">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-accent text-accent-foreground"><p.icon className="h-5 w-5" /></span>
-                <div>
-                  <h3 className="font-semibold">{p.t}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{p.d}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Reveal>
-
       <section className="mx-auto mt-12 grid max-w-6xl gap-3 px-4 md:mt-20 md:grid-cols-3 md:gap-4 md:px-5">
         {doors.map((d, i) => (
           <Reveal key={d.title} delay={i * 80}>
@@ -130,6 +86,32 @@ function Index() {
           </Reveal>
         ))}
       </section>
+
+      <Reveal as="section" aria-labelledby="about" className="mt-16 bg-secondary/60 py-16 md:mt-24 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 md:px-5">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-medium uppercase tracking-widest text-brick">About Detroit Local</p>
+            <h2 id="about" className="mt-3 text-3xl font-semibold leading-tight tracking-tight md:text-5xl">The neighborhood, back on the front porch.</h2>
+            <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+              Detroit Local brings neighbors and the people who serve them into one place. Find the farmer, baker or fixer down the street, ask the block a question, look up a city service, or get your own business on the map, whether you just moved here or have been here fifty years.
+            </p>
+          </div>
+          <ul className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { icon: Sprout, t: "Find people, not just businesses", d: "Browse local farms, food, home services, childcare and more by neighborhood, or by who's a few minutes away." },
+              { icon: MessagesSquare, t: "Ask once, the whole block answers", d: "Questions, recommendations and stories live in one searchable forum, so good answers don't get lost." },
+              { icon: Landmark, t: "City help in one place", d: "Trash day, 311 requests, block clubs and key numbers, without digging through city websites." },
+              { icon: Handshake, t: "Sellers grow together", d: "Local businesses share skills, supplies and buying power, with a plain-language permit guide." },
+            ].map((p) => (
+              <li key={p.t} className="text-center sm:text-left">
+                <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-card text-primary shadow-soft ring-1 ring-border sm:mx-0"><p.icon className="h-5 w-5" /></span>
+                <h3 className="mt-4 text-lg font-semibold leading-snug">{p.t}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.d}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
 
       <Reveal as="section" className="mx-auto mt-16 max-w-6xl px-4 md:mt-24 md:px-5">
         <div className="flex items-end justify-between gap-4">

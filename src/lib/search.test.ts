@@ -8,9 +8,13 @@ describe("site search", () => {
     expect(r[0]?.slug).toBe("when-the-east-side-flooded");
   });
 
-  it("finds vendors by the service they offer", () => {
-    const r = searchSite("daycare", stories, ["vendor"]);
-    expect(r.map((x) => x.slug)).toContain("little-sprouts");
+  it("finds real local businesses by what they sell", () => {
+    const r = searchSite("donuts", stories, ["vendor"]);
+    expect(r.map((x) => x.slug)).toContain("yellow-light-coffee-and-donuts");
+  });
+
+  it("finds parks", () => {
+    expect(searchSite("Clark Park playground", stories, ["park"]).map((x) => x.title)).toContain("Clark Park");
   });
 
   it("finds the permit guide", () => {

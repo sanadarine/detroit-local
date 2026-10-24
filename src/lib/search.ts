@@ -1,13 +1,13 @@
-import { blockClubs, events, hubBoard, permitSteps, vendorReviews, vendors, type Thread } from "@/lib/data";
+import { blockClubs, cityServices, events, hubBoard, parks, permitSteps, vendors, type Thread } from "@/lib/data";
 
-export type SearchKind = "thread" | "vendor" | "community" | "hub";
+export type SearchKind = "thread" | "vendor" | "park" | "community" | "hub" | "service";
 
 export type SearchResult = {
   kind: SearchKind;
   id: string;
   title: string;
   snippet: string;
-  /** slug for threads and vendors */
+  /** slug for threads, vendors, clubs and events */
   slug?: string | undefined;
   /** section anchor for hub results */
   section?: "board" | "permits" | undefined;
@@ -66,21 +66,39 @@ function docs(threads: Thread[]): Doc[] {
       slug: v.slug,
       title: v.name,
       snippet: `${v.category} · ${v.subArea}, ${v.neighborhood} · ${v.tagline}`,
-      text: [v.owner, v.category, v.neighborhood, v.subArea, v.tagline, v.story, ...v.services, v.address, ...(vendorReviews[v.slug] ?? []).map((r) => r.text)].join(" "),
+      text: [v.owner ?? "", v.category, v.neighborhood, v.subArea, v.tagline, v.story, ...v.services, v.address, ...v.reviewHighlights].join(" "),
     })),
     ...blockClubs.map((c) => ({
       kind: "community" as const,
-      id: `club:${c.name}`,
+      id: `club:${c.slug}`,
+      slug: c.slug,
       title: c.name,
       snippet: `Block club · ${c.neighborhood} · Meets ${c.meets}`,
-      text: `block club meeting ${c.neighborhood} ${c.meets}`,
+      text: `block club meeting join ${c.neighborhood} ${c.meets} ${c.about} ${c.focus.join(" ")}`,
     })),
     ...events.map((e) => ({
       kind: "community" as const,
-      id: `event:${e.title}`,
+      id: `event:${e.slug}`,
+      slug: e.slug,
       title: e.title,
       snippet: `Event · ${e.date} · ${e.place}, ${e.neighborhood}`,
-      text: `event ${e.date} ${e.place} ${e.neighborhood}`,
+      text: `event ${e.date} ${e.place} ${e.neighborhood} ${e.host} ${e.about}`,
+    })),
+    ...parks.map((p) => ({
+      kind: "park" as const,
+      id: `park:${p.slug}`,
+      slug: p.neighborhood,
+      title: p.name,
+      snippet: `Park · ${p.subArea}, ${p.neighborhood} · ${p.features.slice(0, 3).join(", ")}`,
+      text: `park outdoors playground green space ${p.neighborhood} ${p.subArea} ${p.about} ${p.features.join(" ")}`,
+    })),
+    ...cityServices.map((c) => ({
+      kind: "service" as const,
+      id: `service:${c.id}`,
+      slug: c.id,
+      title: c.name,
+      snippet: `${c.category}${c.phone ? ` · ${c.phone}` : ""} · ${c.what}`,
+      text: `city service resource number phone 311 help ${c.category} ${c.name} ${c.what}`,
     })),
     ...hubBoard.map((b) => ({
       kind: "hub" as const,
@@ -115,5 +133,7 @@ export const kindLabels: Record<SearchKind, string> = {
   thread: "Forum threads",
   vendor: "Vendors",
   community: "Block clubs & events",
+  service: "City services",
+  park: "Parks",
   hub: "For sellers & permits",
 };
