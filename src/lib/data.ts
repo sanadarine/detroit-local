@@ -381,7 +381,7 @@ export const forumThreads: Thread[] = [
     neighborhood: "Southwest",
     date: "2026-10-12",
     replies: [
-      { id: "r1", author: "Denise Carter", note: "Auntie Dee's Pies", date: "2026-10-12", text: "Michigan doesn't need a license for cottage food, just the labeling rules and the online training. I was selling within two weeks." },
+      { id: "r1", author: "Denise Carter", note: "Auntie Dee's Pies", date: "2026-10-12", text: "Michigan doesn't require a license for cottage food — just follow the labeling rules and sell directly to customers. I was selling within two weeks." },
       { id: "r2", author: "Rosa Delgado", note: "Mexicantown Wellness", date: "2026-10-13", text: "Church bazaars are fine as long as you're selling direct to the person. I'll buy a dozen!" },
     ],
   },
