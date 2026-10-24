@@ -138,9 +138,10 @@ export function GoogleMap({ center, zoom = 14, pins, areas, activeArea, onAreaCl
     if (a) {
       map.current.panTo({ lat: a.lat, lng: a.lng });
       map.current.setZoom(15);
-    } else {
-      map.current.panTo(center);
-      map.current.setZoom(zoom);
+    } else if (areas.length) {
+      const b = new window.google.maps.LatLngBounds();
+      areas.forEach((x) => b.extend({ lat: x.lat, lng: x.lng }));
+      map.current.fitBounds(b, 40);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready, activeArea]);
