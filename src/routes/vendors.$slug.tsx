@@ -62,7 +62,7 @@ function VendorPage() {
 
       <div className="mt-6 grid gap-8 md:grid-cols-[1fr_340px] md:gap-10">
         <div>
-          <p className="text-sm font-medium text-brick">{v.category} · {v.subArea}, {v.neighborhood}</p>
+          <p className="text-sm font-medium text-primary">{v.category} · {v.subArea}, {v.neighborhood}</p>
           <div className="mt-1 flex items-start justify-between gap-3">
             <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">{v.name}</h1>
             <HeartButton kind="vendor" id={v.slug} label={v.name} variant="pill" className="mt-1 shrink-0" />
@@ -76,18 +76,18 @@ function VendorPage() {
           </div>
 
           {!v.story.startsWith(v.tagline) && <p className="mt-6 text-lg leading-relaxed">{v.tagline}</p>}
-          <h2 className="mt-8 text-sm font-medium uppercase tracking-widest text-brick">Their story</h2>
+          <h2 className="mt-8 text-sm font-medium uppercase tracking-widest text-primary">Their story</h2>
           <p className="mt-2 leading-relaxed">{v.story}</p>
 
           {v.services.length > 0 && (
             <>
-              <h2 className="mt-8 text-sm font-medium uppercase tracking-widest text-brick">What they offer</h2>
+              <h2 className="mt-8 text-sm font-medium uppercase tracking-widest text-primary">What they offer</h2>
               <ul className="mt-3 flex flex-wrap gap-2">{v.services.map((s) => <li key={s} className="rounded-full bg-secondary px-3 py-1.5 text-sm">{s}</li>)}</ul>
             </>
           )}
 
           <section className="mt-10 rounded-2xl border border-border bg-card p-5 shadow-soft">
-            <h2 className="flex items-center gap-2 text-lg font-semibold"><Quote className="h-5 w-5 text-brick" />What reviewers say</h2>
+            <h2 className="flex items-center gap-2 text-lg font-semibold"><Quote className="h-5 w-5 text-primary" />What reviewers say</h2>
             {v.reviewHighlights.length > 0 ? (
               <ul className="mt-3 space-y-2">
                 {v.reviewHighlights.map((r) => <li key={r} className="flex gap-2 text-sm leading-relaxed"><Star className="mt-0.5 h-4 w-4 shrink-0 fill-brick text-brick" />{r}</li>)}

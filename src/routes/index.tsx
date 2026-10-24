@@ -89,7 +89,7 @@ function Index() {
       <Reveal as="section" aria-labelledby="about" className="mt-16 bg-secondary/60 py-16 md:mt-24 md:py-24">
         <div className="mx-auto max-w-6xl px-4 md:px-5">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm font-medium uppercase tracking-widest text-brick">About Detroit Local</p>
+            <p className="text-sm font-medium uppercase tracking-widest text-primary">About Detroit Local</p>
             <h2 id="about" className="mt-3 text-3xl font-semibold leading-tight tracking-tight md:text-5xl">The neighborhood, back on the front porch.</h2>
             <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
               Detroit Local brings neighbors and the people who serve them into one place. Find the farmer, baker or fixer down the street, ask the block a question, look up a city service, or get your own business on the map, whether you just moved here or have been here fifty years. Detroit Local is where everything local grows.
@@ -116,7 +116,7 @@ function Index() {
       <Reveal as="section" className="mx-auto mt-16 grid max-w-6xl items-center gap-6 px-4 md:mt-24 md:grid-cols-2 md:gap-12 md:px-5">
         <img src={featured.image} alt={featured.title} loading="lazy" width={1024} height={1024} className="aspect-square w-full rounded-3xl object-cover shadow-lift" />
         <div>
-          <p className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-brick"><MessagesSquare className="h-4 w-4" />From the forum</p>
+          <p className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-primary"><MessagesSquare className="h-4 w-4" />From the forum</p>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-5xl">{featured.title}</h2>
           <blockquote className="mt-5 text-lg italic">"{featured.excerpt}"</blockquote>
           <p className="mt-3 text-sm text-muted-foreground">{featured.teller} · {featured.replies.length} replies</p>

@@ -98,7 +98,7 @@ function Forum() {
       {community && (
         <div className="mt-6 grid animate-rise gap-6 md:grid-cols-2">
           <section>
-            <h2 className="flex items-center gap-2 text-xl font-semibold"><CalendarDays className="h-5 w-5 text-brick" />Coming up</h2>
+            <h2 className="flex items-center gap-2 text-xl font-semibold"><CalendarDays className="h-5 w-5 text-primary" />Coming up</h2>
             <ul className="mt-3 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
               {events.map((e) => {
                 const [mon, day] = e.date.split(" ");
@@ -123,7 +123,7 @@ function Forum() {
             </ul>
           </section>
           <section>
-            <h2 className="flex items-center gap-2 text-xl font-semibold"><Users className="h-5 w-5 text-brick" />Block clubs</h2>
+            <h2 className="flex items-center gap-2 text-xl font-semibold"><Users className="h-5 w-5 text-primary" />Block clubs</h2>
             <ul className="mt-3 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
               {blockClubs.map((b) => (
                 <li key={b.slug} className="relative">

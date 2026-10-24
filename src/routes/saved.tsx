@@ -94,7 +94,7 @@ function SavedCard({ it }: { it: SavedResult }) {
       <SavedLink it={it} className="group flex h-full gap-3.5 rounded-2xl border border-border bg-card p-3 pr-12 shadow-soft transition-[box-shadow,border-color] duration-300 ease-out hover:border-primary/25 hover:shadow-lift">
         <div className="h-20 w-20 shrink-0 overflow-hidden rounded-xl md:h-24 md:w-24"><Thumb it={it} /></div>
         <div className="min-w-0 flex-1 py-0.5">
-          <p className="text-xs font-medium text-brick">{it.category}</p>
+          <p className="text-xs font-medium text-primary">{it.category}</p>
           <h3 className="mt-0.5 line-clamp-2 font-semibold leading-snug group-hover:text-primary">{it.title}</h3>
           <p className="mt-0.5 line-clamp-1 text-sm text-muted-foreground">{it.subtitle}</p>
           <div className="mt-1.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-muted-foreground">
