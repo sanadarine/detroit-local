@@ -67,7 +67,7 @@ export function PlacePhoto({
   const { data } = usePlacePhotos(slug, 1, width);
   const photo = data?.[0];
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div className={`relative overflow-hidden ${className}`} title={photo && credit === "tooltip" ? `Photo: ${photo.author ?? "Google user"} · Google Maps` : undefined}>
       <NeighborhoodArt name={neighborhood} className="h-full w-full" />
       {photo && (
         <>

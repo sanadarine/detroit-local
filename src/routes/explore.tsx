@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { categories, neighborhoodAreas, neighborhoods, parks, subAreas, travelModes, vendors, type Hood, type Park, type TravelMode, type Vendor } from "@/lib/data";
 import { distanceMeters, reachMeters, travelMinutes, type LatLng } from "@/lib/geo";
 import { NeighborhoodStrip } from "@/components/NeighborhoodStrip";
-import { NeighborhoodArt } from "@/components/NeighborhoodArt";
+import { PlacePhoto } from "@/components/PlacePhoto";
 import { SellerHub } from "@/components/SellerHub";
 import { GoogleMap, type MapPin as Pin } from "@/components/GoogleMap";
 
@@ -80,7 +80,7 @@ function ResultRow({ v, minutes, mode }: { v: Vendor; minutes?: number | undefin
   return (
     <Link to="/vendors/$slug" params={{ slug: v.slug }} className="group flex gap-4 rounded-2xl p-2.5 transition-colors hover:bg-card md:p-3">
       <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl shadow-soft md:h-28 md:w-28">
-        <NeighborhoodArt name={v.neighborhood} className="h-full w-full" />
+        <PlacePhoto slug={v.slug} name={v.name} neighborhood={v.neighborhood} credit="tooltip" className="h-full w-full" />
         <span className="absolute bottom-1.5 left-1.5 grid h-7 w-7 place-items-center rounded-full bg-card/95 text-primary shadow-soft"><I className="h-3.5 w-3.5" /></span>
       </div>
       <div className="min-w-0 flex-1 py-0.5">
@@ -103,7 +103,7 @@ function ParkRow({ p, minutes, mode }: { p: Park; minutes?: number | undefined; 
   return (
     <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${p.name} ${p.address}`)}`} target="_blank" rel="noopener noreferrer" className="group flex gap-4 rounded-2xl p-2.5 transition-colors hover:bg-card md:p-3">
       <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl shadow-soft md:h-28 md:w-28">
-        <NeighborhoodArt name={p.neighborhood} className="h-full w-full" />
+        <PlacePhoto slug={p.slug} name={p.name} neighborhood={p.neighborhood} credit="tooltip" className="h-full w-full" />
         <span className="absolute bottom-1.5 left-1.5 grid h-7 w-7 place-items-center rounded-full bg-card/95 text-primary shadow-soft"><Trees className="h-3.5 w-3.5" /></span>
       </div>
       <div className="min-w-0 flex-1 py-0.5">

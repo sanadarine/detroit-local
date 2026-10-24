@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { MapPin, Star } from "lucide-react";
 import type { TravelMode, Vendor } from "@/lib/data";
-import { NeighborhoodArt } from "@/components/NeighborhoodArt";
+import { PlacePhoto } from "@/components/PlacePhoto";
 
 const modeLabel: Record<TravelMode, string> = { walk: "walk", bike: "bike", bus: "by bus", drive: "drive" };
 
@@ -13,7 +13,7 @@ export function VendorCard({ v, mode, minutes }: { v: Vendor; mode?: TravelMode 
       className="group overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
     >
       <div className="relative overflow-hidden">
-        <NeighborhoodArt name={v.neighborhood} className="aspect-[16/9] w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
+        <PlacePhoto slug={v.slug} name={v.name} neighborhood={v.neighborhood} width={800} className="aspect-[16/9] w-full" />
         <span className="absolute left-3 top-3 rounded-full bg-card/95 px-2.5 py-1 text-xs font-medium shadow-soft backdrop-blur">{v.category}</span>
       </div>
       <div className="p-4 md:p-5">
