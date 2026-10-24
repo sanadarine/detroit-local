@@ -7,14 +7,7 @@ export const categories = ["Farms & gardens", "Food businesses", "Coffee & baker
 export type Category = (typeof categories)[number];
 export const neighborhoods = ["Corktown", "Eastern Market", "Jefferson-Chalmers", "Southwest", "North End", "Bagley"] as const;
 
- lat: number; lng: number; radius: number }[] = [
-  { name: "Corktown", lat: 42.3305, lng: -83.0705, radius: 900 },
-  { name: "Eastern Market", lat: 42.3475, lng: -83.0420, radius: 700 },
-  { name: "Jefferson-Chalmers", lat: 42.3600, lng: -82.9520, radius: 1300 },
-  { name: "Southwest", lat: 42.3195, lng: -83.0985, radius: 1400 },
-  { name: "North End", lat: 42.3810, lng: -83.0690, radius: 1000 },
-  { name: "Bagley", lat: 42.4195, lng: -83.1440, radius: 900 },
-];
+
 
 export type Hood = (typeof neighborhoods)[number];
 export type SubArea = { name: string; hint: string; lat: number; lng: number; radius: number };
