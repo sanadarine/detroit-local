@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { subAreas, vendors } from "@/lib/data";
+import { parks, subAreas, vendors } from "@/lib/data";
 import { reachMeters, travelMinutes, withinMinutes } from "@/lib/geo";
 
 const oakland = subAreas["North End"].find((s) => s.name === "Oakland Ave")!;
@@ -12,10 +12,10 @@ describe("within X minutes", () => {
     expect(travelMinutes(a, b, "drive")).toBe(3);
   });
 
-  it("from Oakland Ave, North End Greens is within 5 minutes walking but Auntie Dee's (Bagley) is not", () => {
-    const names = withinMinutes(oakland, vendors, "walk", 5).map((v) => v.slug);
-    expect(names).toContain("north-end-greens");
-    expect(names).not.toContain("auntie-dees-pies");
+  it("from Oakland Ave, MJ's ice cream is within 10 minutes walking but Good Cakes and Bakes (Bagley) is not", () => {
+    const names = withinMinutes(oakland, vendors, "walk", 10).map((v) => v.slug);
+    expect(names).toContain("mjs-north-end-ice-cream-parlor");
+    expect(names).not.toContain("good-cakes-and-bakes");
   });
 
   it("reach grows with more minutes", () => {
@@ -28,7 +28,11 @@ describe("sub-areas", () => {
     for (const list of Object.values(subAreas)) expect(list.length).toBeGreaterThanOrEqual(3);
   });
 
-  it("every vendor's area belongs to its own neighborhood", () => {
-    for (const v of vendors) expect(subAreas[v.neighborhood].map((s) => s.name)).toContain(v.subArea);
+  it("every vendor's and park's area belongs to its own neighborhood", () => {
+    for (const v of [...vendors, ...parks]) expect(subAreas[v.neighborhood].map((s) => s.name)).toContain(v.subArea);
+  });
+
+  it("every specific area has at least one real business listed", () => {
+    for (const [hood, list] of Object.entries(subAreas)) for (const s of list) expect(vendors.some((v) => v.neighborhood === hood && v.subArea === s.name)).toBe(true);
   });
 });

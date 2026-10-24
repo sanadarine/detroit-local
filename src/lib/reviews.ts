@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { vendorReviews, type Review } from "@/lib/data";
+import type { Review } from "@/lib/data";
 
 // Demo-only storage: reviews live in this browser until the app gets shared saving.
 const KEY = "porchlight-reviews-v1";
@@ -55,7 +55,7 @@ export function useReviews(slug: string) {
   }, []);
 
   const reviews = useMemo(
-    () => [...(stored[slug] ?? []), ...(vendorReviews[slug] ?? [])].sort((a, b) => b.date.localeCompare(a.date)),
+    () => [...(stored[slug] ?? [])].sort((a, b) => b.date.localeCompare(a.date)),
     [stored, slug],
   );
 

@@ -1,6 +1,6 @@
-import { blockClubs, cityServices, events, hubBoard, permitSteps, vendorReviews, vendors, type Thread } from "@/lib/data";
+import { blockClubs, cityServices, events, hubBoard, parks, permitSteps, vendors, type Thread } from "@/lib/data";
 
-export type SearchKind = "thread" | "vendor" | "community" | "hub" | "service";
+export type SearchKind = "thread" | "vendor" | "park" | "community" | "hub" | "service";
 
 export type SearchResult = {
   kind: SearchKind;
@@ -66,7 +66,7 @@ function docs(threads: Thread[]): Doc[] {
       slug: v.slug,
       title: v.name,
       snippet: `${v.category} · ${v.subArea}, ${v.neighborhood} · ${v.tagline}`,
-      text: [v.owner, v.category, v.neighborhood, v.subArea, v.tagline, v.story, ...v.services, v.address, ...(vendorReviews[v.slug] ?? []).map((r) => r.text)].join(" "),
+      text: [v.owner ?? "", v.category, v.neighborhood, v.subArea, v.tagline, v.story, ...v.services, v.address, ...v.reviewHighlights].join(" "),
     })),
     ...blockClubs.map((c) => ({
       kind: "community" as const,
@@ -83,6 +83,14 @@ function docs(threads: Thread[]): Doc[] {
       title: e.title,
       snippet: `Event · ${e.date} · ${e.place}, ${e.neighborhood}`,
       text: `event ${e.date} ${e.place} ${e.neighborhood} ${e.host} ${e.about}`,
+    })),
+    ...parks.map((p) => ({
+      kind: "park" as const,
+      id: `park:${p.slug}`,
+      slug: p.neighborhood,
+      title: p.name,
+      snippet: `Park · ${p.subArea}, ${p.neighborhood} · ${p.features.slice(0, 3).join(", ")}`,
+      text: `park outdoors playground green space ${p.neighborhood} ${p.subArea} ${p.about} ${p.features.join(" ")}`,
     })),
     ...cityServices.map((c) => ({
       kind: "service" as const,
@@ -126,5 +134,6 @@ export const kindLabels: Record<SearchKind, string> = {
   vendor: "Vendors",
   community: "Block clubs & events",
   service: "City services",
+  park: "Parks",
   hub: "For sellers & permits",
 };
