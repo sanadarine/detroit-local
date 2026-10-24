@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 /** Fades content up gently the first time it scrolls into view. */
-export function Reveal({ children, className = "", delay = 0, as: Tag = "div" }: { children: React.ReactNode; className?: string; delay?: number; as?: "div" | "section" | "li" }) {
+export function Reveal({ children, className = "", delay = 0, as: Tag = "div", ...aria }: { children: React.ReactNode; className?: string; delay?: number; as?: "div" | "section" | "li"; "aria-labelledby"?: string }) {
   const ref = useRef<HTMLElement | null>(null);
   useEffect(() => {
     const el = ref.current;
@@ -19,7 +19,7 @@ export function Reveal({ children, className = "", delay = 0, as: Tag = "div" }:
     return () => io.disconnect();
   }, []);
   return (
-    <Tag ref={ref as never} className={`reveal ${className}`} style={{ transitionDelay: `${delay}ms` }}>
+    <Tag ref={ref as never} {...aria} className={`reveal ${className}`} style={{ transitionDelay: `${delay}ms` }}>
       {children}
     </Tag>
   );
