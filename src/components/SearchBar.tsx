@@ -47,7 +47,7 @@ export function SearchBar({ size = "page", initial = "", suggest = true, autoFoc
           }}
           placeholder={placeholder}
           aria-label="Search Porchlight Detroit"
-          className={`min-w-0 flex-1 bg-transparent outline-none placeholder:text-muted-foreground ${hero ? "py-2 text-base md:text-lg" : "py-1.5"}`}
+          className={`min-w-0 flex-1 bg-transparent outline-none placeholder:text-muted-foreground [&::-webkit-search-cancel-button]:appearance-none ${hero ? "py-2 text-base md:text-lg" : "py-1.5"}`}
         />
         <button className={`shrink-0 rounded-full bg-primary font-medium text-primary-foreground hover:opacity-90 ${hero ? "px-4 py-2.5 md:px-6" : "px-4 py-2 text-sm"}`}>Search</button>
       </div>

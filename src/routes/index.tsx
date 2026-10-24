@@ -48,7 +48,7 @@ function Index() {
           <p className="mt-4 max-w-xl animate-rise text-base opacity-90 md:text-lg" style={{ animationDelay: "160ms" }}>
             Ask once, and the whole block answers. Search first, your question may already have a thread.
           </p>
-          <div className="mt-8 w-full max-w-2xl animate-rise" style={{ animationDelay: "240ms" }}>
+          <div className="relative z-20 mt-8 w-full max-w-2xl animate-rise" style={{ animationDelay: "240ms" }}>
             <SearchBar size="hero" placeholder="Search daycare, produce, permits, stories…" />
           </div>
           <div className="mt-4 flex animate-rise flex-wrap justify-center gap-2" style={{ animationDelay: "320ms" }}>
