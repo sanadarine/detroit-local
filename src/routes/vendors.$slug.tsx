@@ -3,6 +3,8 @@ import { BadgeCheck, Clock, MapPin, Navigation } from "lucide-react";
 import { vendors } from "@/lib/data";
 import { GoogleMap } from "@/components/GoogleMap";
 import { NeighborhoodArt } from "@/components/NeighborhoodArt";
+import { Stars, VendorReviews } from "@/components/VendorReviews";
+import { useReviews } from "@/lib/reviews";
 
 export const Route = createFileRoute("/vendors/$slug")({
   loader: ({ params }) => {
@@ -32,6 +34,7 @@ export const Route = createFileRoute("/vendors/$slug")({
 
 function VendorPage() {
   const v = Route.useLoaderData();
+  const { reviews, average, addReview } = useReviews(v.slug);
   return (
     <div className="mx-auto max-w-5xl px-4 pt-6 md:px-5 md:pt-10">
       <Link to="/explore" className="text-sm text-muted-foreground hover:text-foreground">← All vendors</Link>
@@ -41,6 +44,11 @@ function VendorPage() {
           <p className="flex items-center gap-1 text-sm text-muted-foreground"><MapPin className="h-4 w-4 shrink-0" />{v.category} · {v.neighborhood} · {v.minutesAway} min away</p>
           <h1 className="mt-2 text-4xl font-semibold tracking-tight md:text-5xl">{v.name}</h1>
           <p className="mt-1 text-lg">Run by {v.owner}</p>
+          {reviews.length > 0 && (
+            <a href="#reviews" className="mt-2 inline-flex items-center gap-2 text-sm hover:underline">
+              <Stars value={average} /> <span className="font-medium">{average.toFixed(1)}</span> <span className="text-muted-foreground">· {reviews.length} review{reviews.length === 1 ? "" : "s"}</span>
+            </a>
+          )}
           <h2 className="mt-8 text-sm font-medium uppercase tracking-widest text-brick">Their story</h2>
           <p className="mt-2 leading-relaxed">{v.story}</p>
           <h2 className="mt-8 text-sm font-medium uppercase tracking-widest text-brick">Services</h2>
@@ -77,6 +85,7 @@ function VendorPage() {
           </section>
         </div>
       </div>
+      <VendorReviews name={v.name} reviews={reviews} average={average} onAdd={addReview} />
     </div>
   );
 }
