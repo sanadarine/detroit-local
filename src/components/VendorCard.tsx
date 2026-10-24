@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { BadgeCheck, MapPin } from "lucide-react";
 import type { TravelMode, Vendor } from "@/lib/data";
 
-export function VendorCard({ v, mode }: { v: Vendor; mode?: TravelMode }) {
+export function VendorCard({ v, mode }: { v: Vendor; mode?: TravelMode | undefined }) {
   return (
     <Link
       to="/vendors/$slug"

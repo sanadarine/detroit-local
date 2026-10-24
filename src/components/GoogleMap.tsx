@@ -30,14 +30,14 @@ function loadGoogleMaps(): Promise<any> {
   return loader;
 }
 
-export type MapPin = { id: string; lat: number; lng: number; title: string; approximate?: boolean };
+export type MapPin = { id: string; lat: number; lng: number; title: string; approximate?: boolean | undefined };
 
 type Props = {
   center: { lat: number; lng: number };
   zoom?: number;
   pins: MapPin[];
-  onPinClick?: (id: string) => void;
-  onMapClick?: (pos: { lat: number; lng: number }) => void;
+  onPinClick?: ((id: string) => void) | undefined;
+  onMapClick?: ((pos: { lat: number; lng: number }) => void) | undefined;
   className?: string;
 };
 
