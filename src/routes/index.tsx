@@ -92,7 +92,7 @@ function Index() {
             <p className="text-sm font-medium uppercase tracking-widest text-brick">About Detroit Local</p>
             <h2 id="about" className="mt-3 text-3xl font-semibold leading-tight tracking-tight md:text-5xl">The neighborhood, back on the front porch.</h2>
             <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-              Detroit Local brings neighbors and the people who serve them into one place. Find the farmer, baker or fixer down the street, ask the block a question, look up a city service, or get your own business on the map, whether you just moved here or have been here fifty years.
+              Detroit Local brings neighbors and the people who serve them into one place. Find the farmer, baker or fixer down the street, ask the block a question, look up a city service, or get your own business on the map, whether you just moved here or have been here fifty years. Detroit Local is where everything local grows.
             </p>
           </div>
           <ul className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
