@@ -54,7 +54,7 @@ function ThreadPage() {
       <div className="mt-5 flex items-center gap-4">
         {thread.image && <img src={thread.image} alt={thread.person} width={1024} height={1024} className="h-16 w-16 shrink-0 rounded-full object-cover md:h-20 md:w-20" />}
         <div>
-          <p className="text-sm text-brick">{thread.category} · {thread.teller}</p>
+          <p className="text-sm text-primary">{thread.category} · {thread.teller}</p>
           <h1 className="mt-1 text-3xl font-semibold leading-tight md:text-5xl">{thread.title}</h1>
           <div className="mt-2 flex flex-wrap items-center gap-3">
             <p className="text-sm text-muted-foreground">{formatDate(thread.date)}</p>

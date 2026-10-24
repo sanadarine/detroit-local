@@ -58,7 +58,7 @@ export function SearchBar({ size = "page", initial = "", suggest = true, autoFoc
         >
           {results.length > 0 ? (
             <>
-              <p className="px-3 pb-1 pt-2 text-xs font-medium uppercase tracking-widest text-brick">Already on Detroit Local</p>
+              <p className="px-3 pb-1 pt-2 text-xs font-medium uppercase tracking-widest text-primary">Already on Detroit Local</p>
               {results.map((r) => <SearchResultLink key={r.id} r={r} compact onClick={() => setOpen(false)} />)}
             </>
           ) : (

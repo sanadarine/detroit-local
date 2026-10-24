@@ -50,7 +50,7 @@ function SearchPage() {
           const Icon = kindIcons[g.kind];
           return (
             <section key={g.kind}>
-              <h2 className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-brick">
+              <h2 className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-primary">
                 <Icon className="h-4 w-4" />
                 {kindLabels[g.kind]} <span className="text-muted-foreground">· {g.items.length}</span>
               </h2>

@@ -77,7 +77,7 @@ export function CityServices() {
           const I = catIcons[c];
           return (
             <section key={c} className="mt-8">
-              <h2 className="flex items-center gap-2 text-lg font-semibold"><I className="h-5 w-5 text-brick" />{c}</h2>
+              <h2 className="flex items-center gap-2 text-lg font-semibold"><I className="h-5 w-5 text-primary" />{c}</h2>
               <ul className="mt-3 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
                 {list
                   .filter((s) => s.category === c)

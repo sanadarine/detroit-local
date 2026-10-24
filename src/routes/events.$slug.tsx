@@ -70,7 +70,7 @@ function EventPage() {
 
       <div className="mt-6 grid gap-8 md:grid-cols-[1fr_340px] md:gap-10">
         <div>
-          <p className="flex items-center gap-1.5 text-sm font-medium text-brick"><CalendarDays className="h-4 w-4" />Event · {e.neighborhood}</p>
+          <p className="flex items-center gap-1.5 text-sm font-medium text-primary"><CalendarDays className="h-4 w-4" />Event · {e.neighborhood}</p>
           <div className="mt-1 flex items-start justify-between gap-3">
             <h1 className="text-3xl font-semibold tracking-tight md:text-5xl">{e.title}</h1>
             <HeartButton kind="event" id={e.slug} label={e.title} variant="pill" className="mt-1 shrink-0" />

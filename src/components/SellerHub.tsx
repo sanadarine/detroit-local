@@ -23,7 +23,7 @@ function PostCard({ p }: { p: BoardPost }) {
     <li className="flex flex-col rounded-2xl bg-card p-4 shadow-soft ring-1 ring-border transition hover:shadow-lift">
       <div className="flex items-center gap-2">
         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-accent text-accent-foreground"><I className="h-4 w-4" /></span>
-        <span className="text-xs font-medium text-brick">{p.tag}</span>
+        <span className="text-xs font-medium text-primary">{p.tag}</span>
         <span className={`ml-auto rounded-full px-2 py-0.5 text-[11px] font-medium ${p.kind === "offer" ? "bg-primary/10 text-primary" : "bg-secondary text-foreground"}`}>
           {p.kind === "offer" ? "Offering" : "Looking for"}
         </span>
@@ -61,7 +61,7 @@ export function SellerHub() {
       <section id="board" className="scroll-mt-24" aria-labelledby="board-title">
         <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 id="board-title" className="flex items-center gap-2 text-2xl font-semibold tracking-tight"><Handshake className="h-5 w-5 text-brick" />Seller directory</h2>
+            <h2 id="board-title" className="flex items-center gap-2 text-2xl font-semibold tracking-tight"><Handshake className="h-5 w-5 text-primary" />Seller directory</h2>
             <p className="mt-1 text-sm text-muted-foreground">Trade skills, supplies, space and buying power with other Detroit sellers.</p>
           </div>
         </div>
@@ -112,7 +112,7 @@ export function SellerHub() {
       </section>
 
       <section id="permits" className="mt-12 scroll-mt-24">
-        <h2 className="flex items-center gap-2 text-xl font-semibold md:text-2xl"><FileCheck className="h-5 w-5 text-brick" />Starting a business</h2>
+        <h2 className="flex items-center gap-2 text-xl font-semibold md:text-2xl"><FileCheck className="h-5 w-5 text-primary" />Starting a business</h2>
         <p className="mt-1 text-sm text-muted-foreground">The Detroit paperwork, one step at a time.</p>
         <ol className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {permitSteps.map((s, i) => (
