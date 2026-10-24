@@ -21,3 +21,4 @@
 - [x] New unique "DL" monogram logo (D + L), update header/footer/favicon
 - [ ] Clickable block clubs & events with detail pages (how to join / request a spot)
 - [ ] Detroit city services directory inside the forum (311, trash pickup, key numbers)
+- [ ] Explore: add parks + more specific categories (Farms, Food businesses separate, etc.)
