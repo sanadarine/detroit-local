@@ -26,10 +26,10 @@ describe("saved page filters", () => {
 
   it("near a place keeps only saved things inside the chosen distance, nearest first", () => {
     const mexicantown = subAreas.Southwest.find((a) => a.name === "Mexicantown")!;
-    const near = filterSaved(items, { near: mexicantown, radius: 3219 });
+    const near = filterSaved(items, { near: mexicantown, radius: 1300 }); // La Gloria ~0.3 km, Clark Park ~1.3 km, Folk ~1.3+ km
     expect(near.map((i) => i.id)).not.toContain("folk");
     expect(near.map((i) => i.id)).not.toContain("911");
-    expect(near.length).toBeGreaterThan(0);
+    expect(near.map((i) => i.id)).toEqual(["la-gloria-bakery", "clark-park"]);
     for (let i = 1; i < near.length; i++) expect(near[i]!.distance!).toBeGreaterThanOrEqual(near[i - 1]!.distance!);
   });
 
