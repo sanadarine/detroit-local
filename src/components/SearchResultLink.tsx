@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { MessagesSquare, Store, Users, Wrench } from "lucide-react";
+import { Landmark, MessagesSquare, Store, Users, Wrench } from "lucide-react";
 import type { SearchKind, SearchResult } from "@/lib/search";
 
 export const kindIcons: Record<SearchKind, typeof Store> = {
@@ -7,6 +7,7 @@ export const kindIcons: Record<SearchKind, typeof Store> = {
   vendor: Store,
   community: Users,
   hub: Wrench,
+  service: Landmark,
 };
 
 export function SearchResultLink({ r, onClick, compact }: { r: SearchResult; onClick?: () => void; compact?: boolean }) {
@@ -26,6 +27,7 @@ export function SearchResultLink({ r, onClick, compact }: { r: SearchResult; onC
   const common = { className: cls, ...(onClick ? { onClick } : {}) };
   if (r.kind === "thread" && r.slug) return <Link to="/stories/$slug" params={{ slug: r.slug }} {...common}>{inner}</Link>;
   if (r.kind === "vendor" && r.slug) return <Link to="/vendors/$slug" params={{ slug: r.slug }} {...common}>{inner}</Link>;
+  if (r.kind === "service") return <Link to="/stories" search={{ section: "services" }} hash={r.slug ?? ""} {...common}>{inner}</Link>;
   if (r.kind === "community" && r.slug && r.id.startsWith("club:")) return <Link to="/clubs/$slug" params={{ slug: r.slug }} {...common}>{inner}</Link>;
   if (r.kind === "community" && r.slug) return <Link to="/events/$slug" params={{ slug: r.slug }} {...common}>{inner}</Link>;
   if (r.kind === "community") return <Link to="/stories" search={{ section: "community" }} {...common}>{inner}</Link>;

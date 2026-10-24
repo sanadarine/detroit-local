@@ -23,7 +23,7 @@ export const Route = createFileRoute("/search")({
   component: SearchPage,
 });
 
-const order: SearchKind[] = ["thread", "vendor", "community", "hub"];
+const order: SearchKind[] = ["thread", "vendor", "service", "community", "hub"];
 
 function SearchPage() {
   const { q = "" } = Route.useSearch();
