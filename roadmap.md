@@ -18,3 +18,4 @@
 - [x] Rename app to Detroit Local + new logo (and favicon)
 - [x] Home: About section under the search (what Detroit Local is, who it helps, how it connects the community)
 - [x] Home headline: "Know your neighbors." + typewriter cycling phrases (no "Buy from them")
+- [ ] New unique "DL" monogram logo (D + L), update header/footer/favicon
