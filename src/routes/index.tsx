@@ -63,8 +63,8 @@ function Index() {
 
       <section className="mx-auto mt-10 grid max-w-6xl gap-3 px-4 md:mt-16 md:grid-cols-3 md:gap-4 md:px-5">
         {doors.map((d, i) => (
-          <Reveal key={d.to} delay={i * 80}>
-            <Link to={d.to} className="group flex h-full items-start gap-4 rounded-2xl border border-border bg-card p-4 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift md:block md:p-6">
+          <Reveal key={d.title} delay={i * 80}>
+            <Link to={d.to} {...("search" in d ? { search: d.search } : {})} className="group flex h-full items-start gap-4 rounded-2xl border border-border bg-card p-4 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift md:block md:p-6">
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"><d.icon className="h-5 w-5" /></span>
               <div className="min-w-0 md:mt-4">
                 <h2 className="text-xl font-semibold md:text-2xl">{d.title}</h2>
