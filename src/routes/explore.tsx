@@ -442,7 +442,7 @@ function Explore() {
                   <span className="block font-semibold">Put your business on the map</span>
                   <span className="block text-sm opacity-80">Drop a pin so neighbors nearby can find you.</span>
                 </span>
-                <ChevronRight className="h-5 w-5 shrink-0 opacity-70 transition-transform group-hover:translate-x-0.5" />
+                <ChevronRight className="h-5 w-5 shrink-0 opacity-70 transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
               </button>
               <h2 id="results" className="flex items-baseline gap-2 px-1 text-2xl font-semibold tracking-tight">
                 {resultsTitle}

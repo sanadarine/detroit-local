@@ -38,7 +38,7 @@ export function PhotoImg({ photo, alt, eager }: { photo: Photo; alt: string; eag
       loading={eager ? "eager" : "lazy"}
       referrerPolicy="no-referrer"
       onLoad={() => setLoaded(true)}
-      className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-700 ease-out group-hover:scale-[1.04] ${loaded ? "opacity-100" : "opacity-0"}`}
+      className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out ${loaded ? "opacity-100" : "opacity-0"}`}
     />
   );
 }

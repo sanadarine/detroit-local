@@ -31,7 +31,7 @@ export function NeighborhoodStrip({ active, onSelect, compact = false }: { activ
           </>
         );
         const size = compact ? "w-[46%] rounded-xl sm:w-[200px]" : "w-[72%] rounded-2xl sm:w-[44%] lg:w-[30%]";
-        const cls = `group ${size} shrink-0 snap-start overflow-hidden border bg-card text-left shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift active:scale-[0.99] animate-rise ${selected ? "border-primary ring-2 ring-primary/30" : "border-border"}`;
+        const cls = `group ${size} shrink-0 snap-start overflow-hidden border bg-card text-left shadow-soft transition-[box-shadow,border-color] duration-300 ease-out hover:border-primary/25 hover:shadow-lift active:scale-[0.99] animate-rise ${selected ? "border-primary ring-2 ring-primary/30" : "border-border"}`;
         const style = { animationDelay: `${i * 70}ms` };
         return onSelect ? (
           <button key={n} type="button" onClick={() => onSelect(selected ? null : n)} className={cls} style={style} aria-pressed={selected}>

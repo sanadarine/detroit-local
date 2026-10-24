@@ -27,7 +27,7 @@ export function NeighborhoodArt({ name, className = "", eager }: { name: HoodNam
         width={1280}
         height={768}
         loading={eager ? "eager" : "lazy"}
-        className="h-full w-full object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-[1.06]"
+        className="h-full w-full object-cover"
       />
       <div className="pointer-events-none absolute inset-0 text-card/90">
         <Cloud className="absolute left-0 top-[6%] w-[22%] animate-drift opacity-80" />

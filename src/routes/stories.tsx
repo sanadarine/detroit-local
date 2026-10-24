@@ -114,7 +114,7 @@ function Forum() {
                         <p className="truncate text-sm text-muted-foreground">{e.place} · {e.neighborhood}</p>
                         <p className="mt-1 text-xs font-medium text-brick">{e.signup === "drop-in" ? "Drop in, no sign-up" : full ? "Full · waitlist open" : `${e.spotsLeft} spots left`}</p>
                       </div>
-                      <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+                      <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
                     </Link>
                   </li>
                 );
@@ -133,7 +133,7 @@ function Forum() {
                       <p className="text-sm text-muted-foreground">{b.neighborhood} · Meets {b.meets}</p>
                       <p className="mt-1 text-xs font-medium text-brick">{b.members} members · Free to join</p>
                     </div>
-                    <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+                    <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
                   </Link>
                 </li>
               ))}
@@ -173,7 +173,7 @@ function Forum() {
                   {t.person} · <MessagesSquare className="inline h-3.5 w-3.5" /> {t.replies.length} · {formatDate(lastActivity(t))}
                 </p>
               </div>
-              <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+              <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
             </Link>
           </li>
         ))}
