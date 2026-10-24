@@ -302,18 +302,180 @@ export const stories: Story[] = [
   },
 ];
 
-export const blockClubs = [
-  { name: "Bagley Block Club", neighborhood: "Bagley", meets: "1st Tuesday, 6:30pm", members: 84 },
-  { name: "North End Neighbors United", neighborhood: "North End", meets: "2nd Saturday, 10am", members: 120 },
-  { name: "Jefferson-Chalmers Citizens District Council", neighborhood: "Jefferson-Chalmers", meets: "3rd Thursday, 7pm", members: 210 },
-  { name: "Corktown Residents Council", neighborhood: "Corktown", meets: "Last Monday, 7pm", members: 95 },
+export type BlockClub = {
+  slug: string;
+  name: string;
+  neighborhood: Hood;
+  meets: string;
+  where: string;
+  members: number;
+  founded: number;
+  leaders: string;
+  about: string;
+  focus: string[];
+  openTo: string;
+  dues: string;
+  howToJoin: string[];
+};
+
+/** Demo block clubs (made-up details). */
+export const blockClubs: BlockClub[] = [
+  {
+    slug: "bagley-block-club",
+    name: "Bagley Block Club",
+    neighborhood: "Bagley",
+    meets: "1st Tuesday, 6:30pm",
+    where: "Church fellowship hall off Livernois (address sent when you join)",
+    members: 84,
+    founded: 1987,
+    leaders: "Pastor Reed & Denise Carter",
+    about: "Neighbors keeping Bagley's tree-lined blocks clean, safe and friendly since the 80s. Meetings are short, there's always coffee, and newcomers get introduced at the start.",
+    focus: ["Monthly block cleanups", "Porch-light safety walks", "Holiday food drive", "Welcoming new neighbors"],
+    openTo: "Anyone who lives, works or worships in Bagley",
+    dues: "Free (optional $10 a year for cleanup supplies)",
+    howToJoin: ["Send a request below and a volunteer will reply within a few days.", "Come to any 1st-Tuesday meeting. You don't need to RSVP.", "Get added to the group text for cleanup and safety updates."],
+  },
+  {
+    slug: "north-end-neighbors-united",
+    name: "North End Neighbors United",
+    neighborhood: "North End",
+    meets: "2nd Saturday, 10am",
+    where: "North End Greens farm stand on Oakland Ave (library room in winter)",
+    members: 120,
+    founded: 2009,
+    leaders: "Ms. Loretta J. & Marcus Bell",
+    about: "Turning vacant lots into gardens, teaching kids to grow food and keeping North End history alive. Saturday meetings end with a walk through the gardens.",
+    focus: ["Vacant-lot gardens", "Youth garden program", "Neighborhood history board", "Senior check-ins"],
+    openTo: "North End residents and friends of the neighborhood",
+    dues: "Free",
+    howToJoin: ["Request to join below and Marcus or Ms. Loretta will reach out.", "Stop by a 2nd-Saturday meeting at the farm stand.", "Pick a project (gardens, kids or history) and help out at least once a season."],
+  },
+  {
+    slug: "jefferson-chalmers-cdc",
+    name: "Jefferson-Chalmers Citizens District Council",
+    neighborhood: "Jefferson-Chalmers",
+    meets: "3rd Thursday, 7pm",
+    where: "Butzel Family Center community room",
+    members: 210,
+    founded: 1979,
+    leaders: "Harold W. & Tanya B.",
+    about: "The east side's longest-running neighborhood council. We push for flood protection, keep the canals clean and support the shops along Jefferson.",
+    focus: ["Flood prevention and backflow valves", "Canal cleanups", "Jefferson Ave small businesses", "Talking with the City on residents' behalf"],
+    openTo: "Residents and property owners in Jefferson-Chalmers",
+    dues: "Free (voting members sign in at two meetings a year)",
+    howToJoin: ["Send a request below and get the meeting agenda by text or email.", "Attend a 3rd-Thursday meeting and sign the member sheet.", "Join a committee: flood, canals or business corridor."],
+  },
+  {
+    slug: "corktown-residents-council",
+    name: "Corktown Residents Council",
+    neighborhood: "Corktown",
+    meets: "Last Monday, 7pm",
+    where: "Rotates between neighbors' porches (indoors in winter)",
+    members: 95,
+    founded: 1996,
+    leaders: "Tom Kelly & Grace L.",
+    about: "Detroit's oldest neighborhood, still looking out for each other. We focus on safe streets, Roosevelt Park and keeping longtime neighbors in their homes.",
+    focus: ["Thursday porch-light walks", "Traffic and crosswalk safety", "Roosevelt Park events", "Help with home repairs for seniors"],
+    openTo: "Anyone living in Historic or North Corktown",
+    dues: "Free",
+    howToJoin: ["Request to join below and you'll get next month's porch address.", "Come on a Thursday porch-light walk to meet people first.", "Say hi at the meeting. New faces always get the first slice of pie."],
+  },
 ];
 
-export const events = [
-  { date: "Nov 1", title: "Fall harvest swap", place: "North End Greens", neighborhood: "North End" },
-  { date: "Nov 8", title: "Block cleanup + chili", place: "Bagley & Livernois", neighborhood: "Bagley" },
-  { date: "Nov 15", title: "Basement flood prep workshop", place: "Butzel Family Center", neighborhood: "Jefferson-Chalmers" },
-  { date: "Nov 22", title: "Holiday pie pre-order pickup", place: "Auntie Dee's", neighborhood: "Bagley" },
+export type CommunityEvent = {
+  slug: string;
+  date: string;
+  /** ISO date for sorting and display */
+  iso: string;
+  time: string;
+  title: string;
+  place: string;
+  neighborhood: Hood;
+  hostClub?: string | undefined;
+  hostVendor?: string | undefined;
+  host: string;
+  about: string;
+  bring: string[];
+  cost: string;
+  kidFriendly: boolean;
+  /** "drop-in": just show up (optional "I'm going"); "request": limited spots, ask to join */
+  signup: "drop-in" | "request";
+  capacity?: number | undefined;
+  spotsLeft?: number | undefined;
+};
+
+/** Demo events (made-up details). */
+export const events: CommunityEvent[] = [
+  {
+    slug: "fall-harvest-swap",
+    date: "Nov 1",
+    iso: "2026-11-01",
+    time: "Sat, 10am – 1pm",
+    title: "Fall harvest swap",
+    place: "North End Greens",
+    neighborhood: "North End",
+    hostClub: "north-end-neighbors-united",
+    host: "North End Neighbors United",
+    about: "Bring what you grew, canned or baked and leave with something new. Extra greens from the farm go to anyone who needs them. Kids can plant garlic for next spring.",
+    bring: ["Extra produce, seeds or jars", "A bag or basket", "Gloves if you want to help plant"],
+    cost: "Free",
+    kidFriendly: true,
+    signup: "drop-in",
+  },
+  {
+    slug: "block-cleanup-chili",
+    date: "Nov 8",
+    iso: "2026-11-08",
+    time: "Sat, 10am – 1pm",
+    title: "Block cleanup + chili",
+    place: "Bagley & Livernois",
+    neighborhood: "Bagley",
+    hostClub: "bagley-block-club",
+    host: "Bagley Block Club",
+    about: "We split into teams by street, clear litter and leaves, then warm up with chili at noon. Teens can earn service hours, and we'll sign the forms.",
+    bring: ["Closed-toe shoes", "A rake if you have one", "Gloves and bags are provided"],
+    cost: "Free",
+    kidFriendly: true,
+    signup: "request",
+    capacity: 40,
+    spotsLeft: 12,
+  },
+  {
+    slug: "flood-prep-workshop",
+    date: "Nov 15",
+    iso: "2026-11-15",
+    time: "Sat, 6pm – 8pm",
+    title: "Basement flood prep workshop",
+    place: "Butzel Family Center",
+    neighborhood: "Jefferson-Chalmers",
+    hostClub: "jefferson-chalmers-cdc",
+    host: "Jefferson-Chalmers Citizens District Council",
+    about: "Ray from Jefferson-Chalmers Fix-It walks through backflow valves, sump pumps and downspouts, plus what to do in the first hour of a flood. Q&A to follow.",
+    bring: ["Photos of your basement or utility area", "Your questions"],
+    cost: "Free",
+    kidFriendly: false,
+    signup: "request",
+    capacity: 60,
+    spotsLeft: 0,
+  },
+  {
+    slug: "holiday-pie-pickup",
+    date: "Nov 22",
+    iso: "2026-11-22",
+    time: "Sun, 11am – 3pm",
+    title: "Holiday pie pre-order pickup",
+    place: "Auntie Dee's",
+    neighborhood: "Bagley",
+    hostVendor: "auntie-dees-pies",
+    host: "Auntie Dee's Pies",
+    about: "Pick up your sweet potato pies for the holidays. Pre-orders only, so request a spot below and Denise will confirm your pie count and pickup time.",
+    bring: ["Your confirmation text", "A flat spot in the car"],
+    cost: "$22 per pie, pay at pickup",
+    kidFriendly: true,
+    signup: "request",
+    capacity: 50,
+    spotsLeft: 8,
+  },
 ];
 
 export const hubBoard = [

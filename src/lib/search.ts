@@ -7,7 +7,7 @@ export type SearchResult = {
   id: string;
   title: string;
   snippet: string;
-  /** slug for threads and vendors */
+  /** slug for threads, vendors, clubs and events */
   slug?: string | undefined;
   /** section anchor for hub results */
   section?: "board" | "permits" | undefined;
@@ -70,17 +70,19 @@ function docs(threads: Thread[]): Doc[] {
     })),
     ...blockClubs.map((c) => ({
       kind: "community" as const,
-      id: `club:${c.name}`,
+      id: `club:${c.slug}`,
+      slug: c.slug,
       title: c.name,
       snippet: `Block club · ${c.neighborhood} · Meets ${c.meets}`,
-      text: `block club meeting ${c.neighborhood} ${c.meets}`,
+      text: `block club meeting join ${c.neighborhood} ${c.meets} ${c.about} ${c.focus.join(" ")}`,
     })),
     ...events.map((e) => ({
       kind: "community" as const,
-      id: `event:${e.title}`,
+      id: `event:${e.slug}`,
+      slug: e.slug,
       title: e.title,
       snippet: `Event · ${e.date} · ${e.place}, ${e.neighborhood}`,
-      text: `event ${e.date} ${e.place} ${e.neighborhood}`,
+      text: `event ${e.date} ${e.place} ${e.neighborhood} ${e.host} ${e.about}`,
     })),
     ...hubBoard.map((b) => ({
       kind: "hub" as const,
