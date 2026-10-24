@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Bike, Bus, Car, Footprints, MapPin, Navigation, Plus, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { categories, neighborhoods, travelModes, vendors, type TravelMode } from "@/lib/data";
+import { categories, neighborhoodAreas, neighborhoods, travelModes, vendors, type TravelMode } from "@/lib/data";
 import { VendorCard } from "@/components/VendorCard";
 import { GoogleMap, type MapPin as Pin } from "@/components/GoogleMap";
 
@@ -114,13 +114,21 @@ function Explore() {
             {adding ? <><X className="h-4 w-4" />Cancel</> : <><Plus className="h-4 w-4" />Add a business</>}
           </button>
         </div>
+        {!adding && (
+          <p className="mt-1 text-sm text-muted-foreground">Scroll or pinch to zoom, drag to move. Tap a neighborhood to see who's there.</p>
+        )}
         {adding && (
           <p className="mt-2 rounded-lg bg-secondary px-3 py-2 text-sm">{draftPos ? "Pin dropped. Fill in the details below." : "Tap the map where the business is to drop a pin."}</p>
         )}
         <GoogleMap
-          className="mt-3 h-72 md:h-96"
+          className="mt-3 h-[60vh] min-h-[360px] md:h-[560px]"
           center={DETROIT}
           zoom={12}
+          gesture="greedy"
+          showLocate
+          areas={neighborhoodAreas}
+          activeArea={hood}
+          onAreaClick={(n) => !adding && setHood(hood === n ? null : n)}
           pins={pins}
           onMapClick={(p) => adding && setDraftPos(p)}
           onPinClick={(id) => id.startsWith("v:") && navigate({ to: "/vendors/$slug", params: { slug: id.slice(2) } })}
