@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { stories, type Reply, type Thread, type ThreadCategory } from "@/lib/data";
+import { seedThreads, type Reply, type Thread, type ThreadCategory } from "@/lib/data";
 
 // Demo-only storage: posts live in this browser until the app gets shared saving.
 const KEY = "porchlight-forum-v1";
@@ -52,7 +52,7 @@ export function useForum() {
 
   const threads = useMemo(
     () =>
-      [...stored.threads, ...stories].map((t) => ({
+      [...stored.threads, ...seedThreads].map((t) => ({
         ...t,
         replies: [...t.replies, ...(stored.replies[t.slug] ?? [])],
       })),

@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, MessagesSquare, Quote, Send } from "lucide-react";
 import { useMemo, useState } from "react";
-import { stories } from "@/lib/data";
+import { seedThreads } from "@/lib/data";
 import { formatDate, useForum } from "@/lib/forum";
 import { searchSite } from "@/lib/search";
 
 export const Route = createFileRoute("/stories_/$slug")({
-  loader: ({ params }) => stories.find((x) => x.slug === params.slug) ?? null,
+  loader: ({ params }) => seedThreads.find((x) => x.slug === params.slug) ?? null,
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [

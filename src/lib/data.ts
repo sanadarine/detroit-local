@@ -330,3 +330,175 @@ export const permitSteps = [
   { t: "Get your tax ID", d: "A free EIN from the IRS and a Michigan sales tax license if you sell goods." },
   { t: "Find free help", d: "Detroit has free small-business coaching programs — ask us to connect you." },
 ] as const;
+
+/** Everyday demo threads so the forum feels lived-in (made-up neighbors). */
+export const forumThreads: Thread[] = [
+  {
+    slug: "best-way-to-get-basement-waterproofed",
+    title: "Who do you trust to waterproof a basement?",
+    person: "Keisha Morgan",
+    teller: "Keisha Morgan, Jefferson-Chalmers",
+    excerpt: "Every big storm I'm out there with a shop vac. Looking for someone honest who won't upsell me.",
+    body: [
+      "Every big storm I'm out there with a shop vac. Looking for someone honest who won't upsell me on a whole new foundation.",
+      "Bonus points if they know the canal-side houses. Ours is from 1924.",
+    ],
+    category: "Recommendations",
+    neighborhood: "Jefferson-Chalmers",
+    date: "2026-10-18",
+    replies: [
+      { id: "r1", author: "Ray Ortiz", note: "Jefferson-Chalmers Fix-It", date: "2026-10-18", text: "Happy to come look for free. Most canal houses just need a backflow valve and the downspouts pointed away from the house." },
+      { id: "r2", author: "Harold W.", note: "Jefferson-Chalmers since 1983", date: "2026-10-19", text: "Ray did mine. Took one afternoon, hasn't flooded since." },
+    ],
+  },
+  {
+    slug: "kid-friendly-saturday-morning",
+    title: "Kid-friendly things to do on a Saturday morning?",
+    person: "Jasmine T.",
+    teller: "Jasmine T., North End",
+    excerpt: "New here with a 6-year-old who has endless energy. Free or cheap ideas within walking distance?",
+    body: ["New here with a 6-year-old who has endless energy. Free or cheap ideas within walking distance of Oakland Ave?"],
+    category: "Questions",
+    neighborhood: "North End",
+    date: "2026-10-20",
+    replies: [
+      { id: "r1", author: "Marcus Bell", note: "North End Greens", date: "2026-10-20", text: "Farm stand is 9 to 1 on Saturdays and kids can help harvest. We usually have a seed-planting table too." },
+      { id: "r2", author: "Ms. Loretta J.", note: "North End", date: "2026-10-21", text: "Story hour at the library branch, and the park on Holbrook just got new swings." },
+      { id: "r3", author: "Jasmine T.", note: "North End", date: "2026-10-21", text: "This is perfect, thank you both! See you Saturday." },
+    ],
+  },
+  {
+    slug: "tamales-cottage-food-license",
+    title: "How long did your cottage food license take?",
+    person: "Alicia M.",
+    teller: "Alicia M., Southwest",
+    excerpt: "I want to sell tamales from my kitchen for the holidays. Is it realistic to be ready by December?",
+    body: [
+      "I want to sell tamales from my kitchen for the holidays. Is it realistic to be ready by December?",
+      "Also, does anyone know if I can sell at a church bazaar with it?",
+    ],
+    category: "For vendors",
+    neighborhood: "Southwest",
+    date: "2026-10-12",
+    replies: [
+      { id: "r1", author: "Denise Carter", note: "Auntie Dee's Pies", date: "2026-10-12", text: "Michigan doesn't need a license for cottage food, just the labeling rules and the online training. I was selling within two weeks." },
+      { id: "r2", author: "Rosa Delgado", note: "Mexicantown Wellness", date: "2026-10-13", text: "Church bazaars are fine as long as you're selling direct to the person. I'll buy a dozen!" },
+    ],
+  },
+  {
+    slug: "porch-light-walk-corktown",
+    title: "Evening porch-light walk in Corktown — who's in?",
+    person: "Tom Kelly",
+    teller: "Tom Kelly, Corktown",
+    excerpt: "Thinking of a slow loop every Thursday at 7, porch lights on, say hi to neighbors. Strollers and dogs welcome.",
+    body: [
+      "Thinking of a slow loop every Thursday at 7 — porch lights on, say hi to neighbors. Strollers and dogs welcome.",
+      "We'd start at Roosevelt Park and loop through North Corktown. About 40 minutes.",
+    ],
+    category: "Events & meetups",
+    neighborhood: "Corktown",
+    date: "2026-10-16",
+    replies: [
+      { id: "r1", author: "Grace L.", note: "Little Sprouts Daycare", date: "2026-10-16", text: "Love this. Can bring a wagon of tired toddlers for the first half." },
+      { id: "r2", author: "Sam P.", note: "North Corktown", date: "2026-10-17", text: "I'm in. Will bring a flashlight for the stretch on Wabash." },
+    ],
+  },
+  {
+    slug: "bus-route-to-eastern-market",
+    title: "Easiest bus to Eastern Market on Saturdays?",
+    person: "Priya S.",
+    teller: "Priya S., Bagley",
+    excerpt: "No car. What's the least painful way to get from 7 Mile & Livernois to the market with a cart?",
+    body: ["No car. What's the least painful way to get from 7 Mile & Livernois to the market with a folding cart?"],
+    category: "Questions",
+    neighborhood: "Bagley",
+    date: "2026-10-09",
+    replies: [
+      { id: "r1", author: "Pastor Reed", note: "Bagley", date: "2026-10-09", text: "Take the Livernois bus down to Grand River and transfer. Go early, the afternoon buses get packed." },
+      { id: "r2", author: "Hank O.", note: "Eastern Market Honey", date: "2026-10-10", text: "Find me at Shed 2 and I'll hold your bag while you shop." },
+    ],
+  },
+  {
+    slug: "tool-library-idea",
+    title: "Should we start a tool-sharing shelf?",
+    person: "Dana R.",
+    teller: "Dana R., Southwest",
+    excerpt: "Half the block owns the same ladder. What if we kept one set of good tools in someone's garage and shared?",
+    body: [
+      "Half the block owns the same ladder. What if we kept one set of good tools in someone's garage and shared?",
+      "I can donate a drill, a post-hole digger and a hedge trimmer to start.",
+    ],
+    category: "Recommendations",
+    neighborhood: "Southwest",
+    date: "2026-10-05",
+    replies: [
+      { id: "r1", author: "Ray Ortiz", note: "Jefferson-Chalmers Fix-It", date: "2026-10-06", text: "Did this on our block. Use a simple sign-out sheet on the door — it works." },
+    ],
+  },
+  {
+    slug: "1960s-photos-of-the-north-end",
+    title: "Anyone have photos of the North End from the 60s?",
+    person: "Marcus Bell",
+    teller: "Marcus Bell, North End",
+    excerpt: "Making a little history board for the farm stand. Would love old photos of Oakland Ave and the shops that used to be here.",
+    body: [
+      "Making a little history board for the farm stand. Would love old photos of Oakland Ave and the shops that used to be here.",
+      "I'll scan them and give the originals right back.",
+    ],
+    category: "Stories",
+    neighborhood: "North End",
+    date: "2026-09-30",
+    replies: [
+      { id: "r1", author: "Ms. Loretta J.", note: "North End since 1972", date: "2026-10-01", text: "I have a whole shoebox. Come by after church and we'll go through it." },
+    ],
+  },
+  {
+    slug: "block-cleanup-volunteers",
+    title: "Volunteers needed: Bagley & Livernois cleanup, Nov 8",
+    person: "Bagley Block Club",
+    teller: "Bagley Block Club",
+    excerpt: "Gloves, bags and chili provided. We'll split into teams by street. Teens can earn service hours.",
+    body: [
+      "Gloves, bags and chili provided. We'll split into teams by street. Teens can earn service hours.",
+      "Meet at 10am at the corner of Bagley & Livernois.",
+    ],
+    category: "Events & meetups",
+    neighborhood: "Bagley",
+    date: "2026-10-22",
+    replies: [
+      { id: "r1", author: "Denise Carter", note: "Auntie Dee's Pies", date: "2026-10-22", text: "I'll bring two pies for the volunteers." },
+      { id: "r2", author: "Priya S.", note: "Bagley", date: "2026-10-23", text: "Signing up me and my roommate!" },
+    ],
+  },
+  {
+    slug: "pricing-for-home-daycare",
+    title: "How do other home daycares set their prices?",
+    person: "Grace L.",
+    teller: "Grace L., Corktown",
+    excerpt: "I don't want to price out neighbors, but I also need to keep the lights on. How do you balance it?",
+    body: ["I don't want to price out neighbors, but I also need to keep the lights on. How do you balance it? Sliding scale? Sibling discounts?"],
+    category: "For vendors",
+    neighborhood: "Corktown",
+    date: "2026-10-14",
+    replies: [
+      { id: "r1", author: "Rosa Delgado", note: "Mexicantown Wellness", date: "2026-10-15", text: "I do a sliding scale with three tiers and nobody has to explain why they pick one. People are honest." },
+    ],
+  },
+  {
+    slug: "honey-for-allergies",
+    title: "Does local honey actually help with allergies?",
+    person: "Brian K.",
+    teller: "Brian K., Eastern Market",
+    excerpt: "My spring allergies are brutal. A coworker swears by local honey. Real or myth?",
+    body: ["My spring allergies are brutal. A coworker swears by local honey. Real or myth?"],
+    category: "Questions",
+    neighborhood: "Eastern Market",
+    date: "2026-10-03",
+    replies: [
+      { id: "r1", author: "Hank O.", note: "Eastern Market Honey", date: "2026-10-03", text: "Honest answer: the science is mixed. But it's good honey, and a spoonful in tea never hurt anybody." },
+    ],
+  },
+];
+
+/** All built-in threads (featured stories first). */
+export const seedThreads: Thread[] = [...stories, ...forumThreads];
