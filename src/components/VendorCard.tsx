@@ -7,9 +7,9 @@ export function VendorCard({ v, mode }: { v: Vendor; mode?: TravelMode | undefin
     <Link
       to="/vendors/$slug"
       params={{ slug: v.slug }}
-      className="group overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-lg"
+      className="group overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
     >
-      <img src={v.image} alt={v.name} loading="lazy" width={1024} height={1024} className="aspect-[4/3] w-full object-cover" />
+      <div className="overflow-hidden"><img src={v.image} alt={v.name} loading="lazy" width={1024} height={1024} className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]" /></div>
       <div className="p-4 md:p-5">
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span className="rounded-full bg-secondary px-2 py-0.5">{v.category}</span>

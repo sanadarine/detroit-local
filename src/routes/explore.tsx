@@ -3,9 +3,13 @@ import { Bike, Bus, Car, Footprints, MapPin, Navigation, Plus, X } from "lucide-
 import { useEffect, useMemo, useState } from "react";
 import { categories, neighborhoodAreas, neighborhoods, travelModes, vendors, type TravelMode } from "@/lib/data";
 import { VendorCard } from "@/components/VendorCard";
+import { NeighborhoodStrip } from "@/components/NeighborhoodStrip";
 import { GoogleMap, type MapPin as Pin } from "@/components/GoogleMap";
 
+type ExploreSearch = { hood?: string };
+
 export const Route = createFileRoute("/explore")({
+  validateSearch: (s: Record<string, unknown>): ExploreSearch => (typeof s["hood"] === "string" && s["hood"] ? { hood: String(s["hood"]) } : {}),
   head: () => ({
     meta: [
       { title: "Explore local vendors — Porchlight Detroit" },
@@ -32,7 +36,7 @@ const DETROIT = { lat: 42.36, lng: -83.06 };
 
 function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
-    <button onClick={onClick} className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm transition-colors ${active ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card hover:bg-secondary"}`}>
+    <button onClick={onClick} className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3.5 py-1.5 text-sm transition-all duration-200 active:scale-[0.97] ${active ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card hover:bg-secondary"}`}>
       {children}
     </button>
   );
@@ -41,7 +45,8 @@ function Chip({ active, onClick, children }: { active: boolean; onClick: () => v
 function Explore() {
   const navigate = useNavigate();
   const [cat, setCat] = useState<string | null>(null);
-  const [hood, setHood] = useState<string | null>(null);
+  const { hood: initialHood } = Route.useSearch();
+  const [hood, setHood] = useState<string | null>(initialHood && (neighborhoods as readonly string[]).includes(initialHood) ? initialHood : null);
   const [near, setNear] = useState(false);
   const [mode, setMode] = useState<TravelMode>("walk");
   const [added, setAdded] = useState<Added[]>([]);
@@ -81,36 +86,42 @@ function Explore() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 pt-8 md:px-5 md:pt-12">
-      <h1 className="text-3xl font-semibold md:text-5xl">Explore your neighborhood</h1>
-      <p className="mt-2 text-muted-foreground">Real people, close to home, vouched for by neighbors.</p>
+      <h1 className="animate-rise text-4xl font-semibold tracking-tight md:text-6xl">Explore your neighborhood</h1>
+      <p className="mt-3 text-lg text-muted-foreground">Real people, close to home, vouched for by neighbors.</p>
 
-      <div className="mt-6 space-y-3 rounded-xl border border-border bg-card p-4 md:mt-8 md:space-y-4 md:p-5">
-        <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:flex-wrap md:px-0">
+      <section className="mt-8">
+        <div className="flex items-baseline justify-between">
+          <h2 className="text-xl font-semibold md:text-2xl">Pick a neighborhood</h2>
+          {hood && <button onClick={() => setHood(null)} className="text-sm font-medium text-primary">Show all</button>}
+        </div>
+        <div className="mt-3">
+          <NeighborhoodStrip active={hood} onSelect={setHood} />
+        </div>
+      </section>
+
+      <div className="mt-6 space-y-4 rounded-2xl border border-border bg-card p-4 shadow-soft md:p-5">
+        <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 md:mx-0 md:flex-wrap md:px-0">
           <Chip active={!cat} onClick={() => setCat(null)}>All types</Chip>
           {categories.map((c) => <Chip key={c} active={cat === c} onClick={() => setCat(c)}>{c}</Chip>)}
         </div>
-        <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:flex-wrap md:px-0">
-          <Chip active={!hood} onClick={() => setHood(null)}>All neighborhoods</Chip>
-          {neighborhoods.map((n) => <Chip key={n} active={hood === n} onClick={() => setHood(n)}>{n}</Chip>)}
-        </div>
-        <div className="space-y-2 border-t border-border pt-3">
+        <div className="space-y-2 border-t border-border pt-4">
           <label className="flex items-center gap-2 text-sm font-medium">
             <input type="checkbox" checked={near} onChange={(e) => setNear(e.target.checked)} className="h-4 w-4 accent-primary" />
             <Navigation className="h-4 w-4 text-primary" /> Within 5 minutes of me by…
           </label>
-          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:px-0">
+          <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 md:mx-0 md:px-0">
             {travelModes.map((m) => {
               const I = modeInfo[m].icon;
-              return <Chip key={m} active={mode === m} onClick={() => { setMode(m); setNear(true); }}><I className="h-4 w-4" />{modeInfo[m].label}</Chip>;
+              return <Chip key={m} active={near && mode === m} onClick={() => { setMode(m); setNear(true); }}><I className="h-4 w-4" />{modeInfo[m].label}</Chip>;
             })}
           </div>
         </div>
       </div>
 
-      <section className="mt-6 md:mt-8">
+      <section className="mt-10">
         <div className="flex items-center justify-between gap-3">
           <h2 className="flex items-center gap-2 text-xl font-semibold md:text-2xl"><MapPin className="h-5 w-5 text-primary" />Neighborhood map</h2>
-          <button onClick={() => { setAdding(!adding); setDraftPos(null); }} className="flex items-center gap-1.5 rounded-full bg-brick px-4 py-2 text-sm font-medium text-brick-foreground hover:opacity-90">
+          <button onClick={() => { setAdding(!adding); setDraftPos(null); }} className="flex items-center gap-1.5 rounded-full bg-brick px-4 py-2 text-sm font-medium text-brick-foreground shadow-soft transition hover:opacity-90 active:scale-[0.97]">
             {adding ? <><X className="h-4 w-4" />Cancel</> : <><Plus className="h-4 w-4" />Add a business</>}
           </button>
         </div>
@@ -158,7 +169,8 @@ function Explore() {
         )}
       </section>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
+      <h2 className="mt-12 text-xl font-semibold md:text-2xl">{hood ? `Locals in ${hood}` : "All locals"} <span className="text-base font-normal text-muted-foreground">· {list.length}</span></h2>
+      <div className="mt-4 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
         {list.map((v) => <VendorCard key={v.slug} v={v} mode={near ? mode : undefined} />)}
       </div>
       {list.length === 0 && <p className="mt-10 text-center text-muted-foreground">No matches yet — try another neighborhood or way of getting there.</p>}

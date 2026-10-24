@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as StoriesRouteImport } from './routes/stories'
 import { Route as VendorHubRouteImport } from './routes/vendor-hub'
 import { Route as StoriesSlugRouteImport } from './routes/stories_.$slug'
@@ -30,6 +31,11 @@ const CommunityRoute = CommunityRouteImport.update({
 const ExploreRoute = ExploreRouteImport.update({
   id: '/explore',
   path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StoriesRoute = StoriesRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
+  '/search': typeof SearchRoute
   '/stories': typeof StoriesRoute
   '/vendor-hub': typeof VendorHubRoute
   '/stories/$slug': typeof StoriesSlugRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
+  '/search': typeof SearchRoute
   '/stories': typeof StoriesRoute
   '/vendor-hub': typeof VendorHubRoute
   '/stories/$slug': typeof StoriesSlugRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
+  '/search': typeof SearchRoute
   '/stories': typeof StoriesRoute
   '/vendor-hub': typeof VendorHubRoute
   '/stories_/$slug': typeof StoriesSlugRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/community'
     | '/explore'
+    | '/search'
     | '/stories'
     | '/vendor-hub'
     | '/stories/$slug'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/community'
     | '/explore'
+    | '/search'
     | '/stories'
     | '/vendor-hub'
     | '/stories/$slug'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/community'
     | '/explore'
+    | '/search'
     | '/stories'
     | '/vendor-hub'
     | '/stories_/$slug'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CommunityRoute: typeof CommunityRoute
   ExploreRoute: typeof ExploreRoute
+  SearchRoute: typeof SearchRoute
   StoriesRoute: typeof StoriesRoute
   VendorHubRoute: typeof VendorHubRoute
   StoriesSlugRoute: typeof StoriesSlugRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/explore'
       fullPath: '/explore'
       preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/stories': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CommunityRoute: CommunityRoute,
   ExploreRoute: ExploreRoute,
+  SearchRoute: SearchRoute,
   StoriesRoute: StoriesRoute,
   VendorHubRoute: VendorHubRoute,
   StoriesSlugRoute: StoriesSlugRoute,

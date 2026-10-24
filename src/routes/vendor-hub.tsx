@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { hubBoard, permitSteps } from "@/lib/data";
 import { FileCheck, Handshake, Hammer, Package, ShoppingBasket, Users } from "lucide-react";
 
 export const Route = createFileRoute("/vendor-hub")({
@@ -13,32 +14,21 @@ export const Route = createFileRoute("/vendor-hub")({
   component: Hub,
 });
 
-const board = [
-  { icon: Hammer, type: "Skill share", text: "I'll teach canning basics in exchange for help with my website.", who: "Denise, Bagley" },
-  { icon: Package, type: "Material share", text: "Extra raised-bed lumber and 20 bags of compost — free to a grower.", who: "Marcus, North End" },
-  { icon: ShoppingBasket, type: "Group buying", text: "Splitting a bulk order of pie tins and boxes. 4 spots left.", who: "Auntie Dee's" },
-  { icon: Users, type: "Share clients", text: "Booked through December — happy to refer porch jobs to another fixer.", who: "Ray, Jefferson-Chalmers" },
-];
-
-const steps = [
-  { t: "Pick your business type", d: "Cottage food, home occupation, or storefront — each has different rules." },
-  { t: "Register your business name", d: "File an assumed name (DBA) with Wayne County." },
-  { t: "Check zoning and licenses", d: "Detroit's Buildings, Safety Engineering & Environmental Department (BSEED) handles most permits." },
-  { t: "Get your tax ID", d: "A free EIN from the IRS and a Michigan sales tax license if you sell goods." },
-  { t: "Find free help", d: "Detroit has free small-business coaching programs — ask us to connect you." },
-];
+const boardIcons = { "Skill share": Hammer, "Material share": Package, "Group buying": ShoppingBasket, "Share clients": Users } as const;
+const board = hubBoard.map((b) => ({ ...b, icon: boardIcons[b.type] }));
+const steps = permitSteps;
 
 function Hub() {
   return (
     <div className="mx-auto max-w-6xl px-4 pt-8 md:px-5 md:pt-12">
-      <h1 className="text-3xl font-semibold md:text-5xl">Grow together, not alone</h1>
+      <h1 className="animate-rise text-4xl font-semibold tracking-tight md:text-6xl">Grow together, not alone</h1>
       <p className="mt-2 max-w-2xl text-muted-foreground">Other vendors aren't just competition. Share skills, supplies and buying power — and get through the paperwork.</p>
       <div className="mt-8 grid gap-8 md:mt-10 md:gap-10 md:grid-cols-[1.2fr_1fr]">
         <section>
-          <h2 className="flex items-center gap-2 text-2xl font-semibold"><Handshake className="h-6 w-6 text-brick" />Neighbor board</h2>
+          <h2 id="board" className="flex items-center gap-2 text-2xl font-semibold"><Handshake className="h-6 w-6 text-brick" />Neighbor board</h2>
           <div className="mt-4 space-y-3">
             {board.map((b) => (
-              <div key={b.text} className="rounded-xl border border-border bg-card p-4">
+              <div key={b.text} className="rounded-2xl border border-border bg-card shadow-soft p-4">
                 <span className="inline-flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-xs text-accent-foreground"><b.icon className="h-3.5 w-3.5" />{b.type}</span>
                 <p className="mt-2">{b.text}</p>
                 <p className="mt-1 text-sm text-muted-foreground">— {b.who}</p>
@@ -46,7 +36,7 @@ function Hub() {
             ))}
           </div>
         </section>
-        <section className="rounded-xl bg-secondary p-5 md:p-6">
+        <section id="permits" className="rounded-2xl bg-secondary p-5 md:p-6">
           <h2 className="flex items-center gap-2 text-xl font-semibold md:text-2xl"><FileCheck className="h-6 w-6 shrink-0 text-brick" />Starting a business in Detroit</h2>
           <ol className="mt-4 space-y-4">
             {steps.map((s, i) => (

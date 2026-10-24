@@ -156,15 +156,26 @@ export const vendors: Vendor[] = [
   },
 ];
 
+export const threadCategories = ["Stories", "Questions", "Recommendations", "Events & meetups", "For vendors"] as const;
+export type ThreadCategory = (typeof threadCategories)[number];
+
+export type Reply = { id: string; author: string; note?: string | undefined; date: string; text: string };
+
 export type Story = {
   slug: string;
   title: string;
   person: string;
   teller: string;
-  image: string;
+  image?: string | undefined;
   excerpt: string;
   body: string[];
+  category: ThreadCategory;
+  neighborhood?: string | undefined;
+  date: string;
+  featured?: boolean | undefined;
+  replies: Reply[];
 };
+export type Thread = Story;
 
 export const stories: Story[] = [
   {
@@ -175,6 +186,15 @@ export const stories: Story[] = [
     image: story,
     excerpt:
       "Back then every yard had a garden. We traded greens over the fence. When I see Marcus out there with the kids, it's like the block remembered.",
+    category: "Stories",
+    neighborhood: "North End",
+    date: "2026-09-12",
+    featured: true,
+    replies: [
+      { id: "r1", author: "Marcus Bell", note: "North End Greens", date: "2026-09-13", text: "Ms. Loretta, you taught me which okra was ready by snapping the tip. I still do it that way with the kids." },
+      { id: "r2", author: "Jasmine T.", note: "New to the North End", date: "2026-09-20", text: "Just moved here from Atlanta. Is the Saturday farm stand open to anyone? Would love to bring my daughter." },
+      { id: "r3", author: "Marcus Bell", note: "North End Greens", date: "2026-09-20", text: "Absolutely, Jasmine. Saturdays 9 to 1, and kids can help pick." },
+    ],
     body: [
       "I moved onto Oakland Avenue in the summer of 1972. My husband worked at Dodge Main and I worked at the hospital, and every evening we'd come home to a block that smelled like somebody's supper.",
       "Every yard had a garden then. Mrs. Bell next door grew okra so tall you couldn't see her kitchen window. We traded over the fence: my tomatoes for her okra, her collards for my peppers. Nobody wrote anything down. You just knew who had what.",
@@ -190,6 +210,14 @@ export const stories: Story[] = [
     teller: "Denise Carter, Bagley",
     image: baker,
     excerpt: "My great-aunt brought this recipe from Alabama in 1951. I still use her pie tin.",
+    category: "Stories",
+    neighborhood: "Bagley",
+    date: "2026-10-02",
+    featured: true,
+    replies: [
+      { id: "r1", author: "Pastor Reed", note: "Bagley", date: "2026-10-03", text: "Those pies have been at every church homecoming I can remember. Thank you for keeping it going, Denise." },
+      { id: "r2", author: "Alicia M.", note: "Bagley", date: "2026-10-10", text: "How did you get the cottage food license? I want to sell tamales from home." },
+    ],
     body: [
       "My great-aunt Hattie came up from Montgomery on the train in 1951 with one suitcase, forty dollars, and a recipe card folded inside her Bible.",
       "She got work cleaning houses in Palmer Park, and on Sundays she baked sweet potato pies for the whole church. People would line up after service. She never charged a dime.",
@@ -205,6 +233,14 @@ export const stories: Story[] = [
     teller: "Harold Washington, Jefferson-Chalmers since 1983",
     image: hero,
     excerpt: "Neighbors pumped each other's basements for a week straight. That's who we are.",
+    category: "Stories",
+    neighborhood: "Jefferson-Chalmers",
+    date: "2026-08-28",
+    featured: true,
+    replies: [
+      { id: "r1", author: "Ray Ortiz", note: "Jefferson-Chalmers Fix-It", date: "2026-08-29", text: "Still have those two pumps. If anyone on the east side needs one during a storm, message the block club." },
+      { id: "r2", author: "Tanya B.", note: "Jefferson-Chalmers", date: "2026-09-05", text: "The flood prep workshop is Nov 15 at Butzel Family Center. Bring your questions about backflow valves." },
+    ],
     body: [
       "They call Jefferson-Chalmers 'Little Venice' because of the canals. Pretty name. Not so pretty when the water comes in the house.",
       "In June of 2021 it rained like I'd never seen. By morning there was four feet of water in my basement and my neighbor's furnace was floating.",
@@ -228,3 +264,18 @@ export const events = [
   { date: "Nov 15", title: "Basement flood prep workshop", place: "Butzel Family Center", neighborhood: "Jefferson-Chalmers" },
   { date: "Nov 22", title: "Holiday pie pre-order pickup", place: "Auntie Dee's", neighborhood: "Bagley" },
 ];
+
+export const hubBoard = [
+  { type: "Skill share", text: "I'll teach canning basics in exchange for help with my website.", who: "Denise, Bagley" },
+  { type: "Material share", text: "Extra raised-bed lumber and 20 bags of compost — free to a grower.", who: "Marcus, North End" },
+  { type: "Group buying", text: "Splitting a bulk order of pie tins and boxes. 4 spots left.", who: "Auntie Dee's" },
+  { type: "Share clients", text: "Booked through December — happy to refer porch jobs to another fixer.", who: "Ray, Jefferson-Chalmers" },
+] as const;
+
+export const permitSteps = [
+  { t: "Pick your business type", d: "Cottage food, home occupation, or storefront — each has different rules." },
+  { t: "Register your business name", d: "File an assumed name (DBA) with Wayne County." },
+  { t: "Check zoning and licenses", d: "Detroit's Buildings, Safety Engineering & Environmental Department (BSEED) handles most permits." },
+  { t: "Get your tax ID", d: "A free EIN from the IRS and a Michigan sales tax license if you sell goods." },
+  { t: "Find free help", d: "Detroit has free small-business coaching programs — ask us to connect you." },
+] as const;
