@@ -1,4 +1,3 @@
-import farmer from "@/assets/farmer.jpg";
 import baker from "@/assets/baker.jpg";
 import story from "@/assets/story.jpg";
 import hero from "@/assets/hero.jpg";
