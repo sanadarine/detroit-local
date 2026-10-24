@@ -89,13 +89,13 @@ function Explore() {
       <h1 className="animate-rise text-4xl font-semibold tracking-tight md:text-6xl">Explore your neighborhood</h1>
       <p className="mt-3 text-lg text-muted-foreground">Real people, close to home, vouched for by neighbors.</p>
 
-      <section className="mt-8">
+      <section className="mt-6">
         <div className="flex items-baseline justify-between">
-          <h2 className="text-xl font-semibold md:text-2xl">Pick a neighborhood</h2>
+          <h2 className="text-lg font-semibold md:text-xl">Pick a neighborhood</h2>
           {hood && <button onClick={() => setHood(null)} className="text-sm font-medium text-primary">Show all</button>}
         </div>
-        <div className="mt-3">
-          <NeighborhoodStrip active={hood} onSelect={setHood} />
+        <div className="mt-2">
+          <NeighborhoodStrip active={hood} onSelect={setHood} compact />
         </div>
       </section>
 
