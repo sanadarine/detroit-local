@@ -46,7 +46,7 @@ export function SearchBar({ size = "page", initial = "", suggest = true, autoFoc
             blurTimer.current = setTimeout(() => setOpen(false), 150);
           }}
           placeholder={placeholder}
-          aria-label="Search Porchlight Detroit"
+          aria-label="Search Detroit Local"
           className={`min-w-0 flex-1 bg-transparent outline-none placeholder:text-muted-foreground [&::-webkit-search-cancel-button]:appearance-none ${hero ? "py-2 text-base md:text-lg" : "py-1.5"}`}
         />
         <button className={`shrink-0 rounded-full bg-primary font-medium text-primary-foreground hover:opacity-90 ${hero ? "px-4 py-2.5 md:px-6" : "px-4 py-2 text-sm"}`}>Search</button>
@@ -58,7 +58,7 @@ export function SearchBar({ size = "page", initial = "", suggest = true, autoFoc
         >
           {results.length > 0 ? (
             <>
-              <p className="px-3 pb-1 pt-2 text-xs font-medium uppercase tracking-widest text-brick">Already on Porchlight</p>
+              <p className="px-3 pb-1 pt-2 text-xs font-medium uppercase tracking-widest text-brick">Already on Detroit Local</p>
               {results.map((r) => <SearchResultLink key={r.id} r={r} compact onClick={() => setOpen(false)} />)}
             </>
           ) : (

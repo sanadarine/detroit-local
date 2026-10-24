@@ -10,14 +10,14 @@ export const Route = createFileRoute("/stories_/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.title} — Porchlight Detroit` },
+          { title: `${loaderData.title} — Detroit Local` },
           { name: "description", content: loaderData.excerpt },
           { property: "og:title", content: `${loaderData.title} — ${loaderData.person}` },
           { property: "og:description", content: loaderData.excerpt },
           { property: "og:type", content: "article" },
           { name: "twitter:card", content: "summary" },
         ]
-      : [{ title: "Forum thread — Porchlight Detroit" }, { name: "robots", content: "noindex" }],
+      : [{ title: "Forum thread — Detroit Local" }, { name: "robots", content: "noindex" }],
   }),
   component: ThreadPage,
 });

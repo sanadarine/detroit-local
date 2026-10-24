@@ -15,13 +15,13 @@ export const Route = createFileRoute("/vendors/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.name} — Porchlight Detroit` },
+          { title: `${loaderData.name} — Detroit Local` },
           { name: "description", content: loaderData.tagline },
-          { property: "og:title", content: `${loaderData.name} — Porchlight Detroit` },
+          { property: "og:title", content: `${loaderData.name} — Detroit Local` },
           { property: "og:description", content: loaderData.tagline },
           { property: "og:type", content: "profile" },
         ]
-      : [{ title: "Vendor not found — Porchlight Detroit" }, { name: "robots", content: "noindex" }],
+      : [{ title: "Vendor not found — Detroit Local" }, { name: "robots", content: "noindex" }],
   }),
   notFoundComponent: () => (
     <div className="mx-auto max-w-xl px-5 py-24 text-center">

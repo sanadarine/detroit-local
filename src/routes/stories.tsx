@@ -15,9 +15,9 @@ export const Route = createFileRoute("/stories")({
   }),
   head: () => ({
     meta: [
-      { title: "Neighborhood forum — Porchlight Detroit" },
+      { title: "Neighborhood forum — Detroit Local" },
       { name: "description", content: "Ask questions, share recommendations, find block clubs and events, and pass down stories with Detroit neighbors." },
-      { property: "og:title", content: "Neighborhood forum — Porchlight Detroit" },
+      { property: "og:title", content: "Neighborhood forum — Detroit Local" },
       { property: "og:description", content: "Stories, questions, block clubs and events from Detroit neighbors." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
