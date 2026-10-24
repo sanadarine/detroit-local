@@ -1,11 +1,12 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { CalendarDays, ChevronRight, Landmark, MessagesSquare, Pin, Plus, Search, Users } from "lucide-react";
+import { CalendarDays, Landmark, MessagesSquare, Pin, Plus, Search, Users } from "lucide-react";
 import { useMemo, useState } from "react";
 import { blockClubs, events, threadCategories, type ThreadCategory } from "@/lib/data";
 import { formatDate, lastActivity, useForum } from "@/lib/forum";
 import { searchSite } from "@/lib/search";
 import { Composer, type ComposerPreset } from "@/components/Composer";
 import { CityServices } from "@/components/CityServices";
+import { HeartButton } from "@/components/HeartButton";
 
 type ForumSearch = { new?: string; section?: "community" | "services" };
 

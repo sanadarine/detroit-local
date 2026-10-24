@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { seedThreads } from "@/lib/data";
 import { formatDate, useForum } from "@/lib/forum";
 import { searchSite } from "@/lib/search";
+import { HeartButton } from "@/components/HeartButton";
 
 export const Route = createFileRoute("/stories_/$slug")({
   loader: ({ params }) => seedThreads.find((x) => x.slug === params.slug) ?? null,
