@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CommunityRouteImport } from './routes/community'
+import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as StoriesRouteImport } from './routes/stories'
+import { Route as VendorHubRouteImport } from './routes/vendor-hub'
+import { Route as VendorsSlugRouteImport } from './routes/vendors.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExploreRoute = ExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoriesRoute = StoriesRouteImport.update({
+  id: '/stories',
+  path: '/stories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VendorHubRoute = VendorHubRouteImport.update({
+  id: '/vendor-hub',
+  path: '/vendor-hub',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VendorsSlugRoute = VendorsSlugRouteImport.update({
+  id: '/vendors/$slug',
+  path: '/vendors/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/community': typeof CommunityRoute
+  '/explore': typeof ExploreRoute
+  '/stories': typeof StoriesRoute
+  '/vendor-hub': typeof VendorHubRoute
+  '/vendors/$slug': typeof VendorsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/community': typeof CommunityRoute
+  '/explore': typeof ExploreRoute
+  '/stories': typeof StoriesRoute
+  '/vendor-hub': typeof VendorHubRoute
+  '/vendors/$slug': typeof VendorsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/community': typeof CommunityRoute
+  '/explore': typeof ExploreRoute
+  '/stories': typeof StoriesRoute
+  '/vendor-hub': typeof VendorHubRoute
+  '/vendors/$slug': typeof VendorsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/community'
+    | '/explore'
+    | '/stories'
+    | '/vendor-hub'
+    | '/vendors/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/community'
+    | '/explore'
+    | '/stories'
+    | '/vendor-hub'
+    | '/vendors/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/community'
+    | '/explore'
+    | '/stories'
+    | '/vendor-hub'
+    | '/vendors/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CommunityRoute: typeof CommunityRoute
+  ExploreRoute: typeof ExploreRoute
+  StoriesRoute: typeof StoriesRoute
+  VendorHubRoute: typeof VendorHubRoute
+  VendorsSlugRoute: typeof VendorsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explore': {
+      id: '/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stories': {
+      id: '/stories'
+      path: '/stories'
+      fullPath: '/stories'
+      preLoaderRoute: typeof StoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vendor-hub': {
+      id: '/vendor-hub'
+      path: '/vendor-hub'
+      fullPath: '/vendor-hub'
+      preLoaderRoute: typeof VendorHubRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vendors/$slug': {
+      id: '/vendors/$slug'
+      path: '/vendors/$slug'
+      fullPath: '/vendors/$slug'
+      preLoaderRoute: typeof VendorsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CommunityRoute: CommunityRoute,
+  ExploreRoute: ExploreRoute,
+  StoriesRoute: StoriesRoute,
+  VendorHubRoute: VendorHubRoute,
+  VendorsSlugRoute: VendorsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
