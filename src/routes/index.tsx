@@ -118,7 +118,7 @@ function Index() {
         <div>
           <p className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-brick"><MessagesSquare className="h-4 w-4" />From the forum</p>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-5xl">{featured.title}</h2>
-          <blockquote className="mt-5 border-l-4 border-primary pl-4 text-lg italic">"{featured.excerpt}"</blockquote>
+          <blockquote className="mt-5 text-lg italic">"{featured.excerpt}"</blockquote>
           <p className="mt-3 text-sm text-muted-foreground">{featured.teller} · {featured.replies.length} replies</p>
           <Link to="/stories/$slug" params={{ slug: featured.slug }} className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-soft transition hover:opacity-90 active:scale-[0.98]">
             Join the conversation <ArrowRight className="h-4 w-4" />
