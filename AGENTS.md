@@ -13,5 +13,6 @@
 - Site-wide search uses one index in `src/lib/search.ts` covering threads, vendors, community and vendor hub; add new content types there so search and duplicate-thread hints stay consistent.
 - Forum threads/replies, seller reviews and map-added businesses are demo-only (browser storage via `src/lib/forum.ts`, `src/lib/reviews.ts`, explore page) until shared saving is added; seed content lives in `src/lib/data.ts` (`seedThreads`).
 - Block clubs & events live inside the forum (`/stories?section=community`) and the seller hub inside Explore (`/explore?tab=sell`, `SellerHub`); `/community` and `/vendor-hub` only redirect there.
-- Neighborhood sub-areas live in `subAreas` in `src/lib/data.ts`; each vendor's `subArea` must name one in its own neighborhood (tested). Travel-time estimates come from `src/lib/geo.ts`, not hand-entered minutes.
+- Real businesses, parks, neighborhood circles and sub-areas live in `src/lib/listings.ts` (researched data, re-exported by `src/lib/data.ts`); every vendor/park `subArea` must exist in its neighborhood and every sub-area must have a business (tested). Never invent listings, ratings or quotes; review highlights are paraphrased with source links. Travel times come from `src/lib/geo.ts`.
+- City services directory data is `cityServices` in `src/lib/data.ts` (real numbers with source URLs); it renders in the forum (`/stories?section=services`).
 - Neighborhood illustrations and taglines live in `src/lib/neighborhoods.ts`; reuse `NeighborhoodArt` / `NeighborhoodStrip` instead of new one-off images.

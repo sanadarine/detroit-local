@@ -73,7 +73,7 @@ function VendorPage() {
             {reviews.length > 0 && <a href="#reviews" className="text-primary hover:underline">{reviews.length} neighbor review{reviews.length === 1 ? "" : "s"}</a>}
           </div>
 
-          <p className="mt-6 text-lg leading-relaxed">{v.tagline}</p>
+          {!v.story.startsWith(v.tagline) && <p className="mt-6 text-lg leading-relaxed">{v.tagline}</p>}
           <h2 className="mt-8 text-sm font-medium uppercase tracking-widest text-brick">Their story</h2>
           <p className="mt-2 leading-relaxed">{v.story}</p>
 
