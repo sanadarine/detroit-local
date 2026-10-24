@@ -1,6 +1,7 @@
 import { ExternalLink, Flame, Landmark, MessageSquareText, Phone, Search, ShieldAlert, Siren, Smartphone, Trash2, Wrench, Zap, HeartHandshake } from "lucide-react";
 import { useMemo, useState } from "react";
 import { cityServices, serviceCategories, type ServiceCategory } from "@/lib/data";
+import { HeartButton } from "@/components/HeartButton";
 
 const catIcons: Record<ServiceCategory, typeof Phone> = {
   "Emergency & safety": ShieldAlert,
@@ -88,7 +89,8 @@ export function CityServices() {
                           <p className="mt-1 text-sm text-muted-foreground">{s.what}</p>
                           {s.hours && <p className="mt-1 text-xs font-medium text-primary">{s.hours}</p>}
                         </div>
-                        <div className="mt-3 flex shrink-0 flex-wrap gap-2 md:mt-0 md:justify-end">
+                        <div className="mt-3 flex shrink-0 flex-wrap items-center gap-2 md:mt-0 md:justify-end">
+                          <HeartButton kind="service" id={s.id} label={s.name} variant="plain" className="bg-secondary hover:bg-accent" />
                           {s.phone && (
                             <a href={tel(s.phone)} className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-sm font-medium text-primary-foreground transition hover:opacity-90">
                               <Phone className="h-3.5 w-3.5" />{s.phone}{s.phoneNote && <span className="opacity-80">· {s.phoneNote}</span>}

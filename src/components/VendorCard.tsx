@@ -2,11 +2,13 @@ import { Link } from "@tanstack/react-router";
 import { MapPin, Star } from "lucide-react";
 import type { TravelMode, Vendor } from "@/lib/data";
 import { PlacePhoto } from "@/components/PlacePhoto";
+import { HeartButton } from "@/components/HeartButton";
 
 const modeLabel: Record<TravelMode, string> = { walk: "walk", bike: "bike", bus: "by bus", drive: "drive" };
 
 export function VendorCard({ v, mode, minutes }: { v: Vendor; mode?: TravelMode | undefined; minutes?: number | undefined }) {
   return (
+    <div className="relative">
     <Link
       to="/vendors/$slug"
       params={{ slug: v.slug }}
@@ -14,7 +16,7 @@ export function VendorCard({ v, mode, minutes }: { v: Vendor; mode?: TravelMode 
     >
       <div className="relative overflow-hidden">
         <PlacePhoto slug={v.slug} name={v.name} neighborhood={v.neighborhood} width={800} className="aspect-[16/9] w-full" />
-        <span className="absolute left-3 top-3 rounded-full bg-card/95 px-2.5 py-1 text-xs font-medium shadow-soft backdrop-blur">{v.category}</span>
+        <span className="absolute left-3 top-3.5 rounded-full bg-card/95 px-2.5 py-1 text-xs font-medium shadow-soft backdrop-blur">{v.category}</span>
       </div>
       <div className="p-4 md:p-5">
         <h3 className="text-xl font-semibold leading-snug group-hover:text-primary">{v.name}</h3>
@@ -28,5 +30,7 @@ export function VendorCard({ v, mode, minutes }: { v: Vendor; mode?: TravelMode 
         </div>
       </div>
     </Link>
+    <HeartButton kind="vendor" id={v.slug} label={v.name} className="absolute right-3 top-3" />
+    </div>
   );
 }

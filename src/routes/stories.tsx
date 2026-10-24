@@ -103,8 +103,8 @@ function Forum() {
                 const [mon, day] = e.date.split(" ");
                 const full = e.signup === "request" && e.spotsLeft === 0;
                 return (
-                  <li key={e.slug}>
-                    <Link to="/events/$slug" params={{ slug: e.slug }} className="group flex items-center gap-4 p-4 transition-colors hover:bg-secondary">
+                  <li key={e.slug} className="relative">
+                    <Link to="/events/$slug" params={{ slug: e.slug }} className="group flex items-center gap-4 p-4 pr-14 transition-colors hover:bg-secondary">
                       <span className="grid w-12 shrink-0 place-items-center rounded-xl bg-secondary py-1.5 text-center leading-none group-hover:bg-card">
                         <span className="text-[10px] font-semibold uppercase tracking-wider text-brick">{mon}</span>
                         <span className="mt-0.5 font-display text-xl">{day}</span>
@@ -114,8 +114,8 @@ function Forum() {
                         <p className="truncate text-sm text-muted-foreground">{e.place} · {e.neighborhood}</p>
                         <p className="mt-1 text-xs font-medium text-brick">{e.signup === "drop-in" ? "Drop in, no sign-up" : full ? "Full · waitlist open" : `${e.spotsLeft} spots left`}</p>
                       </div>
-                      <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
                     </Link>
+                    <HeartButton kind="event" id={e.slug} label={e.title} variant="plain" className="absolute right-3 top-1/2 -translate-y-1/2" />
                   </li>
                 );
               })}
@@ -125,16 +125,16 @@ function Forum() {
             <h2 className="flex items-center gap-2 text-xl font-semibold"><Users className="h-5 w-5 text-brick" />Block clubs</h2>
             <ul className="mt-3 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
               {blockClubs.map((b) => (
-                <li key={b.slug}>
-                  <Link to="/clubs/$slug" params={{ slug: b.slug }} className="group flex items-center gap-4 p-4 transition-colors hover:bg-secondary">
+                <li key={b.slug} className="relative">
+                  <Link to="/clubs/$slug" params={{ slug: b.slug }} className="group flex items-center gap-4 p-4 pr-14 transition-colors hover:bg-secondary">
                     <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent text-accent-foreground"><Users className="h-5 w-5" /></span>
                     <div className="min-w-0 flex-1">
                       <p className="font-medium group-hover:text-primary">{b.name}</p>
                       <p className="text-sm text-muted-foreground">{b.neighborhood} · Meets {b.meets}</p>
                       <p className="mt-1 text-xs font-medium text-brick">{b.members} members · Free to join</p>
                     </div>
-                    <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
                   </Link>
+                  <HeartButton kind="club" id={b.slug} label={b.name} variant="plain" className="absolute right-3 top-1/2 -translate-y-1/2" />
                 </li>
               ))}
             </ul>
@@ -159,8 +159,8 @@ function Forum() {
 
       <ul className={`${community ? "mt-3" : "mt-6"} divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card shadow-soft`}>
         {filtered.map((t) => (
-          <li key={t.slug}>
-            <Link to="/stories/$slug" params={{ slug: t.slug }} className="group grid grid-cols-[44px_1fr_auto] items-center gap-3 p-4 transition-colors hover:bg-secondary md:grid-cols-[52px_1fr_auto] md:gap-4">
+          <li key={t.slug} className="relative">
+            <Link to="/stories/$slug" params={{ slug: t.slug }} className="group grid grid-cols-[44px_1fr] items-center gap-3 p-4 pr-14 transition-colors hover:bg-secondary md:grid-cols-[52px_1fr] md:gap-4">
               {t.image ? <img src={t.image} alt={t.person} loading="lazy" className="aspect-square w-full rounded-full object-cover" /> : <Initials name={t.person} />}
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2 text-xs">
@@ -173,8 +173,8 @@ function Forum() {
                   {t.person} · <MessagesSquare className="inline h-3.5 w-3.5" /> {t.replies.length} · {formatDate(lastActivity(t))}
                 </p>
               </div>
-              <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
             </Link>
+            <HeartButton kind="thread" id={t.slug} label={t.title} variant="plain" className="absolute right-3 top-1/2 -translate-y-1/2" />
           </li>
         ))}
         {filtered.length === 0 && (

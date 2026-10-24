@@ -55,7 +55,10 @@ function ThreadPage() {
         <div>
           <p className="text-sm text-brick">{thread.category} · {thread.teller}</p>
           <h1 className="mt-1 text-3xl font-semibold leading-tight md:text-5xl">{thread.title}</h1>
-          <p className="mt-1 text-sm text-muted-foreground">{formatDate(thread.date)}</p>
+          <div className="mt-2 flex flex-wrap items-center gap-3">
+            <p className="text-sm text-muted-foreground">{formatDate(thread.date)}</p>
+            <HeartButton kind="thread" id={thread.slug} label={thread.title} variant="pill" className="py-1.5" />
+          </div>
         </div>
       </div>
       {thread.featured && (

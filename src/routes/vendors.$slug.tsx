@@ -3,6 +3,7 @@ import { ArrowLeft, Clock, ExternalLink, Globe, Instagram, MapPin, Navigation, P
 import { vendors } from "@/lib/data";
 import { GoogleMap } from "@/components/GoogleMap";
 import { PlaceGallery } from "@/components/PlaceGallery";
+import { HeartButton } from "@/components/HeartButton";
 import { Stars, VendorReviews } from "@/components/VendorReviews";
 import { useReviews } from "@/lib/reviews";
 
@@ -62,7 +63,10 @@ function VendorPage() {
       <div className="mt-6 grid gap-8 md:grid-cols-[1fr_340px] md:gap-10">
         <div>
           <p className="text-sm font-medium text-brick">{v.category} · {v.subArea}, {v.neighborhood}</p>
-          <h1 className="mt-1 text-4xl font-semibold tracking-tight md:text-5xl">{v.name}</h1>
+          <div className="mt-1 flex items-start justify-between gap-3">
+            <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">{v.name}</h1>
+            <HeartButton kind="vendor" id={v.slug} label={v.name} variant="pill" className="mt-1 shrink-0" />
+          </div>
           {v.owner && <p className="mt-1 text-lg text-muted-foreground">Run by {v.owner}</p>}
           <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
             {v.rating && (
