@@ -1,19 +1,20 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { Baby, ChevronDown, Compass, Hammer, Home, Leaf, LocateFixed, MapPin, Navigation, Plus, Sprout, Star, Store, X } from "lucide-react";
+import { Baby, ChevronDown, Coffee, Compass, Hammer, Leaf, LocateFixed, MapPin, Navigation, Plus, Scissors, ShoppingBasket, Sprout, Star, Store, Trees, Utensils, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { categories, neighborhoodAreas, neighborhoods, subAreas, travelModes, vendorReviews, vendors, type Hood, type TravelMode, type Vendor } from "@/lib/data";
+import { categories, neighborhoodAreas, neighborhoods, parks, subAreas, travelModes, vendors, type Hood, type Park, type TravelMode, type Vendor } from "@/lib/data";
 import { distanceMeters, reachMeters, travelMinutes, type LatLng } from "@/lib/geo";
-import { averageRating } from "@/lib/reviews";
 import { NeighborhoodStrip } from "@/components/NeighborhoodStrip";
+import { NeighborhoodArt } from "@/components/NeighborhoodArt";
 import { SellerHub } from "@/components/SellerHub";
 import { GoogleMap, type MapPin as Pin } from "@/components/GoogleMap";
 
-type ExploreSearch = { hood?: string; tab?: "sell" };
+type ExploreSearch = { hood?: string; tab?: "sell"; show?: "parks" };
 
 export const Route = createFileRoute("/explore")({
   validateSearch: (s: Record<string, unknown>): ExploreSearch => ({
     ...(typeof s["hood"] === "string" && s["hood"] ? { hood: String(s["hood"]) } : {}),
     ...(s["tab"] === "sell" ? { tab: "sell" as const } : {}),
+    ...(s["show"] === "parks" ? { show: "parks" as const } : {}),
   }),
   head: () => ({
     meta: [
@@ -29,7 +30,18 @@ export const Route = createFileRoute("/explore")({
 });
 
 const modeLabel: Record<TravelMode, string> = { walk: "walking", bike: "biking", bus: "by bus", drive: "driving" };
-const catIcon: Record<string, typeof Home> = { "Food & farms": Sprout, "Home-based business": Home, "Home repair": Hammer, Childcare: Baby, Wellness: Leaf };
+const catIcon: Record<string, typeof Store> = {
+  "Farms & gardens": Sprout,
+  "Food businesses": Utensils,
+  "Coffee & bakeries": Coffee,
+  "Markets & grocers": ShoppingBasket,
+  "Home services": Hammer,
+  "Childcare & kids": Baby,
+  Wellness: Leaf,
+  "Beauty & barbers": Scissors,
+  "Shops & makers": Store,
+};
+const PARKS = "Parks";
 const MINUTE_OPTIONS = [5, 10, 15, 20] as const;
 
 type Added = { id: string; name: string; category: string; description: string; lat: number; lng: number };
@@ -64,18 +76,20 @@ function Menu({ value, onChange, label, children }: { value: string; onChange: (
 }
 
 function ResultRow({ v, minutes, mode }: { v: Vendor; minutes?: number | undefined; mode: TravelMode }) {
-  const reviews = vendorReviews[v.slug] ?? [];
-  const avg = averageRating(reviews);
+  const I = catIcon[v.category] ?? Store;
   return (
     <Link to="/vendors/$slug" params={{ slug: v.slug }} className="group flex gap-4 rounded-2xl p-2.5 transition-colors hover:bg-card md:p-3">
-      <img src={v.image} alt="" loading="lazy" width={1024} height={1024} className="h-24 w-24 shrink-0 rounded-xl object-cover shadow-soft md:h-28 md:w-28" />
+      <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl shadow-soft md:h-28 md:w-28">
+        <NeighborhoodArt name={v.neighborhood} className="h-full w-full" />
+        <span className="absolute bottom-1.5 left-1.5 grid h-7 w-7 place-items-center rounded-full bg-card/95 text-primary shadow-soft"><I className="h-3.5 w-3.5" /></span>
+      </div>
       <div className="min-w-0 flex-1 py-0.5">
         <p className="text-xs text-muted-foreground">{v.category}</p>
         <h3 className="mt-0.5 truncate text-lg font-semibold leading-snug group-hover:text-primary">{v.name}</h3>
         <p className="mt-0.5 line-clamp-1 text-sm text-muted-foreground">{v.tagline}</p>
         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
-          {reviews.length > 0 && (
-            <span className="inline-flex items-center gap-1 font-medium"><Star className="h-3.5 w-3.5 fill-brick text-brick" />{avg.toFixed(1)} <span className="font-normal text-muted-foreground">({reviews.length})</span></span>
+          {v.rating && (
+            <span className="inline-flex items-center gap-1 font-medium"><Star className="h-3.5 w-3.5 fill-brick text-brick" />{v.rating.stars.toFixed(1)} <span className="font-normal text-muted-foreground">({v.rating.count})</span></span>
           )}
           <span className="inline-flex items-center gap-1 text-muted-foreground"><MapPin className="h-3.5 w-3.5" />{v.subArea}</span>
           {minutes !== undefined && <span className="rounded-full bg-accent px-2 py-0.5 font-medium text-accent-foreground">{minutes} min {modeLabel[mode]}</span>}
@@ -85,11 +99,32 @@ function ResultRow({ v, minutes, mode }: { v: Vendor; minutes?: number | undefin
   );
 }
 
+function ParkRow({ p, minutes, mode }: { p: Park; minutes?: number | undefined; mode: TravelMode }) {
+  return (
+    <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${p.name} ${p.address}`)}`} target="_blank" rel="noopener noreferrer" className="group flex gap-4 rounded-2xl p-2.5 transition-colors hover:bg-card md:p-3">
+      <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl shadow-soft md:h-28 md:w-28">
+        <NeighborhoodArt name={p.neighborhood} className="h-full w-full" />
+        <span className="absolute bottom-1.5 left-1.5 grid h-7 w-7 place-items-center rounded-full bg-card/95 text-primary shadow-soft"><Trees className="h-3.5 w-3.5" /></span>
+      </div>
+      <div className="min-w-0 flex-1 py-0.5">
+        <p className="text-xs text-muted-foreground">Park</p>
+        <h3 className="mt-0.5 truncate text-lg font-semibold leading-snug group-hover:text-primary">{p.name}</h3>
+        <p className="mt-0.5 line-clamp-2 text-sm text-muted-foreground">{p.about}</p>
+        <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+          <span className="inline-flex items-center gap-1 text-muted-foreground"><MapPin className="h-3.5 w-3.5" />{p.subArea}</span>
+          {p.features.slice(0, 3).map((f) => <span key={f} className="rounded-full bg-secondary px-2 py-0.5">{f}</span>)}
+          {minutes !== undefined && <span className="rounded-full bg-accent px-2 py-0.5 font-medium text-accent-foreground">{minutes} min {modeLabel[mode]}</span>}
+        </div>
+      </div>
+    </a>
+  );
+}
+
 function Explore() {
   const navigate = useNavigate();
-  const { hood: initialHood, tab } = Route.useSearch();
+  const { hood: initialHood, tab, show } = Route.useSearch();
   const selling = tab === "sell";
-  const [cat, setCat] = useState<string | null>(null);
+  const [cat, setCat] = useState<string | null>(show === "parks" ? PARKS : null);
   const [hood, setHoodState] = useState<Hood | null>(initialHood && (neighborhoods as readonly string[]).includes(initialHood) ? (initialHood as Hood) : null);
   const [sub, setSub] = useState<string | null>(null);
   const [near, setNear] = useState(false);
@@ -176,26 +211,33 @@ function Explore() {
   const minutesTo = (v: LatLng) => (origin ? travelMinutes(origin, v, mode) : undefined);
   const nearActive = near && !!origin;
 
-  const list = vendors
-    .filter((v) => (!cat || v.category === cat) && (!hood || v.neighborhood === hood) && (!sub || v.subArea === sub))
+  const showParks = cat === PARKS;
+  const inPlace = <T extends { neighborhood: string; subArea: string }>(x: T) => (!hood || x.neighborhood === hood) && (!sub || x.subArea === sub);
+  const parkList = parks
+    .filter(inPlace)
+    .filter((p) => !nearActive || (minutesTo(p) ?? 0) <= minutes)
+    .sort((a, b) => (nearActive ? (minutesTo(a) ?? 0) - (minutesTo(b) ?? 0) : 0));
+  const list = (showParks ? [] : vendors)
+    .filter((v) => (!cat || v.category === cat) && inPlace(v))
     .filter((v) => !nearActive || (minutesTo(v) ?? 0) <= minutes)
     .sort((a, b) => (nearActive ? (minutesTo(a) ?? 0) - (minutesTo(b) ?? 0) : 0));
 
   // When a specific block has nobody yet, suggest the closest locals instead of a dead end.
   const anchor = subArea ?? (nearActive ? origin : null);
   const closest =
-    list.length === 0 && anchor
-      ? [...vendors].filter((v) => !cat || v.category === cat).sort((a, b) => distanceMeters(anchor, a) - distanceMeters(anchor, b)).slice(0, 3)
+    list.length === 0 && !showParks && anchor
+      ? [...vendors].filter((v) => !cat || v.category === cat || showParks).sort((a, b) => distanceMeters(anchor, a) - distanceMeters(anchor, b)).slice(0, 3)
       : [];
 
   const pins = useMemo<Pin[]>(
     () => [
       ...list.map((v) => ({ id: `v:${v.slug}`, lat: v.lat, lng: v.lng, title: v.name })),
+      ...(showParks ? parkList.map((p) => ({ id: `p:${p.slug}`, lat: p.lat, lng: p.lng, title: p.name, approximate: p.approximate })) : []),
       ...added.map((a) => ({ id: `a:${a.id}`, lat: a.lat, lng: a.lng, title: a.name })),
       ...(draftPos ? [{ id: "draft", ...draftPos, title: "New business" }] : []),
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [list.map((v) => v.slug).join(), added, draftPos],
+    [list.map((v) => v.slug).join(), showParks, parkList.map((p) => p.slug).join(), added, draftPos],
   );
 
   function startAdding() {
@@ -301,6 +343,7 @@ function Explore() {
                 const I = catIcon[c] ?? Store;
                 return <Pill key={c} active={cat === c} onClick={() => setCat(cat === c ? null : c)}><I className="h-4 w-4" />{c}</Pill>;
               })}
+              <Pill active={showParks} onClick={() => setCat(showParks ? null : PARKS)}><Trees className="h-4 w-4" />Parks</Pill>
             </div>
 
             {near && (
@@ -392,17 +435,18 @@ function Explore() {
             <div className="lg:order-1">
               <h2 id="results" className="flex items-baseline gap-2 px-1 text-2xl font-semibold tracking-tight">
                 {resultsTitle}
-                <span className="text-base font-normal text-muted-foreground">{list.length} local{list.length === 1 ? "" : "s"}</span>
+                <span className="text-base font-normal text-muted-foreground">{showParks ? `${parkList.length} park${parkList.length === 1 ? "" : "s"}` : `${list.length} local${list.length === 1 ? "" : "s"}`}</span>
               </h2>
               {nearActive && from === "me" && me && !farAway && <p className="mt-0.5 flex items-center gap-1 px-1 text-xs text-muted-foreground"><LocateFixed className="h-3 w-3" />Closest to you first</p>}
 
               <div className="mt-3 -mx-2.5 divide-y divide-border/70 md:-mx-3">
                 {list.map((v) => <ResultRow key={v.slug} v={v} mode={mode} minutes={nearActive ? minutesTo(v) : undefined} />)}
+                {showParks && parkList.map((p) => <ParkRow key={p.slug} p={p} mode={mode} minutes={nearActive ? minutesTo(p) : undefined} />)}
               </div>
 
-              {list.length === 0 && (
+              {(showParks ? parkList.length === 0 : list.length === 0) && (
                 <div className="mt-4 rounded-2xl bg-secondary p-5 text-center">
-                  <p className="font-medium">No locals listed {sub ? `in ${sub}` : nearActive ? "that close" : "here"} yet</p>
+                  <p className="font-medium">No {showParks ? "parks" : "locals"} listed {sub ? `in ${sub}` : nearActive ? "that close" : "here"} yet</p>
                   <p className="mt-1 text-sm text-muted-foreground">{closest.length > 0 ? "These are the closest ones:" : "Try another neighborhood or category."}</p>
                 </div>
               )}

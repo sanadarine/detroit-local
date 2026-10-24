@@ -20,6 +20,7 @@ export const Route = createFileRoute("/vendors/$slug")({
           { property: "og:title", content: `${loaderData.name} — Detroit Local` },
           { property: "og:description", content: loaderData.tagline },
           { property: "og:type", content: "profile" },
+          { name: "twitter:card", content: "summary" },
         ]
       : [{ title: "Vendor not found — Detroit Local" }, { name: "robots", content: "noindex" }],
   }),
