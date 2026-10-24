@@ -32,3 +32,4 @@
 - [x] Real Google Maps photos for every Explore listing (cards, rows, seller pages, parks)
 - [x] Home About cards: icons left-aligned, 4 columns on desktop, at least 16px gaps
 - [x] Smoother hover effects site-wide, no zoom/scale on hover
+- [x] Saved tab: hearts on places, parks, events, clubs, threads, seller listings, city services; Saved page filters (type, neighborhood, near a typed place, category, upcoming, kid-friendly) and grouping

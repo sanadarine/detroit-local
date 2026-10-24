@@ -6,6 +6,7 @@ import { useForum } from "@/lib/forum";
 import { useJoin } from "@/lib/joins";
 import { searchSite } from "@/lib/search";
 import { NeighborhoodArt } from "@/components/NeighborhoodArt";
+import { HeartButton } from "@/components/HeartButton";
 import { JoinCard } from "@/components/JoinCard";
 
 export const Route = createFileRoute("/clubs/$slug")({
@@ -60,7 +61,10 @@ function ClubPage() {
       <div className="mt-6 grid gap-8 md:grid-cols-[1fr_340px] md:gap-10">
         <div>
           <p className="flex items-center gap-1.5 text-sm font-medium text-brick"><Users className="h-4 w-4" />Block club · {c.neighborhood}</p>
-          <h1 className="mt-1 text-3xl font-semibold tracking-tight md:text-5xl">{c.name}</h1>
+          <div className="mt-1 flex items-start justify-between gap-3">
+            <h1 className="text-3xl font-semibold tracking-tight md:text-5xl">{c.name}</h1>
+            <HeartButton kind="club" id={c.slug} label={c.name} variant="pill" className="mt-1 shrink-0" />
+          </div>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{c.about}</p>
 
           <dl className="mt-6 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card shadow-soft">

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as SavedRouteImport } from './routes/saved'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as StoriesRouteImport } from './routes/stories'
 import { Route as VendorHubRouteImport } from './routes/vendor-hub'
@@ -33,6 +34,11 @@ const CommunityRoute = CommunityRouteImport.update({
 const ExploreRoute = ExploreRouteImport.update({
   id: '/explore',
   path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SavedRoute = SavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SearchRoute = SearchRouteImport.update({
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
+  '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
   '/stories': typeof StoriesRoute
   '/vendor-hub': typeof VendorHubRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
+  '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
   '/stories': typeof StoriesRoute
   '/vendor-hub': typeof VendorHubRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
+  '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
   '/stories': typeof StoriesRoute
   '/vendor-hub': typeof VendorHubRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/'
     | '/community'
     | '/explore'
+    | '/saved'
     | '/search'
     | '/stories'
     | '/vendor-hub'
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/'
     | '/community'
     | '/explore'
+    | '/saved'
     | '/search'
     | '/stories'
     | '/vendor-hub'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/'
     | '/community'
     | '/explore'
+    | '/saved'
     | '/search'
     | '/stories'
     | '/vendor-hub'
@@ -151,6 +163,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CommunityRoute: typeof CommunityRoute
   ExploreRoute: typeof ExploreRoute
+  SavedRoute: typeof SavedRoute
   SearchRoute: typeof SearchRoute
   StoriesRoute: typeof StoriesRoute
   VendorHubRoute: typeof VendorHubRoute
@@ -181,6 +194,13 @@ declare module '@tanstack/react-router' {
       path: '/explore'
       fullPath: '/explore'
       preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/saved': {
+      id: '/saved'
+      path: '/saved'
+      fullPath: '/saved'
+      preLoaderRoute: typeof SavedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/search': {
@@ -239,6 +259,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CommunityRoute: CommunityRoute,
   ExploreRoute: ExploreRoute,
+  SavedRoute: SavedRoute,
   SearchRoute: SearchRoute,
   StoriesRoute: StoriesRoute,
   VendorHubRoute: VendorHubRoute,

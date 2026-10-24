@@ -5,6 +5,7 @@ import { categories, neighborhoodAreas, neighborhoods, parks, subAreas, travelMo
 import { distanceMeters, reachMeters, travelMinutes, type LatLng } from "@/lib/geo";
 import { NeighborhoodStrip } from "@/components/NeighborhoodStrip";
 import { PlacePhoto } from "@/components/PlacePhoto";
+import { HeartButton } from "@/components/HeartButton";
 import { SellerHub } from "@/components/SellerHub";
 import { GoogleMap, type MapPin as Pin } from "@/components/GoogleMap";
 
@@ -78,7 +79,8 @@ function Menu({ value, onChange, label, children }: { value: string; onChange: (
 function ResultRow({ v, minutes, mode }: { v: Vendor; minutes?: number | undefined; mode: TravelMode }) {
   const I = catIcon[v.category] ?? Store;
   return (
-    <Link to="/vendors/$slug" params={{ slug: v.slug }} className="group flex gap-4 rounded-2xl p-2.5 transition-colors hover:bg-card md:p-3">
+    <div className="relative">
+    <Link to="/vendors/$slug" params={{ slug: v.slug }} className="group flex gap-4 rounded-2xl p-2.5 pr-12 transition-colors hover:bg-card md:p-3 md:pr-14">
       <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl shadow-soft md:h-28 md:w-28">
         <PlacePhoto slug={v.slug} name={v.name} neighborhood={v.neighborhood} credit="tooltip" className="h-full w-full" />
         <span className="absolute bottom-1.5 left-1.5 grid h-7 w-7 place-items-center rounded-full bg-card/95 text-primary shadow-soft"><I className="h-3.5 w-3.5" /></span>
@@ -96,12 +98,15 @@ function ResultRow({ v, minutes, mode }: { v: Vendor; minutes?: number | undefin
         </div>
       </div>
     </Link>
+    <HeartButton kind="vendor" id={v.slug} label={v.name} variant="plain" className="absolute right-1.5 top-2 md:right-2.5 md:top-3" />
+    </div>
   );
 }
 
 function ParkRow({ p, minutes, mode }: { p: Park; minutes?: number | undefined; mode: TravelMode }) {
   return (
-    <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${p.name} ${p.address}`)}`} target="_blank" rel="noopener noreferrer" className="group flex gap-4 rounded-2xl p-2.5 transition-colors hover:bg-card md:p-3">
+    <div className="relative">
+    <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${p.name} ${p.address}`)}`} target="_blank" rel="noopener noreferrer" className="group flex gap-4 rounded-2xl p-2.5 pr-12 transition-colors hover:bg-card md:p-3 md:pr-14">
       <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl shadow-soft md:h-28 md:w-28">
         <PlacePhoto slug={p.slug} name={p.name} neighborhood={p.neighborhood} credit="tooltip" className="h-full w-full" />
         <span className="absolute bottom-1.5 left-1.5 grid h-7 w-7 place-items-center rounded-full bg-card/95 text-primary shadow-soft"><Trees className="h-3.5 w-3.5" /></span>
@@ -117,6 +122,8 @@ function ParkRow({ p, minutes, mode }: { p: Park; minutes?: number | undefined; 
         </div>
       </div>
     </a>
+    <HeartButton kind="park" id={p.slug} label={p.name} variant="plain" className="absolute right-1.5 top-2 md:right-2.5 md:top-3" />
+    </div>
   );
 }
 

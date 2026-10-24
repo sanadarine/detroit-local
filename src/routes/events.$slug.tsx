@@ -3,6 +3,7 @@ import { ArrowLeft, Baby, CalendarDays, Clock, MapPin, MessagesSquare, Package, 
 import { blockClubs, events, vendors } from "@/lib/data";
 import { eventSignup, useJoin } from "@/lib/joins";
 import { NeighborhoodArt } from "@/components/NeighborhoodArt";
+import { HeartButton } from "@/components/HeartButton";
 import { JoinCard } from "@/components/JoinCard";
 
 export const Route = createFileRoute("/events/$slug")({
@@ -70,7 +71,10 @@ function EventPage() {
       <div className="mt-6 grid gap-8 md:grid-cols-[1fr_340px] md:gap-10">
         <div>
           <p className="flex items-center gap-1.5 text-sm font-medium text-brick"><CalendarDays className="h-4 w-4" />Event · {e.neighborhood}</p>
-          <h1 className="mt-1 text-3xl font-semibold tracking-tight md:text-5xl">{e.title}</h1>
+          <div className="mt-1 flex items-start justify-between gap-3">
+            <h1 className="text-3xl font-semibold tracking-tight md:text-5xl">{e.title}</h1>
+            <HeartButton kind="event" id={e.slug} label={e.title} variant="pill" className="mt-1 shrink-0" />
+          </div>
           <p className="mt-2 text-muted-foreground">
             Hosted by{" "}
             {club ? <Link to="/clubs/$slug" params={{ slug: club.slug }} className="font-medium text-primary hover:underline">{club.name}</Link>

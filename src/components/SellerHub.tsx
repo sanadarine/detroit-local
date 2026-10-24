@@ -4,6 +4,7 @@ import { permitSteps } from "@/lib/data";
 import { boardTags, filterBoard, useBoard, type BoardKind, type BoardPost, type BoardTag } from "@/lib/board";
 import { formatDate } from "@/lib/forum";
 import { BoardComposer } from "@/components/BoardComposer";
+import { HeartButton } from "@/components/HeartButton";
 
 export const boardIcons: Record<BoardTag, typeof Hammer> = {
   "Skill share": Hammer,
@@ -26,6 +27,7 @@ function PostCard({ p }: { p: BoardPost }) {
         <span className={`ml-auto rounded-full px-2 py-0.5 text-[11px] font-medium ${p.kind === "offer" ? "bg-primary/10 text-primary" : "bg-secondary text-foreground"}`}>
           {p.kind === "offer" ? "Offering" : "Looking for"}
         </span>
+        <HeartButton kind="board" id={p.id} label={p.title} variant="plain" className="-my-1 -mr-1.5" />
       </div>
       <h3 className="mt-3 font-semibold leading-snug">{p.title}</h3>
       {p.details && <p className="mt-1 line-clamp-3 text-sm text-muted-foreground">{p.details}</p>}
