@@ -8,3 +8,7 @@
 - [x] Site-wide search (threads, vendors, community, vendor hub) + big search in home hero
 - [x] 2D drawings for each neighborhood + gentle neighborhood animations
 - [x] Apple-level UI polish pass across the app
+- [ ] Specific sub-areas under each neighborhood (pick your exact area)
+- [ ] "Within X minutes of me": real location, map zooms to where you are
+- [ ] More demo threads in the forum
+- [ ] Simpler Apple-style "new post" form in the forum
