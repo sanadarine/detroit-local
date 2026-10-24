@@ -6,6 +6,9 @@ import hero from "@/assets/hero.jpg";
 export const categories = ["Food & farms", "Home-based business", "Home repair", "Childcare", "Wellness"] as const;
 export const neighborhoods = ["Corktown", "Eastern Market", "Jefferson-Chalmers", "Southwest", "North End", "Bagley"] as const;
 
+export const travelModes = ["walk", "bike", "bus", "drive"] as const;
+export type TravelMode = (typeof travelModes)[number];
+
 export type Vendor = {
   slug: string;
   name: string;
@@ -13,6 +16,11 @@ export type Vendor = {
   category: (typeof categories)[number];
   neighborhood: (typeof neighborhoods)[number];
   minutesAway: number;
+  travel: Record<TravelMode, number>;
+  address: string;
+  lat: number;
+  lng: number;
+  approximate?: boolean;
   image: string;
   tagline: string;
   story: string;
@@ -29,6 +37,10 @@ export const vendors: Vendor[] = [
     category: "Food & farms",
     neighborhood: "North End",
     minutesAway: 4,
+    travel: { walk: 12, bike: 5, bus: 8, drive: 4 },
+    address: "Oakland Ave & Holbrook St, Detroit, MI 48211",
+    lat: 42.3815,
+    lng: -83.0675,
     image: farmer,
     tagline: "Collards, kale and tomatoes grown on three once-vacant lots.",
     story:
@@ -44,6 +56,11 @@ export const vendors: Vendor[] = [
     category: "Home-based business",
     neighborhood: "Bagley",
     minutesAway: 3,
+    travel: { walk: 9, bike: 4, bus: 7, drive: 3 },
+    address: "Near Bagley & Livernois, Detroit, MI 48221",
+    lat: 42.4186,
+    lng: -83.1418,
+    approximate: true,
     image: baker,
     tagline: "Sweet potato pies from a family recipe, baked in a licensed home kitchen.",
     story:
@@ -59,6 +76,10 @@ export const vendors: Vendor[] = [
     category: "Home repair",
     neighborhood: "Jefferson-Chalmers",
     minutesAway: 6,
+    travel: { walk: 25, bike: 10, bus: 14, drive: 6 },
+    address: "14000 E Jefferson Ave, Detroit, MI 48215",
+    lat: 42.3612,
+    lng: -82.9538,
     image: hero,
     tagline: "Porches, gutters and basement flood prep from a neighbor who knows these houses.",
     story:
@@ -74,6 +95,11 @@ export const vendors: Vendor[] = [
     category: "Childcare",
     neighborhood: "Corktown",
     minutesAway: 5,
+    travel: { walk: 15, bike: 6, bus: 5, drive: 5 },
+    address: "Near Michigan Ave & Trumbull, Detroit, MI 48216",
+    lat: 42.3317,
+    lng: -83.068,
+    approximate: true,
     image: story,
     tagline: "Licensed home daycare with a backyard garden and lots of story time.",
     story:
@@ -89,6 +115,10 @@ export const vendors: Vendor[] = [
     category: "Wellness",
     neighborhood: "Southwest",
     minutesAway: 8,
+    travel: { walk: 30, bike: 12, bus: 15, drive: 8 },
+    address: "4200 W Vernor Hwy, Detroit, MI 48209",
+    lat: 42.3197,
+    lng: -83.0963,
     image: hero,
     tagline: "Teas and remedies passed down three generations, with bilingual classes.",
     story:
@@ -104,6 +134,10 @@ export const vendors: Vendor[] = [
     category: "Food & farms",
     neighborhood: "Eastern Market",
     minutesAway: 7,
+    travel: { walk: 28, bike: 11, bus: 4, drive: 7 },
+    address: "Eastern Market Shed 2, 2934 Russell St, Detroit, MI 48207",
+    lat: 42.3474,
+    lng: -83.041,
     image: farmer,
     tagline: "Raw city honey from rooftop and lot hives across the east side.",
     story: "Samuel keeps 40 hives on rooftops and lots, and sells every Saturday at Eastern Market Shed 2.",
@@ -113,25 +147,62 @@ export const vendors: Vendor[] = [
   },
 ];
 
-export const stories = [
+export type Story = {
+  slug: string;
+  title: string;
+  person: string;
+  teller: string;
+  image: string;
+  excerpt: string;
+  body: string[];
+};
+
+export const stories: Story[] = [
   {
+    slug: "okra-rows-oakland-avenue",
     title: "The okra rows on Oakland Avenue",
+    person: "Loretta Johnson",
     teller: "Loretta Johnson, North End since 1972",
     image: story,
     excerpt:
       "Back then every yard had a garden. We traded greens over the fence. When I see Marcus out there with the kids, it's like the block remembered.",
+    body: [
+      "I moved onto Oakland Avenue in the summer of 1972. My husband worked at Dodge Main and I worked at the hospital, and every evening we'd come home to a block that smelled like somebody's supper.",
+      "Every yard had a garden then. Mrs. Bell next door grew okra so tall you couldn't see her kitchen window. We traded over the fence: my tomatoes for her okra, her collards for my peppers. Nobody wrote anything down. You just knew who had what.",
+      "When the plant closed, a lot of folks left. Houses came down. The gardens went with them. For years those lots were just grass and glass.",
+      "Then one spring, Mrs. Bell's grandson Marcus came back with a shovel. He didn't ask anybody, he just started. Now there are kids out there every Saturday pulling weeds and arguing over who gets to pick the first tomato.",
+      "I tell young people: the land remembers. You just have to give it somebody to remember with.",
+    ],
   },
   {
+    slug: "pies-came-up-on-the-train",
     title: "Pies that came up on the train",
+    person: "Denise Carter",
     teller: "Denise Carter, Bagley",
     image: baker,
     excerpt: "My great-aunt brought this recipe from Alabama in 1951. I still use her pie tin.",
+    body: [
+      "My great-aunt Hattie came up from Montgomery on the train in 1951 with one suitcase, forty dollars, and a recipe card folded inside her Bible.",
+      "She got work cleaning houses in Palmer Park, and on Sundays she baked sweet potato pies for the whole church. People would line up after service. She never charged a dime.",
+      "When she passed, I got the Bible, the card, and a dented tin pie plate. For years I only made those pies at Thanksgiving.",
+      "During the pandemic, my neighbor asked if I'd sell her one. Then her sister wanted one. Then the block club. I took a class, got my cottage food license, and now I bake every Friday night.",
+      "I still use her tin. The pies taste the same. I think that's the point.",
+    ],
   },
   {
+    slug: "when-the-east-side-flooded",
     title: "When the east side flooded",
+    person: "Harold Washington",
     teller: "Harold Washington, Jefferson-Chalmers since 1983",
     image: hero,
     excerpt: "Neighbors pumped each other's basements for a week straight. That's who we are.",
+    body: [
+      "They call Jefferson-Chalmers 'Little Venice' because of the canals. Pretty name. Not so pretty when the water comes in the house.",
+      "In June of 2021 it rained like I'd never seen. By morning there was four feet of water in my basement and my neighbor's furnace was floating.",
+      "Nobody waited for the city. Ray from down the street had two pumps. The church brought sandwiches. Teenagers carried ruined couches to the curb all day for no pay.",
+      "We pumped basements for a week straight, house to house. By the end, I knew the names of people I'd waved at for thirty years and never spoken to.",
+      "Now Ray teaches flood prep at the rec center. I go every year, and I bring someone new.",
+    ],
   },
 ];
 
