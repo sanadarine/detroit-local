@@ -1,4 +1,4 @@
-import { blockClubs, events, hubBoard, permitSteps, vendors, type Thread } from "@/lib/data";
+import { blockClubs, events, hubBoard, permitSteps, vendorReviews, vendors, type Thread } from "@/lib/data";
 
 export type SearchKind = "thread" | "vendor" | "community" | "hub";
 
@@ -66,7 +66,7 @@ function docs(threads: Thread[]): Doc[] {
       slug: v.slug,
       title: v.name,
       snippet: `${v.category} · ${v.subArea}, ${v.neighborhood} · ${v.tagline}`,
-      text: [v.owner, v.category, v.neighborhood, v.subArea, v.tagline, v.story, ...v.services, v.address].join(" "),
+      text: [v.owner, v.category, v.neighborhood, v.subArea, v.tagline, v.story, ...v.services, v.address, ...(vendorReviews[v.slug] ?? []).map((r) => r.text)].join(" "),
     })),
     ...blockClubs.map((c) => ({
       kind: "community" as const,
