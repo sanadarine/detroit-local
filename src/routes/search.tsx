@@ -33,7 +33,7 @@ function SearchPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 pt-8 md:px-5 md:pt-12">
-      <h1 className="text-3xl font-semibold md:text-5xl">Search the neighborhood</h1>
+      <h1 className="animate-rise text-4xl font-semibold tracking-tight md:text-6xl">Search the neighborhood</h1>
       <p className="mt-2 text-muted-foreground">Check whether neighbors already asked or answered it.</p>
       <div className="mt-6">
         <SearchBar key={q} initial={q} suggest={false} autoFocus={!q} />

@@ -21,14 +21,14 @@ const steps = permitSteps;
 function Hub() {
   return (
     <div className="mx-auto max-w-6xl px-4 pt-8 md:px-5 md:pt-12">
-      <h1 className="text-3xl font-semibold md:text-5xl">Grow together, not alone</h1>
+      <h1 className="animate-rise text-4xl font-semibold tracking-tight md:text-6xl">Grow together, not alone</h1>
       <p className="mt-2 max-w-2xl text-muted-foreground">Other vendors aren't just competition. Share skills, supplies and buying power — and get through the paperwork.</p>
       <div className="mt-8 grid gap-8 md:mt-10 md:gap-10 md:grid-cols-[1.2fr_1fr]">
         <section>
           <h2 id="board" className="flex items-center gap-2 text-2xl font-semibold"><Handshake className="h-6 w-6 text-brick" />Neighbor board</h2>
           <div className="mt-4 space-y-3">
             {board.map((b) => (
-              <div key={b.text} className="rounded-xl border border-border bg-card p-4">
+              <div key={b.text} className="rounded-2xl border border-border bg-card shadow-soft p-4">
                 <span className="inline-flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-xs text-accent-foreground"><b.icon className="h-3.5 w-3.5" />{b.type}</span>
                 <p className="mt-2">{b.text}</p>
                 <p className="mt-1 text-sm text-muted-foreground">— {b.who}</p>
@@ -36,7 +36,7 @@ function Hub() {
             ))}
           </div>
         </section>
-        <section id="permits" className="rounded-xl bg-secondary p-5 md:p-6">
+        <section id="permits" className="rounded-2xl bg-secondary p-5 md:p-6">
           <h2 className="flex items-center gap-2 text-xl font-semibold md:text-2xl"><FileCheck className="h-6 w-6 shrink-0 text-brick" />Starting a business in Detroit</h2>
           <ol className="mt-4 space-y-4">
             {steps.map((s, i) => (

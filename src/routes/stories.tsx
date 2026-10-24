@@ -61,7 +61,7 @@ function Forum() {
     <div className="mx-auto max-w-4xl px-4 pt-8 md:px-5 md:pt-12">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold md:text-5xl">Neighborhood forum</h1>
+          <h1 className="animate-rise text-4xl font-semibold tracking-tight md:text-6xl">Neighborhood forum</h1>
           <p className="mt-2 max-w-xl text-muted-foreground">Stories, questions and recommendations from people who know these blocks.</p>
         </div>
         <button onClick={() => setComposing(!composing)} className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-sm transition hover:opacity-90 active:scale-[0.98]">
