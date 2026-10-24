@@ -1,0 +1,61 @@
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { vendors } from "@/lib/data";
+
+export const Route = createFileRoute("/vendors/$slug")({
+  loader: ({ params }) => {
+    const v = vendors.find((x) => x.slug === params.slug);
+    if (!v) throw notFound();
+    return v;
+  },
+  head: ({ loaderData }) => ({
+    meta: loaderData
+      ? [
+          { title: `${loaderData.name} — Porchlight Detroit` },
+          { name: "description", content: loaderData.tagline },
+          { property: "og:title", content: `${loaderData.name} — Porchlight Detroit` },
+          { property: "og:description", content: loaderData.tagline },
+          { property: "og:type", content: "profile" },
+        ]
+      : [{ title: "Vendor not found — Porchlight Detroit" }, { name: "robots", content: "noindex" }],
+  }),
+  notFoundComponent: () => (
+    <div className="mx-auto max-w-xl px-5 py-24 text-center">
+      <h1 className="text-3xl font-semibold">We couldn't find that neighbor</h1>
+      <Link to="/explore" className="mt-4 inline-block text-primary">Back to explore</Link>
+    </div>
+  ),
+  component: VendorPage,
+});
+
+function VendorPage() {
+  const v = Route.useLoaderData();
+  return (
+    <div className="mx-auto max-w-5xl px-5 pt-10">
+      <Link to="/explore" className="text-sm text-muted-foreground hover:text-foreground">← All vendors</Link>
+      <div className="mt-6 grid gap-10 md:grid-cols-2">
+        <img src={v.image} alt={v.name} width={1024} height={1024} className="aspect-square w-full rounded-2xl object-cover" />
+        <div>
+          <p className="text-sm text-muted-foreground">{v.category} · {v.neighborhood} · {v.minutesAway} min away</p>
+          <h1 className="mt-2 text-4xl font-semibold md:text-5xl">{v.name}</h1>
+          <p className="mt-1 text-lg">Run by {v.owner}</p>
+          <h2 className="mt-8 text-sm font-medium uppercase tracking-widest text-brick">Their story</h2>
+          <p className="mt-2 leading-relaxed">{v.story}</p>
+          <h2 className="mt-8 text-sm font-medium uppercase tracking-widest text-brick">Services</h2>
+          <ul className="mt-2 space-y-1">{v.services.map((s) => <li key={s}>• {s}</li>)}</ul>
+          <p className="mt-4 text-sm text-muted-foreground">{v.hours}</p>
+          <div className="mt-8 rounded-xl border border-border bg-secondary p-5">
+            <h2 className="text-lg font-semibold">Vouched for by neighbors</h2>
+            <ul className="mt-3 space-y-2">
+              {v.vouchedBy.map((p) => (
+                <li key={p.name} className="flex items-center gap-3 text-sm">
+                  <span className="grid h-8 w-8 place-items-center rounded-full bg-primary text-primary-foreground">✓</span>
+                  {p.name} <span className="text-muted-foreground">· {p.years} years in the neighborhood</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
