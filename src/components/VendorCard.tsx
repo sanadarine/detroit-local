@@ -8,11 +8,11 @@ const modeLabel: Record<TravelMode, string> = { walk: "walk", bike: "bike", bus:
 
 export function VendorCard({ v, mode, minutes }: { v: Vendor; mode?: TravelMode | undefined; minutes?: number | undefined }) {
   return (
-    <div className="relative">
+    <div className="relative h-full">
     <Link
       to="/vendors/$slug"
       params={{ slug: v.slug }}
-      className="group overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-[box-shadow,border-color] duration-300 ease-out hover:border-primary/25 hover:shadow-lift"
+      className="group block h-full overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-[box-shadow,border-color] duration-300 ease-out hover:border-primary/25 hover:shadow-lift"
     >
       <div className="relative overflow-hidden">
         <PlacePhoto slug={v.slug} name={v.name} neighborhood={v.neighborhood} width={800} className="aspect-[16/9] w-full" />
