@@ -19,9 +19,9 @@
 - [x] Home: About section under the search (what Detroit Local is, who it helps, how it connects the community)
 - [x] Home headline: "Know your neighbors." + typewriter cycling phrases (no "Buy from them")
 - [x] New unique "DL" monogram logo (D + L), update header/footer/favicon
-- [ ] Clickable block clubs & events with detail pages (how to join / request a spot)
-- [ ] Detroit city services directory inside the forum (311, trash pickup, key numbers)
+- [x] Clickable block clubs & events with detail pages (how to join / request a spot)
+- [x] Detroit city services directory inside the forum (311, trash pickup, key numbers)
 - [ ] Explore: add parks + more specific categories (Farms, Food businesses separate, etc.)
 - [ ] Real small-business examples for every neighborhood + sub-area (researched, sourced)
 - [ ] Replace sample listings with real businesses (real ratings, websites/Instagram, review summaries, real resources)
-- [ ] Nicer front-page (hero) photo
+- [x] Nicer front-page (hero) photo

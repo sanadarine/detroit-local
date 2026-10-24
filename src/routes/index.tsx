@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BadgeCheck, HandHeart, Handshake, MapPin, MessagesSquare, Sprout, Store } from "lucide-react";
-import hero from "@/assets/hero.jpg";
+import hero from "@/assets/hero-v2.jpg";
 import { neighborhoods, seedThreads, stories, vendors } from "@/lib/data";
 import { VendorCard } from "@/components/VendorCard";
 import { SearchBar } from "@/components/SearchBar";
@@ -45,7 +45,7 @@ function Index() {
     <div>
       <section className="relative">
         <div className="absolute inset-0 overflow-hidden">
-          <img src={hero} alt="Neighbors on a Detroit street at sunset" width={1600} height={912} className="h-full w-full scale-105 object-cover" />
+          <img src={hero} alt="A grandmother hands a basket of fresh greens over her fence to a young family on a Detroit street at golden hour" width={1920} height={1088} fetchPriority="high" className="h-full w-full scale-105 object-cover object-[60%_center]" />
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/45 to-foreground/10" />
         </div>
         <div className="relative mx-auto flex min-h-[560px] max-w-4xl flex-col items-center justify-center px-4 py-16 text-center text-primary-foreground md:min-h-[640px] md:px-5">
