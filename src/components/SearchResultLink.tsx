@@ -26,6 +26,6 @@ export function SearchResultLink({ r, onClick, compact }: { r: SearchResult; onC
   const common = { className: cls, ...(onClick ? { onClick } : {}) };
   if (r.kind === "thread" && r.slug) return <Link to="/stories/$slug" params={{ slug: r.slug }} {...common}>{inner}</Link>;
   if (r.kind === "vendor" && r.slug) return <Link to="/vendors/$slug" params={{ slug: r.slug }} {...common}>{inner}</Link>;
-  if (r.kind === "community") return <Link to="/community" {...common}>{inner}</Link>;
+  if (r.kind === "community") return <Link to="/stories" search={{ section: "community" }} {...common}>{inner}</Link>;
   return <Link to="/vendor-hub" hash={r.section ?? ""} {...common}>{inner}</Link>;
 }

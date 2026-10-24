@@ -1,11 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { Compass, Home, MessagesSquare, Search, Store, Users } from "lucide-react";
+import { Compass, Home, MessagesSquare, Search, Store } from "lucide-react";
 
 const links = [
   { to: "/", label: "Home", icon: Home, exact: true },
   { to: "/explore", label: "Explore", icon: Compass, exact: false },
   { to: "/stories", label: "Forum", icon: MessagesSquare, exact: false },
-  { to: "/community", label: "Community", icon: Users, exact: false },
   { to: "/vendor-hub", label: "Vendors", icon: Store, exact: false },
 ] as const;
 
@@ -45,7 +44,7 @@ export function SiteHeader() {
         className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/80 backdrop-blur-xl backdrop-saturate-150 md:hidden"
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
-        <ul className="grid grid-cols-5">
+        <ul className="grid grid-cols-4">
           {links.map((l) => (
             <li key={l.to}>
               <Link

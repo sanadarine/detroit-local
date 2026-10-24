@@ -46,18 +46,30 @@ type Props = {
   /** "greedy" lets scroll / one finger move the map freely (full map); "cooperative" keeps page scrolling smooth. */
   gesture?: "greedy" | "cooperative";
   showLocate?: boolean;
+  /** Called with the user's position when they tap "Find me". */
+  onLocate?: ((pos: { lat: number; lng: number }) => void) | undefined;
+  /** Blue "you are here" dot controlled by the parent. */
+  me?: { lat: number; lng: number } | null | undefined;
+  /** Shaded "how far you can get" circle. */
+  reach?: { lat: number; lng: number; radius: number } | null | undefined;
+  /** When this changes, the map flies to fit it. */
+  focus?: { lat: number; lng: number; radius: number } | null | undefined;
   className?: string;
 };
 
 const GREEN = "#2f5d46";
 const BRICK = "#b4482c";
+const BLUE = "#1a73e8";
 
-export function GoogleMap({ center, zoom = 14, pins, areas, activeArea, onAreaClick, onPinClick, onMapClick, gesture = "cooperative", showLocate, className }: Props) {
+export function GoogleMap({ center, zoom = 14, pins, areas, activeArea, onAreaClick, onPinClick, onMapClick, gesture = "cooperative", showLocate, onLocate, me, reach, focus, className }: Props) {
   const el = useRef<HTMLDivElement>(null);
   const map = useRef<any>(null);
   const overlays = useRef<any[]>([]);
   const areaOverlays = useRef<any[]>([]);
   const meMarker = useRef<any>(null);
+  const reachCircle = useRef<any>(null);
+  const locateRef = useRef(onLocate);
+  locateRef.current = onLocate;
   const clickRef = useRef(onMapClick);
   const pinClickRef = useRef(onPinClick);
   const areaClickRef = useRef(onAreaClick);
@@ -131,20 +143,64 @@ export function GoogleMap({ center, zoom = 14, pins, areas, activeArea, onAreaCl
     });
   }, [ready, areas, activeArea]);
 
-  // Fly to the selected neighborhood
+  // Fly to the selected area, or fit all areas when none is selected
+  const areasKey = areas?.map((a) => a.name).join("|") ?? "";
   useEffect(() => {
     if (!ready || !areas) return;
+    const google = window.google;
     const a = areas.find((x) => x.name === activeArea);
     if (a) {
-      map.current.panTo({ lat: a.lat, lng: a.lng });
-      map.current.setZoom(15);
+      const bounds = new google.maps.Circle({ center: { lat: a.lat, lng: a.lng }, radius: a.radius }).getBounds();
+      map.current.fitBounds(bounds, 30);
     } else if (areas.length) {
-      const b = new window.google.maps.LatLngBounds();
+      const b = new google.maps.LatLngBounds();
       areas.forEach((x) => b.extend({ lat: x.lat, lng: x.lng }));
-      map.current.fitBounds(b, 40);
+      map.current.fitBounds(b, 50);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ready, activeArea]);
+  }, [ready, activeArea, areasKey]);
+
+  // "You are here" dot
+  useEffect(() => {
+    if (!ready) return;
+    const google = window.google;
+    meMarker.current?.setMap(null);
+    meMarker.current = me
+      ? new google.maps.Marker({
+          map: map.current,
+          position: me,
+          title: "You are here",
+          icon: { path: google.maps.SymbolPath.CIRCLE, scale: 8, fillColor: BLUE, fillOpacity: 1, strokeColor: "#ffffff", strokeWeight: 3 },
+          zIndex: 20,
+        })
+      : null;
+  }, [ready, me?.lat, me?.lng]);
+
+  // Reach circle
+  useEffect(() => {
+    if (!ready) return;
+    reachCircle.current?.setMap(null);
+    reachCircle.current = reach
+      ? new window.google.maps.Circle({
+          map: map.current,
+          center: { lat: reach.lat, lng: reach.lng },
+          radius: reach.radius,
+          strokeColor: BLUE,
+          strokeOpacity: 0.7,
+          strokeWeight: 2,
+          fillColor: BLUE,
+          fillOpacity: 0.08,
+          clickable: false,
+        })
+      : null;
+  }, [ready, reach?.lat, reach?.lng, reach?.radius]);
+
+  // Fly to a focus area (declared after the area effect so it wins)
+  useEffect(() => {
+    if (!ready || !focus) return;
+    const bounds = new window.google.maps.Circle({ center: { lat: focus.lat, lng: focus.lng }, radius: Math.max(focus.radius, 150) }).getBounds();
+    map.current.fitBounds(bounds, 30);
+  }, [ready, focus?.lat, focus?.lng, focus?.radius]);
 
   useEffect(() => {
     if (!ready) return;
@@ -174,14 +230,18 @@ export function GoogleMap({ center, zoom = 14, pins, areas, activeArea, onAreaCl
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         setLocating(false);
-        const google = window.google;
         const here = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        if (locateRef.current) {
+          locateRef.current(here);
+          return;
+        }
+        const google = window.google;
         meMarker.current?.setMap(null);
         meMarker.current = new google.maps.Marker({
           map: map.current,
           position: here,
           title: "You are here",
-          icon: { path: google.maps.SymbolPath.CIRCLE, scale: 8, fillColor: "#1a73e8", fillOpacity: 1, strokeColor: "#ffffff", strokeWeight: 3 },
+          icon: { path: google.maps.SymbolPath.CIRCLE, scale: 8, fillColor: BLUE, fillOpacity: 1, strokeColor: "#ffffff", strokeWeight: 3 },
           zIndex: 20,
         });
         map.current.panTo(here);

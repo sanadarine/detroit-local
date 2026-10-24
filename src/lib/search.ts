@@ -65,8 +65,8 @@ function docs(threads: Thread[]): Doc[] {
       id: `vendor:${v.slug}`,
       slug: v.slug,
       title: v.name,
-      snippet: `${v.category} · ${v.neighborhood} · ${v.tagline}`,
-      text: [v.owner, v.category, v.neighborhood, v.tagline, v.story, ...v.services, v.address].join(" "),
+      snippet: `${v.category} · ${v.subArea}, ${v.neighborhood} · ${v.tagline}`,
+      text: [v.owner, v.category, v.neighborhood, v.subArea, v.tagline, v.story, ...v.services, v.address].join(" "),
     })),
     ...blockClubs.map((c) => ({
       kind: "community" as const,
