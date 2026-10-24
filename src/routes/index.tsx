@@ -55,8 +55,7 @@ function Index() {
             <Typewriter phrases={headlinePhrases} className="block min-h-[2.1em] text-accent md:min-h-[1.05em]" />
           </h1>
           <p className="mt-4 max-w-xl animate-rise text-base opacity-95 [text-shadow:0_1px_12px_rgb(0_0_0/0.5)] md:text-lg" style={{ animationDelay: "160ms" }}>
-            Detroit Local is where you connect with real 
-locals, learn, grow, and support others
+            Detroit Local is where you connect with everything local
           </p>
           <div className="relative z-20 mt-8 w-full max-w-2xl animate-rise" style={{ animationDelay: "240ms" }}>
             <SearchBar size="hero" placeholder="Search daycare, produce, permits, stories…" />
