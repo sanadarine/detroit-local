@@ -50,7 +50,7 @@ function Index() {
         </div>
         <div className="relative mx-auto flex min-h-[560px] max-w-4xl flex-col items-center justify-center px-4 py-16 text-center text-primary-foreground md:min-h-[640px] md:px-5">
           <p className="animate-rise text-xs font-medium uppercase tracking-[0.25em] opacity-90">Detroit, Michigan</p>
-          <h1 className="mt-3 animate-rise text-4xl font-semibold leading-[1.05] tracking-tight md:text-7xl" style={{ animationDelay: "80ms" }}>
+          <h1 className="mt-3 animate-rise text-4xl font-semibold leading-[1.05] tracking-tight [text-shadow:0_2px_24px_rgb(0_0_0/0.45)] md:text-7xl" style={{ animationDelay: "80ms" }}>
             <span className="sr-only">Know your neighbors. Support them.</span>
             <span aria-hidden>Know your neighbors.</span>
             <Typewriter phrases={headlinePhrases} className="block min-h-[2.1em] text-accent md:min-h-[1.05em]" />
