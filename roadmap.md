@@ -25,3 +25,4 @@
 - [ ] Real small-business examples for every neighborhood + sub-area (researched, sourced)
 - [ ] Replace sample listings with real businesses (real ratings, websites/Instagram, review summaries, real resources)
 - [x] Nicer front-page (hero) photo
+- [ ] Home: remove stats boxes; move About lower as a polished section
