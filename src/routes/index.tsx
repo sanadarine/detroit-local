@@ -4,7 +4,6 @@ import hero from "@/assets/hero-v2.jpg";
 import { stories, vendors } from "@/lib/data";
 import { VendorCard } from "@/components/VendorCard";
 import { SearchBar } from "@/components/SearchBar";
-import { NeighborhoodStrip } from "@/components/NeighborhoodStrip";
 import { Reveal } from "@/components/Reveal";
 import { Typewriter } from "@/components/Typewriter";
 
@@ -113,18 +112,6 @@ function Index() {
         </div>
       </Reveal>
 
-      <Reveal as="section" className="mx-auto mt-16 max-w-6xl px-4 md:mt-24 md:px-5">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <p className="text-sm font-medium uppercase tracking-widest text-brick">Neighborhoods</p>
-            <h2 className="mt-1 text-3xl font-semibold tracking-tight md:text-4xl">Find your corner of the city</h2>
-          </div>
-          <Link to="/explore" className="hidden shrink-0 text-sm font-medium text-primary sm:block">Open the map →</Link>
-        </div>
-        <div className="mt-6">
-          <NeighborhoodStrip />
-        </div>
-      </Reveal>
 
       <Reveal as="section" className="mx-auto mt-16 grid max-w-6xl items-center gap-6 px-4 md:mt-24 md:grid-cols-2 md:gap-12 md:px-5">
         <img src={featured.image} alt={featured.title} loading="lazy" width={1024} height={1024} className="aspect-square w-full rounded-3xl object-cover shadow-lift" />
