@@ -8,7 +8,7 @@ const modeLabel: Record<TravelMode, string> = { walk: "walk", bike: "bike", bus:
 
 export function VendorCard({ v, mode, minutes }: { v: Vendor; mode?: TravelMode | undefined; minutes?: number | undefined }) {
   return (
-    <div className="relative">
+    <div className="relative h-full">
     <Link
       to="/vendors/$slug"
       params={{ slug: v.slug }}
