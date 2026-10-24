@@ -14,5 +14,5 @@
 - [x] Simpler Apple-style "new post" form in the forum
 - [x] Move Community into the forum as a special section; remove the Community tab
 - [x] Reviews on seller pages (stars + written review)
-- [ ] Move Vendors into Explore ("For sellers") + Apple-style Explore redesign, simpler sub-area picker
-- [ ] Rename app to Detroit Local + new logo (and favicon)
+- [x] Move Vendors into Explore ("For sellers") + Apple-style Explore redesign, simpler sub-area picker
+- [x] Rename app to Detroit Local + new logo (and favicon)
