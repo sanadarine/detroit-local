@@ -17,3 +17,4 @@
 - [x] Move Vendors into Explore ("For sellers") + Apple-style Explore redesign, simpler sub-area picker
 - [x] Rename app to Detroit Local + new logo (and favicon)
 - [ ] Home: About section under the search (what Detroit Local is, who it helps, how it connects the community)
+- [ ] Home headline: "Know your neighbors." + typewriter cycling phrases (no "Buy from them")
