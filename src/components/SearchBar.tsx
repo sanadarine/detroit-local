@@ -53,7 +53,7 @@ export function SearchBar({ size = "page", initial = "", suggest = true, autoFoc
       </div>
       {open && q.trim().length >= 2 && suggest && (
         <div
-          className="absolute inset-x-0 top-full z-30 mt-2 overflow-hidden rounded-xl border border-border bg-card p-1 text-foreground shadow-xl"
+          className="absolute inset-x-0 top-full z-30 mt-2 overflow-hidden rounded-2xl text-left border border-border bg-card p-1 text-foreground shadow-xl"
           onMouseDown={() => blurTimer.current && clearTimeout(blurTimer.current)}
         >
           {results.length > 0 ? (
