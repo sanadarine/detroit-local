@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { BadgeCheck, Clock, MapPin } from "lucide-react";
+import { BadgeCheck, Clock, MapPin, Navigation } from "lucide-react";
 import { vendors } from "@/lib/data";
+import { GoogleMap } from "@/components/GoogleMap";
 
 export const Route = createFileRoute("/vendors/$slug")({
   loader: ({ params }) => {
@@ -55,6 +56,20 @@ function VendorPage() {
               ))}
             </ul>
           </div>
+          <section className="mt-8">
+            <h2 className="text-sm font-medium uppercase tracking-widest text-brick">Find them</h2>
+            <p className="mt-2 flex items-start gap-2 text-sm"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{v.address}</p>
+            {v.approximate && <p className="mt-1 text-xs text-muted-foreground">Home-based, so we show the general area. Exact pickup spot shared when you order.</p>}
+            <GoogleMap className="mt-3 h-64 md:h-72" center={{ lat: v.lat, lng: v.lng }} zoom={v.approximate ? 15 : 16} pins={[{ id: v.slug, lat: v.lat, lng: v.lng, title: v.name, approximate: v.approximate }]} />
+            <a
+              href={`https://www.google.com/maps/dir/?api=1&destination=${v.lat},${v.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 font-medium text-primary-foreground hover:opacity-90"
+            >
+              <Navigation className="h-4 w-4" />{v.approximate ? "Directions to pickup spot" : "Get directions"}
+            </a>
+          </section>
         </div>
       </div>
     </div>
