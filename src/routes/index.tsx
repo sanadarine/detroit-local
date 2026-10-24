@@ -22,7 +22,7 @@ const doors = [
 ] as const;
 
 function Index() {
-  const featured = stories[0];
+  const featured = stories[0]!;
   return (
     <div>
       <section className="relative">
