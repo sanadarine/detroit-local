@@ -24,3 +24,4 @@
 - [ ] Explore: add parks + more specific categories (Farms, Food businesses separate, etc.)
 - [ ] Real small-business examples for every neighborhood + sub-area (researched, sourced)
 - [ ] Replace sample listings with real businesses (real ratings, websites/Instagram, review summaries, real resources)
+- [ ] Nicer front-page (hero) photo
