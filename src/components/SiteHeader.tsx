@@ -1,11 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { Compass, Home, MessagesSquare, Search, Store } from "lucide-react";
+import { Compass, Home, MessagesSquare, Search } from "lucide-react";
 
 const links = [
   { to: "/", label: "Home", icon: Home, exact: true },
   { to: "/explore", label: "Explore", icon: Compass, exact: false },
   { to: "/stories", label: "Forum", icon: MessagesSquare, exact: false },
-  { to: "/vendor-hub", label: "Vendors", icon: Store, exact: false },
 ] as const;
 
 export function SiteHeader() {
@@ -32,7 +31,7 @@ export function SiteHeader() {
               </Link>
             ))}
           </nav>
-          <Link to="/search" aria-label="Search" className="grid h-9 w-9 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground" activeProps={{ className: "bg-secondary text-foreground" }}>
+          <Link to="/search" aria-label="Search" className="hidden h-9 w-9 md:grid place-items-center rounded-full text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground" activeProps={{ className: "bg-secondary text-foreground" }}>
             <Search className="h-[18px] w-[18px]" />
           </Link>
           </div>
@@ -45,7 +44,7 @@ export function SiteHeader() {
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
         <ul className="grid grid-cols-4">
-          {links.map((l) => (
+          {[...links, { to: "/search", label: "Search", icon: Search, exact: false } as const].map((l) => (
             <li key={l.to}>
               <Link
                 to={l.to}

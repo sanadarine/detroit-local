@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
 const doors = [
   { to: "/explore", icon: MapPin, title: "I'm new to Detroit", body: "Find trusted help, food and childcare within a few minutes of home." },
   { to: "/stories", icon: HandHeart, title: "I've been here a while", body: "Answer questions, vouch for good people and pass down the stories." },
-  { to: "/vendor-hub", icon: Store, title: "I run a business", body: "Reach neighbors, share skills and supplies, and get help with permits." },
+  { to: "/explore", search: { tab: "sell" as const }, icon: Store, title: "I run a business", body: "Reach neighbors, share skills and supplies, and get help with permits." },
 ] as const;
 
 const popular = ["Daycare in Corktown", "Fresh produce", "Flood prep", "Business permits"];

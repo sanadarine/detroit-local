@@ -115,5 +115,5 @@ export const kindLabels: Record<SearchKind, string> = {
   thread: "Forum threads",
   vendor: "Vendors",
   community: "Block clubs & events",
-  hub: "Vendor hub & permits",
+  hub: "For sellers & permits",
 };
