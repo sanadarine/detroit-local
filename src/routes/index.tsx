@@ -95,15 +95,15 @@ function Index() {
               Detroit Local brings neighbors and the people who serve them into one place. Find the farmer, baker or fixer down the street, ask the block a question, look up a city service, or get your own business on the map, whether you just moved here or have been here fifty years. Detroit Local is where everything local grows.
             </p>
           </div>
-          <ul className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-4 lg:gap-x-8">
             {[
               { icon: Sprout, t: "Find people, not just businesses", d: "Browse local farms, food, home services, childcare and more by neighborhood, or by who's a few minutes away." },
               { icon: MessagesSquare, t: "Ask once, the whole block answers", d: "Questions, recommendations and stories live in one searchable forum, so good answers don't get lost." },
               { icon: Landmark, t: "City help in one place", d: "Trash day, 311 requests, block clubs and key numbers, without digging through city websites." },
               { icon: Handshake, t: "Sellers grow together", d: "Local businesses share skills, supplies and buying power, with a plain-language permit guide." },
             ].map((p) => (
-              <li key={p.t} className="text-center sm:text-left">
-                <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-card text-primary shadow-soft ring-1 ring-border sm:mx-0"><p.icon className="h-5 w-5" /></span>
+              <li key={p.t} className="min-w-0 text-left">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-card text-primary shadow-soft ring-1 ring-border"><p.icon className="h-5 w-5" /></span>
                 <h3 className="mt-4 text-lg font-semibold leading-snug">{p.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.d}</p>
               </li>
