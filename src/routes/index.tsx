@@ -128,7 +128,7 @@ function Index() {
 
       <Reveal as="section" className="mx-auto mt-16 max-w-6xl px-4 md:mt-24 md:px-5">
         <div className="flex items-end justify-between">
-          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Close to home</h2>
+          <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Recent Adds</h2>
           <Link to="/explore" className="text-sm font-medium text-primary">See all →</Link>
         </div>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
