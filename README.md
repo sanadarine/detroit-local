@@ -1,14 +1,18 @@
-# Welcome to your Lovable project
+# Detroit Local
+
+This is context for our project. We are building a project for neighborhood services, a detroit local application that is aimed at improving community services, helping people find locals more (ex. the story of a local farmer to buy from), and connect the community together in Detroit, MI.
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://detroit-local.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/4f2178f8-4844-4fd8-8bda-4b63e08f2272).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +24,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
