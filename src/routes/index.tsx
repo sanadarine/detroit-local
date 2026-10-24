@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Detroit Local — Know your neighbors" },
-      { name: "description", content: "Search local farmers, home businesses, trusted services and neighborhood threads across Detroit, vouched for by long-time residents." },
+      { name: "description", content: "Search real local businesses, parks, city services and neighborhood threads across Detroit." },
       { property: "og:title", content: "Detroit Local — Know your neighbors" },
       { property: "og:description", content: "Local farmers, home businesses, trusted services and neighborhood conversations across Detroit." },
       { property: "og:type", content: "website" },
