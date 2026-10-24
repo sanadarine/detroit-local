@@ -15,6 +15,49 @@ export const neighborhoodAreas: { name: (typeof neighborhoods)[number]; lat: num
   { name: "Bagley", lat: 42.4195, lng: -83.1440, radius: 900 },
 ];
 
+export type Hood = (typeof neighborhoods)[number];
+export type SubArea = { name: string; hint: string; lat: number; lng: number; radius: number };
+
+/** Smaller, specific pockets inside each neighborhood (approximate, hand-placed — not official boundaries). */
+export const subAreas: Record<Hood, SubArea[]> = {
+  Corktown: [
+    { name: "Historic Corktown", hint: "Michigan Ave & Trumbull", lat: 42.3315, lng: -83.068, radius: 350 },
+    { name: "North Corktown", hint: "Butternut & Wabash", lat: 42.3378, lng: -83.0735, radius: 400 },
+    { name: "Roosevelt Park", hint: "By Michigan Central Station", lat: 42.3292, lng: -83.0775, radius: 300 },
+    { name: "Porter St", hint: "Porter & Rosa Parks", lat: 42.3272, lng: -83.0645, radius: 300 },
+  ],
+  "Eastern Market": [
+    { name: "The Sheds", hint: "Russell St market sheds", lat: 42.3474, lng: -83.041, radius: 250 },
+    { name: "Gratiot Corridor", hint: "Gratiot Ave & Russell", lat: 42.3432, lng: -83.0432, radius: 250 },
+    { name: "Riopelle & Wilkins", hint: "Murals and warehouses", lat: 42.35, lng: -83.0385, radius: 250 },
+    { name: "Division St", hint: "Division & St. Aubin", lat: 42.3505, lng: -83.0462, radius: 250 },
+  ],
+  "Jefferson-Chalmers": [
+    { name: "Jefferson Ave Strip", hint: "Shops along E Jefferson", lat: 42.3625, lng: -82.954, radius: 450 },
+    { name: "Fox Creek Canals", hint: "Canal-side homes", lat: 42.357, lng: -82.944, radius: 450 },
+    { name: "Riverfront", hint: "Mariner Park & Alter Rd", lat: 42.3538, lng: -82.9395, radius: 400 },
+    { name: "Kercheval & Chalmers", hint: "North of Jefferson", lat: 42.368, lng: -82.958, radius: 450 },
+  ],
+  Southwest: [
+    { name: "Mexicantown", hint: "Bagley St & W Vernor", lat: 42.3205, lng: -83.0935, radius: 450 },
+    { name: "Hubbard Farms", hint: "W Grand Blvd to Clark", lat: 42.3195, lng: -83.082, radius: 350 },
+    { name: "Clark Park", hint: "Around the park", lat: 42.3245, lng: -83.0985, radius: 350 },
+    { name: "Springwells Village", hint: "Springwells & W Vernor", lat: 42.316, lng: -83.112, radius: 450 },
+  ],
+  "North End": [
+    { name: "Oakland Ave", hint: "Oakland & Holbrook", lat: 42.3822, lng: -83.067, radius: 350 },
+    { name: "Holbrook & Brush", hint: "Quiet residential blocks", lat: 42.3848, lng: -83.073, radius: 350 },
+    { name: "Milwaukee Junction", hint: "Old factory district", lat: 42.3735, lng: -83.064, radius: 350 },
+    { name: "Woodward & Clairmount", hint: "Along Woodward", lat: 42.379, lng: -83.08, radius: 350 },
+  ],
+  Bagley: [
+    { name: "Avenue of Fashion", hint: "Livernois & 7 Mile", lat: 42.4205, lng: -83.1415, radius: 350 },
+    { name: "Curtis & Prairie", hint: "Tree-lined side streets", lat: 42.4228, lng: -83.1468, radius: 300 },
+    { name: "McNichols & Wyoming", hint: "South-west corner", lat: 42.416, lng: -83.1525, radius: 350 },
+    { name: "Bagley Park", hint: "Around the park", lat: 42.4178, lng: -83.1455, radius: 250 },
+  ],
+};
+
 export const travelModes = ["walk", "bike", "bus", "drive"] as const;
 export type TravelMode = (typeof travelModes)[number];
 
