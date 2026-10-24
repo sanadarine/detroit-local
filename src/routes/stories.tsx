@@ -1,17 +1,18 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { CalendarDays, ChevronRight, MessagesSquare, Pin, Plus, Search, Users } from "lucide-react";
+import { CalendarDays, ChevronRight, Landmark, MessagesSquare, Pin, Plus, Search, Users } from "lucide-react";
 import { useMemo, useState } from "react";
 import { blockClubs, events, threadCategories, type ThreadCategory } from "@/lib/data";
 import { formatDate, lastActivity, useForum } from "@/lib/forum";
 import { searchSite } from "@/lib/search";
 import { Composer, type ComposerPreset } from "@/components/Composer";
+import { CityServices } from "@/components/CityServices";
 
-type ForumSearch = { new?: string; section?: "community" };
+type ForumSearch = { new?: string; section?: "community" | "services" };
 
 export const Route = createFileRoute("/stories")({
   validateSearch: (s: Record<string, unknown>): ForumSearch => ({
     ...(typeof s["new"] === "string" ? { new: String(s["new"]).slice(0, 140) } : {}),
-    ...(s["section"] === "community" ? { section: "community" as const } : {}),
+    ...(s["section"] === "community" || s["section"] === "services" ? { section: s["section"] as "community" | "services" } : {}),
   }),
   head: () => ({
     meta: [
@@ -40,6 +41,7 @@ function Forum() {
   const [composing, setComposing] = useState(prefill !== undefined);
   const [preset, setPreset] = useState<ComposerPreset | undefined>(prefill !== undefined ? { title: prefill } : undefined);
   const community = section === "community";
+  const services = section === "services";
 
   const filtered = useMemo(() => {
     let list = threads;
@@ -57,19 +59,19 @@ function Forum() {
     setComposing(true);
   }
 
-  function setSection(next: "threads" | "community") {
-    navigate({ to: "/stories", search: next === "community" ? { section: "community" } : {}, replace: true });
+  function setSection(next: "threads" | "community" | "services") {
+    navigate({ to: "/stories", search: next === "threads" ? {} : { section: next }, replace: true });
   }
 
   const segment = (active: boolean) =>
-    `flex flex-1 items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${active ? "bg-card text-foreground shadow-soft" : "text-muted-foreground hover:text-foreground"}`;
+    `flex flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-2 text-sm font-medium sm:px-4 transition-all duration-200 ${active ? "bg-card text-foreground shadow-soft" : "text-muted-foreground hover:text-foreground"}`;
 
   return (
     <div className="mx-auto max-w-4xl px-4 pt-8 md:px-5 md:pt-12">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="animate-rise text-4xl font-semibold tracking-tight md:text-6xl">Neighborhood forum</h1>
-          <p className="mt-2 max-w-xl text-muted-foreground">Stories, questions, block clubs and events from people who know these blocks.</p>
+          <p className="mt-2 max-w-xl text-muted-foreground">Stories, questions, block clubs, events and city services from people who know these blocks.</p>
         </div>
         <button type="button" onClick={() => compose(community ? { category: "Events & meetups" } : undefined)} className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-soft transition hover:opacity-90 active:scale-[0.98]">
           <Plus className="h-4 w-4" />New post
@@ -77,14 +79,21 @@ function Forum() {
       </div>
 
       <div className="mt-6 flex rounded-full bg-secondary p-1" role="tablist" aria-label="Forum sections">
-        <button type="button" role="tab" aria-selected={!community} onClick={() => setSection("threads")} className={segment(!community)}>
-          <MessagesSquare className="h-4 w-4" />Discussions
+        <button type="button" role="tab" aria-selected={!community && !services} onClick={() => setSection("threads")} className={segment(!community && !services)}>
+          <MessagesSquare className="hidden h-4 w-4 sm:block" /><span className="sm:hidden">Threads</span><span className="hidden sm:inline">Discussions</span>
         </button>
         <button type="button" role="tab" aria-selected={community} onClick={() => setSection("community")} className={segment(community)}>
-          <Users className="h-4 w-4" /><span className="sm:hidden">Clubs &amp; events</span><span className="hidden sm:inline">Block clubs &amp; events</span>
+          <Users className="hidden h-4 w-4 sm:block" /><span className="sm:hidden">Clubs &amp; events</span><span className="hidden sm:inline">Block clubs &amp; events</span>
+        </button>
+        <button type="button" role="tab" aria-selected={services} onClick={() => setSection("services")} className={segment(services)}>
+          <Landmark className="hidden h-4 w-4 sm:block" />City services
         </button>
       </div>
 
+      {services ? (
+        <CityServices />
+      ) : (
+        <>
       {community && (
         <div className="mt-6 grid animate-rise gap-6 md:grid-cols-2">
           <section>
@@ -175,6 +184,9 @@ function Forum() {
           </li>
         )}
       </ul>
+
+        </>
+      )}
 
       <Composer
         open={composing}
