@@ -1,4 +1,5 @@
-import { blockClubs, cityServices, events, hubBoard, parks, permitSteps, vendors, type Thread } from "@/lib/data";
+import { blockClubs, cityServices, events, parks, permitSteps, vendors, type Thread } from "@/lib/data";
+import { seedBoardPosts } from "@/lib/board";
 
 export type SearchKind = "thread" | "vendor" | "park" | "community" | "hub" | "service";
 
@@ -100,13 +101,13 @@ function docs(threads: Thread[]): Doc[] {
       snippet: `${c.category}${c.phone ? ` · ${c.phone}` : ""} · ${c.what}`,
       text: `city service resource number phone 311 help ${c.category} ${c.name} ${c.what}`,
     })),
-    ...hubBoard.map((b) => ({
+    ...seedBoardPosts.map((b) => ({
       kind: "hub" as const,
-      id: `board:${b.text}`,
+      id: `board:${b.id}`,
       section: "board" as const,
-      title: b.text,
-      snippet: `${b.type} · ${b.who}`,
-      text: `${b.type} ${b.who} vendor`,
+      title: b.title,
+      snippet: `Seller directory · ${b.tag} · ${b.author}${b.neighborhood ? `, ${b.neighborhood}` : ""}`,
+      text: `${b.tag} ${b.details} ${b.author} ${b.neighborhood ?? ""} seller vendor directory ${b.kind === "offer" ? "offering" : "looking for"}`,
     })),
     ...permitSteps.map((p) => ({
       kind: "hub" as const,

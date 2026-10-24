@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { Baby, ChevronDown, Coffee, Compass, Hammer, Leaf, LocateFixed, MapPin, Navigation, Plus, Scissors, ShoppingBasket, Sprout, Star, Store, Trees, Utensils, X } from "lucide-react";
+import { Baby, ChevronDown, ChevronRight, Coffee, Compass, Hammer, Leaf, LocateFixed, MapPin, Navigation, Plus, Scissors, ShoppingBasket, Sprout, Star, Store, Trees, Utensils, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { categories, neighborhoodAreas, neighborhoods, parks, subAreas, travelModes, vendors, type Hood, type Park, type TravelMode, type Vendor } from "@/lib/data";
 import { distanceMeters, reachMeters, travelMinutes, type LatLng } from "@/lib/geo";
@@ -241,7 +241,6 @@ function Explore() {
   );
 
   function startAdding() {
-    if (selling) setTab("find");
     setAdding(true);
     setDraftPos(null);
     setTimeout(() => mapRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }), 50);
@@ -286,7 +285,7 @@ function Explore() {
 
       {selling ? (
         <div className="mt-8">
-          <SellerHub onListBusiness={startAdding} />
+          <SellerHub />
         </div>
       ) : (
         <>
@@ -433,6 +432,18 @@ function Explore() {
             </div>
 
             <div className="lg:order-1">
+              <button
+                type="button"
+                onClick={startAdding}
+                className="group mb-6 flex w-full items-center gap-3 rounded-2xl bg-primary p-3.5 text-left text-primary-foreground shadow-soft transition active:scale-[0.99] md:p-4"
+              >
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary-foreground/15"><Plus className="h-5 w-5" /></span>
+                <span className="min-w-0 flex-1">
+                  <span className="block font-semibold">Put your business on the map</span>
+                  <span className="block text-sm opacity-80">Drop a pin so neighbors nearby can find you.</span>
+                </span>
+                <ChevronRight className="h-5 w-5 shrink-0 opacity-70 transition-transform group-hover:translate-x-0.5" />
+              </button>
               <h2 id="results" className="flex items-baseline gap-2 px-1 text-2xl font-semibold tracking-tight">
                 {resultsTitle}
                 <span className="text-base font-normal text-muted-foreground">{showParks ? `${parkList.length} park${parkList.length === 1 ? "" : "s"}` : `${list.length} local${list.length === 1 ? "" : "s"}`}</span>

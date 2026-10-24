@@ -329,13 +329,6 @@ export const events: CommunityEvent[] = [
   },
 ];
 
-export const hubBoard = [
-  { type: "Skill share", text: "I'll teach canning basics in exchange for help with my website.", who: "Denise, Bagley" },
-  { type: "Material share", text: "Extra raised-bed lumber and 20 bags of compost — free to a grower.", who: "Marcus, North End" },
-  { type: "Group buying", text: "Splitting a bulk order of pie tins and boxes. 4 spots left.", who: "Auntie Dee's" },
-  { type: "Share clients", text: "Booked through December — happy to refer porch jobs to another fixer.", who: "Ray, Jefferson-Chalmers" },
-] as const;
-
 export const permitSteps = [
   { t: "Pick your business type", d: "Cottage food, home occupation, or storefront — each has different rules." },
   { t: "Register your business name", d: "File an assumed name (DBA) with Wayne County." },
